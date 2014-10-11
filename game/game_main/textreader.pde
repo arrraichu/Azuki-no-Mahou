@@ -4,14 +4,17 @@
 */
 
 class TextReader {
+  // reader and displayer
   BufferedReader reader;
   TextRoll tr;
   
+  // constructor
   TextReader(String filepath, TextRoll roll) {
     reader = createReader(filepath);
     tr = roll;
   }
   
+  // read one line and display it
   void sendNextLine() {
     if (!tr.ready()) return;
     

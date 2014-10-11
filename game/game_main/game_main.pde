@@ -6,7 +6,7 @@
 */
 
 /*===== CONSTANTS =====*/
-final static int WIDTH = 1080;
+final static int WIDTH = 1280;
 final static int HEIGHT = 720;
 
 PFont default_font;

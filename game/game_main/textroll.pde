@@ -81,6 +81,7 @@ class TextRoll {
     }
   }
   
+  // handles displaying the text character by character
   private void rollText() {
     stroke(50);
     fill(0);
@@ -100,6 +101,7 @@ class TextRoll {
     text(inputBuffer, text_startx, text_starty);
   }
   
+  // hard reset on displaying text
   void reset() {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
     isPrompt = false; readyNext = true;
