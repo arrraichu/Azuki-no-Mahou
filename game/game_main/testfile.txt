@@ -1,0 +1,5 @@
+Hello World!
+My name is Raichu.
+How are you doing today?
+Great weather, huh?
+Goodbye.
