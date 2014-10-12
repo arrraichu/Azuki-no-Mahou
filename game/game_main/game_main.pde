@@ -6,8 +6,8 @@
 */
 
 /*===== CONSTANTS =====*/
-final static int WIDTH = 1280;
-final static int HEIGHT = 720;
+final static int WIDTH = 1024;
+final static int HEIGHT = 576;
 
 PFont default_font;
 
@@ -20,13 +20,14 @@ void setup() {
   size(WIDTH, HEIGHT);
   background(130);
   
-  default_font = createFont("fonts/EightBit.ttf", 28);
-  textFont(default_font, 28);
+  default_font = createFont("fonts/EightBit.ttf", 22);
+  textFont(default_font, 22);
   
-  tr = new TextRoll(width*0.01, height*0.90, width*0.98, height*0.09);
-  tr.setTextStart(width*0.03, height*0.96);
+  tr = new TextRoll(width*0.01, height*0.85, width*0.98, height*0.14);
+  tr.setTextStart(width*0.03, height*0.91);
+  tr.setNewlinePlacement(width*0.94, height*0.05);
   
-  reader = new TextReader("testfile.txt", tr);
+  reader = new TextReader("debug/testfile.txt", tr);
 }
 
 void draw() {

@@ -1,0 +1,5 @@
+Hello World!
+My name is Raichu. I am a computer programming in my senior year at New York University School of Engineering.
+How are you doing today?
+Great weather, huh?
+Goodbye.

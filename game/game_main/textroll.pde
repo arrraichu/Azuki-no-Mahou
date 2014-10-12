@@ -12,9 +12,13 @@ class TextRoll {
   float box_width;
   float box_height;
   
-  // where the text should start
+  // where the text should start & the max width per line
   float text_startx;
   float text_starty;
+  
+  // set text max width and displacement of next line
+  float text_width;
+  float nextline_disp;
   
   // two-pass buffer system for text rolling
   String fedInput;
@@ -22,6 +26,10 @@ class TextRoll {
   
   // count for text rolling interval
   int textroll_count;
+  
+  // where the text needs to be wrapped to the next line
+  int current_spcindex;
+  int wrap_index;
   
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
@@ -36,7 +44,11 @@ class TextRoll {
     text_startx = left;
     text_starty = top;
     
+    text_width = w;
+    nextline_disp = h*0.05;
+    
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
+    current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
   }
   
@@ -44,6 +56,12 @@ class TextRoll {
   void setTextStart(float x, float y) {
     text_startx = x;
     text_starty = y;
+  }
+  
+  // set the max width of a line and how far the new line should go
+  void setNewlinePlacement(float tw, float nld) {
+    text_width = tw;
+    nextline_disp = nld;
   }
   
   // display function run in main's draw method
@@ -70,6 +88,8 @@ class TextRoll {
     inputBuffer = (isPrompt) ? text : "";
     textroll_count = 0;
     fedInput = text;
+    current_spcindex = -1;
+    wrap_index = -1;
   }
   
   // update whether textbox is ready at each iteration
@@ -96,14 +116,25 @@ class TextRoll {
 
     } else if (++textroll_count % TEXTROLL_INTERVAL == 0) {
       inputBuffer = fedInput.substring(0, inputBuffer.length()+1);
+      if (inputBuffer.charAt(inputBuffer.length()-1) == ' ') current_spcindex = inputBuffer.length();
     }
     
-    text(inputBuffer, text_startx, text_starty);
+    if (textWidth(inputBuffer) > text_width && wrap_index == -1) {
+      wrap_index = current_spcindex;
+    }
+    
+    if (wrap_index != -1) {
+      text(inputBuffer.substring(0, wrap_index), text_startx, text_starty);
+      text(inputBuffer.substring(wrap_index), text_startx, text_starty+nextline_disp);
+    } else {
+      text(inputBuffer, text_startx, text_starty);
+    }
   }
   
   // hard reset on displaying text
   void reset() {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
+    current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
   }
 }
