@@ -9,37 +9,23 @@
 final static int WIDTH = 1024;
 final static int HEIGHT = 576;
 
-PFont default_font;
-
-TextRoll tr;
-TextReader reader;
+Game game;
 
 
 /*===== FUNCTIONS =====*/
 void setup() {
   size(WIDTH, HEIGHT);
-  background(130);
   
-  default_font = createFont("fonts/EightBit.ttf", 22);
-  textFont(default_font, 22);
-  
-  tr = new TextRoll(width*0.01, height*0.85, width*0.98, height*0.14);
-  tr.setTextStart(width*0.03, height*0.91);
-  tr.setNewlinePlacement(width*0.94, height*0.05);
-  
-  reader = new TextReader("debug/testfile.txt", tr);
+  game = new Game(WIDTH, HEIGHT);
 }
 
-void draw() {
-  stroke(0);
-  strokeWeight(1);
-  line(width/4, height/2, 3*width/4, height/2);
+void draw() {  
+  background(130);
   
-  tr.display();
+  game.run();
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    reader.sendNextLine();
-  }
+  char k = key;
+  game.receiveKey(k);
 }

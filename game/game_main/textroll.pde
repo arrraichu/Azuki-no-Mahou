@@ -34,6 +34,9 @@ class TextRoll {
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
   
+  final int WAIT_INTERVAL = 15;
+  int wait_counter;
+  
   // constructor reads box coordinates and sets default values
   TextRoll(float left, float top, float w, float h) {
     left_coor = left;
@@ -50,6 +53,8 @@ class TextRoll {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
     current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
+    
+    wait_counter = 0;
   }
   
   // set where the text should begin
@@ -71,12 +76,15 @@ class TextRoll {
     fill(255);
     rect(left_coor, top_coor, box_width, box_height);
     
-    this.rollText();
-    this.updateReady();
+    if (wait_counter <= 0) {
+      this.rollText();
+      this.updateReady();
+    } else wait_counter--;
   }
   
   // returns whether the textbox is ready to accept the next input
   boolean ready() {
+    if (wait_counter > 0) return false;
     return readyNext;
   }
   
@@ -110,7 +118,7 @@ class TextRoll {
       return;
     }
     
-    if (fedInput == "") return;
+    if (fedInput.length() == 0) return;
     
     if (inputBuffer == fedInput) {
 
@@ -129,6 +137,10 @@ class TextRoll {
     } else {
       text(inputBuffer, text_startx, text_starty);
     }
+  }
+  
+  void stall() {
+    wait_counter = WAIT_INTERVAL;
   }
   
   // hard reset on displaying text
