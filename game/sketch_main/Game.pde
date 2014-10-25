@@ -1,8 +1,11 @@
 class Game {
+  final boolean DEBUG = true;
+  
   int game_width;
   int game_height;
   
   Player p;
+  GameMode mode;
   
   PFont default_font;
   TextRoll tr;
@@ -11,7 +14,7 @@ class Game {
   PImage tiles[] = new PImage[Tiles.NUM_TILES+1];
   
   final int TOTAL_CHAPTERS = 0;
-  int current_chapter;
+  public int current_chapter;
   
   Map current_map;
   
@@ -23,9 +26,10 @@ class Game {
   float extraFade = 0f;
   final float EXTRA_SURPRISE_LENGTH = GAME_SPEED*50f;
   float extraSurprise = 0f;
-  
+    
   Game(int w, int h) {
     game_width = w; game_height = h;
+    mode = GameMode.STORY;
     p = new Player();
       
     default_font = createFont("assets/fonts/EightBit.ttf", 22);
@@ -44,47 +48,61 @@ class Game {
     current_chapter = 0;
     
     initialize = false;
+    
+    reader.setParent(this);
+    tr.setParent(this);
   }
 
   void run() {
     if (!initialize) {
-       current_map = new Map(100, 100, "assets/maps/0.txt", game_width/2, game_height/2);
+       current_map = new Map(this, 100, 100, "assets/maps/0.txt", game_width/2, game_height/2);
        extraFade = EXTRA_FADE_LENGTH;
        initialize = true;
     }
     
     displayMap();
     p.display(game_width/2, game_height/2);
-    tr.display();
+    if (mode == GameMode.STORY) tr.display();
+    reader.run();
     
-    handleFeedbacks();
     handleExtras();
   }
   
   void receiveKey(char k) {
     if (!initialize || extraFade > 0) return;
     
-    if (k == ' ') {
-     reader.sendNextLine();
-     return;
+    // DEBUG MODE
+    if (DEBUG) {
+      if (k == 'q') {
+        println(current_map.coordinateOn(WIDTH/2, HEIGHT/2));       
+      }
     }
     
-    if (k == 'w') {
-      p.move(0, GAME_SPEED);
-      current_map.move(0, GAME_SPEED);
-    } else if (k == 's') {
-      p.move(0, -GAME_SPEED);
-      current_map.move(0, -GAME_SPEED);
-    } else if (k == 'a') {
-      p.move(GAME_SPEED, 0);
-      current_map.move(GAME_SPEED, 0);
-    } else if (k == 'd') {
-      p.move(-GAME_SPEED, 0);
-      current_map.move(-GAME_SPEED, 0);
+    // STORY MODE
+    if (mode == GameMode.STORY) {
+      if (k == ' ') {
+       reader.sendNextLine();
+       return;
+      }
+      return;
     }
     
-    else if (k == 'p') {
-      extraPlayerSurprised();
+    // EXPLORE MODE
+    if (mode == GameMode.EXPLORE) {
+      if (k == 'w') { // up
+        p.move(0, GAME_SPEED);
+        current_map.move(0, GAME_SPEED);
+      } else if (k == 's') { // down
+        p.move(0, -GAME_SPEED);
+        current_map.move(0, -GAME_SPEED);
+      } else if (k == 'a') { // left
+        p.move(GAME_SPEED, 0);
+        current_map.move(GAME_SPEED, 0);
+      } else if (k == 'd') { // right
+        p.move(-GAME_SPEED, 0);
+        current_map.move(-GAME_SPEED, 0);
+      }
+      return;
     }
   }
   
@@ -99,17 +117,9 @@ class Game {
         char c = current_map.map[i][j];
         int c_index = (int) c - '0';
         
-        if (c_index < 0 || c_index > Tiles.NUM_TILES) continue;
-        
+        if (c_index <= 0 || c_index > Tiles.NUM_TILES) continue;
         image(tiles[c_index], x, y, 50, 50);
       }
-    }
-  }
-  
-  void handleFeedbacks() {
-    if (reader.feedback == "surprise") {
-      reader.feedback = "";
-      extraPlayerSurprised();
     }
   }
   
@@ -134,9 +144,13 @@ class Game {
       return;
     }
   }
+  
+  void extraOff() {
+    mode = GameMode.EXPLORE;
+  }
     
   
   void extraPlayerSurprised() {
-    extraSurprise = GAME_SPEED*50f;
+    extraSurprise = GAME_SPEED*30f;
   }
 }

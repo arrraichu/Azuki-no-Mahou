@@ -6,6 +6,8 @@
 class TextRoll {
   final static int TEXTROLL_INTERVAL = 1;
   
+  Game parent;
+  
   // dimensions of text box
   float left_coor;
   float top_coor;
@@ -34,6 +36,7 @@ class TextRoll {
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
   
+  // for fading?
   final int WAIT_INTERVAL = 15;
   int wait_counter;
   
@@ -54,7 +57,11 @@ class TextRoll {
     current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
     
-    wait_counter = 0;
+    parent = null;
+  }
+  
+  void setParent(Game g) {
+    parent = g;
   }
   
   // set where the text should begin
@@ -137,10 +144,6 @@ class TextRoll {
     } else {
       text(inputBuffer, text_startx, text_starty);
     }
-  }
-  
-  void stall() {
-    wait_counter = WAIT_INTERVAL;
   }
   
   // hard reset on displaying text
