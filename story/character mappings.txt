@@ -1,0 +1,51 @@
+NOTE: All characters are VERY CASE SENSITIVE!!!
+
+Use the following characters for only:
+
+P - where the player begins
+0 - empty space
+1 - tile # 1: grass tile
+2 - tile # 2:
+3 - tile # 3:
+4 - tile # 4:
+5 - tile # 5:
+6 - tile # 6:
+7 - tile # 7:
+8 - tile # 8:
+9 - tile # 9:
+: - tile # 10:
+; - tile # 11:
+< - tile # 12:
+= - tile # 13:
+> - tile # 14:
+? - tile # 15:
+@ - tile # 16:
+A - tile # 17:
+B - tile # 18:
+C - tile # 19:
+
+Use the following characters for characters:
+
+b - character # 1
+c - character # 2
+d - character # 3
+e - character # 4
+f - character # 5
+g - character # 6
+h - character # 7
+i - character # 8
+j - character # 9
+k - character # 10
+l - character # 11
+m - character # 12
+n - character # 13
+o - character # 14
+p - character # 15
+q - character # 16
+r - character # 17
+s - character # 18
+t - character # 19
+u - character # 20
+
+what each character number is depends on each level.
+tell me (Raymond) what each character number is when we make a new level plz.
