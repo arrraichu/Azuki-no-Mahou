@@ -1,155 +1,20 @@
-﻿[Use the SPACEBAR to progress through text.]
-You: Where...where am I?
+[Use the SPACEBAR to progress through text.]
+Where...where am I?
 
-<Screen fade in>
-You wake up, your eyes opening slowly as you see nothing but blades of grass and a nearby stream. The world seems peaceful, so you slowly move your head up. The wind is blowing gently against the back of your head, making this almost feel like a dream. 
+How...did I get here?
 
-You: How...did I get here?
+Maybe I’m just dehydrated.
 
-You look around, but you see no people around you. You try to remember what happened or why you’re here, but you can’t really remember anything. 
+Wait...
 
-<headache>
-You: Maybe I’m just dehydrated.
+<surprise>
+Why can’t I feel anything?
+No...What the hell? This can’t be right.
 
-You get up slowly, walking towards the stream.
+<surprise>
+Gah! What the hell happened to me?
 
 [Use the WASD controls to move your character.]
-[New Objective: Walk to your right and find a river.]
-
-<surprise>
-The water looks clean enough to drink from, so you try to move your hands. Except...
-
-You: Wait...
-
-You quickly realize you don't have any arms.
-
-<surprise>
-You: Where are my arms?
-
-Or legs...
-
-<surprise>
-You: Where are my legs?
-
-<surprise>
-You: No...What the hell? This can’t be right.
-
-Your arms are gone. There were no nubs, no blood, nothing. It was as if his arms were never even on his body. You look down at your body and you notice other weird things. Your legs are gone, your clothing gone, and your skin looks...almost grey. You peer into the water and what you see looking back at you is a giant grey bean.
-
-You: What the hell happened to me!?
-
-???????????: You’re a bean!
-
-<surprise>
-<caterpillar enters>
-
-???????????: It’s been a while since we saw one of you. Welcome to the Plains.
-
-You: What the hell man!? You scared me have to death. Who are you?
-
-???????????: Well gee mister, haven’t you see a caterpillar before. Guess this time we got a weird one.
-
-You: Do you at least have a name?
-
-???????????: Caterpillar, of course.
-
-You sigh as you pinch your nose, or you would if you had any arms...or hands...
-
-<sigh>
-You: You’re name’s caterpillar?
-
-Caterpillar: Yea. What else would I be named? Butterfly? I’m not quite there yet, ya know. I’m still missing the wings.
-
-<headache>
-You can’t believe this right now. You’re a bean, in the middle of nowhere, talking to a caterpillar. This has to be a dream. You’d try to slap yourself, but again you have no arms.
-
-Caterpillar: You, okay mister? It’s such a beautiful day today.
-
-You: Well for one thing, I’m a bean. I wasn’t a bean yesterday. At least...I think I wasn’t.
-
-You try to remember what happened, but it still hurts to even try.
-
-<headache>
-You: Ugh...still can’t remember.
-
-Caterpillar: Well mister if its help you need, I could take you to see Old man Worm. He knows just about everything about...
-
-Before he can finish, you can hear strange sounds. You can make out long black bodies moving towards you.
-<Weird Monster Sounds>
-
-You: Are those ants? Are they like...ya know? Like you? Friendly?
-
-<cowering caterpillar>
-Caterpillar: No, they eat caterpillars...and beans.
-
-The caterpillar doesn’t say anything as it seems to cower in fear over the ants that are headed towards you. The ants hiss as they creep towards you and your new companion. You’re not quite sure what to do, until you hear the caterpillar shout something.
-
-<surprise>
-You: So, what do I do?
-
-Caterpillar: Fight them!
-
-You: Fight them? How?
-
-Caterpillar: I dunno, think of something!
-
-<Weird Monster Sounds>
-
-<Battle Sequence>
-
-<Happy Caterpillar>
-Caterpillar: See, I told you that you could do it.
-
-You honestly don’t know what happened. How did you do any of that?
-
-You: What...what am I?
-
-<Happy Caterpillar>
-Caterpillar: You're a bean!
-
-Whatever it is, it’s clear that you need answers.
-
-You: So, you said this worm guy would be able to help?
-
-Caterpillar: Yep! He’s the smartest guy I know!
-
-<sigh>
-You: Guess I don't have much of a choice. Guess I'll go see him then.
-
-<Happy Caterpillar>
-Caterpillar: Awesome. Just head south from here. He usually hangs out near a large sun flower.
-
-[New Objective: Find the Old Worm]
-
-
-<surprise>
-You: Is that a rabbit?
-
-<cowering caterpillar>
-Caterpillar: Please don't wake him. They eat beans too.
-
-<surprise>
-You: We should probably keep going then.
-
-[Continue to Find the Old Worm]
-
-Caterpillar: Hey Old man! Look what I found!
-
-<inching worm>
-
-Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
-
-You: One of me? You mean I'm not...
-
-<roaring sounds>
-<surprise>
-
-You: What was that?
-
-<cowering caterpillar>
-Caterpillar: The Rabbit
-
-<roaring sound>
-[New Objective: Defeat the Rabbit]
+[You can talk to other characters using the SPACEBAR key.]
 
 <off>

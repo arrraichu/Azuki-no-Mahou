@@ -12,6 +12,8 @@ class Map {
   public int center_x, center_y;
   
   final float MOVE_MAGNITUDE = 50f;
+  
+  PImage extras[] = new PImage[20];
 
   Map(Game g, int r, int c, String path, int x, int y) {
     parent = g;
@@ -40,13 +42,26 @@ class Map {
       for (int j = 0; j < columns; ++j) {
         map[i][j] = line.charAt(j);
         
-        if (line.charAt(j) == 'P') {
+        char cur = line.charAt(j);
+        if (cur == 'P') {
           starting_x = j * 50;
           starting_y = i * 50;
           map[i][j] = MapDefaults.playerTiles[parent.current_chapter];
         }
+        
+        else if (cur >= ('0'+50)) { // character sprites
+          int index = cur - '0' - 50;
+          extras[index] = loadImage(ChapterNpcs.spritepaths[parent.current_chapter][index]);
+        }
       }
     }
+  }
+  
+  char contact(float x, float y) {
+    float test_x = center_x - x * MOVE_MAGNITUDE;
+    float test_y = center_y - y * MOVE_MAGNITUDE;
+    
+    return coordinateOn(test_x, test_y);
   }
   
   void move(float x, float y) {
@@ -62,7 +77,8 @@ class Map {
       test_y += 49f;
     }
     
-    if (coordinateOn(test_x, test_y) != '0') {
+    int test_char = coordinateOn(test_x, test_y) - '0';
+    if (test_char > 0 && test_char <= 20) {
       starting_x -= x * MOVE_MAGNITUDE;
       starting_y -= y * MOVE_MAGNITUDE;
     }

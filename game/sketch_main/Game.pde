@@ -9,6 +9,9 @@ class Game {
   
   PFont default_font;
   TextRoll tr;
+  BattleText battle_prompt;
+  
+  
   TextReader reader;
   
   PImage tiles[] = new PImage[Tiles.NUM_TILES+1];
@@ -35,11 +38,15 @@ class Game {
     default_font = createFont("assets/fonts/EightBit.ttf", 22);
     textFont(default_font, 22);
     
-    tr = new TextRoll(width*0.01, height*0.85, width*0.98, height*0.14);
+    tr = new TextRoll(this, width*0.01, height*0.85, width*0.98, height*0.14);
     tr.setTextStart(width*0.03, height*0.91);
     tr.setNewlinePlacement(width*0.94, height*0.05);
-  
-    reader = new TextReader("gametexts/0.txt", tr);
+    
+    battle_prompt = new BattleText(this, width*0.01, height*0.6, width*0.23, height*0.39);
+    battle_prompt.setTextStart(width*0.03, height*0.66);
+    battle_prompt.setNewlinePlacement(18, height*0.04);
+    
+    reader = new TextReader(this, "gametexts/0.txt", tr);
     for (int i = 0; i <= Tiles.NUM_TILES; ++i) {
       if (i == 0) tiles[0] = null;
       else tiles[i] = loadImage(Tiles.paths[i]);
@@ -48,24 +55,27 @@ class Game {
     current_chapter = 0;
     
     initialize = false;
-    
-    reader.setParent(this);
-    tr.setParent(this);
   }
 
   void run() {
     if (!initialize) {
-       current_map = new Map(this, 100, 100, "assets/maps/0.txt", game_width/2, game_height/2);
+       current_map = new Map(this, 100, 100, MapDefaults.mapfiles[current_chapter], game_width/2, game_height/2);
        extraFade = EXTRA_FADE_LENGTH;
        initialize = true;
     }
     
-    displayMap();
-    p.display(game_width/2, game_height/2);
-    if (mode == GameMode.STORY) tr.display();
-    reader.run();
+    if (mode != GameMode.BATTLE) {
+      displayMap();
+      p.display(game_width/2, game_height/2);
+      if (mode == GameMode.STORY) tr.display();
+      reader.run();
+      
+      handleExtras();
+    }
     
-    handleExtras();
+    else {
+      battle_prompt.display();
+    }
   }
   
   void receiveKey(char k) {
@@ -73,23 +83,31 @@ class Game {
     
     // DEBUG MODE
     if (DEBUG) {
-      if (k == 'q') {
-        println(current_map.coordinateOn(WIDTH/2, HEIGHT/2));       
+      if (k == '`') {
+        mode = GameMode.BATTLE;
+      }
+      if (k == '1' && mode == GameMode.BATTLE)
+      {
+        battle_prompt.setText("Hello World my name is Raichu i like potatoes yolo what up yoyos hurt anpanman synchro summon omg haha lmfao yogurtz are bomb!"); 
       }
     }
     
     // STORY MODE
     if (mode == GameMode.STORY) {
       if (k == ' ') {
-       reader.sendNextLine();
-       return;
+        reader.sendNextLine();
+        return;
       }
       return;
     }
     
     // EXPLORE MODE
     if (mode == GameMode.EXPLORE) {
-      if (k == 'w') { // up
+      if (k == ' ') {
+        playerTalk();
+      }
+      
+      else if (k == 'w') { // up
         p.move(0, GAME_SPEED);
         current_map.move(0, GAME_SPEED);
       } else if (k == 's') { // down
@@ -117,7 +135,13 @@ class Game {
         char c = current_map.map[i][j];
         int c_index = (int) c - '0';
         
-        if (c_index <= 0 || c_index > Tiles.NUM_TILES) continue;
+        if (c_index <= 0) continue;
+        if (c_index >= 50 && current_map.extras[c_index-50] != null) {
+          image(tiles[ChapterNpcs.spritebottoms[current_chapter][c_index-50]], x, y, 50, 50);
+          image(current_map.extras[c_index-50], x, y, 50, 50);
+          continue;
+        }
+        if (c_index > Tiles.NUM_TILES) continue;
         image(tiles[c_index], x, y, 50, 50);
       }
     }
@@ -127,6 +151,21 @@ class Game {
     if (x > game_width || y > game_height) return false;
     if (x+50 < 0 || y+50 < 0) return false;
     return true;
+  }
+  
+  void playerTalk() {
+    float x = GAME_SPEED; float y = GAME_SPEED;
+    if (p.direction > 1) x *= 0;
+    else y *= 0;
+    if (p.direction == 0) x *= -1;
+    if (p.direction == 3) y *= -1;
+    
+    int index = current_map.contact(x,y) - '0' - 50;
+    if (index < 0 || index >= 20) return;
+    
+    reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
+    mode = GameMode.STORY;
+    reader.sendNextLine();
   }
   
   void handleExtras() {
@@ -148,7 +187,10 @@ class Game {
   void extraOff() {
     mode = GameMode.EXPLORE;
   }
-    
+  
+  void extraFight() {
+    mode = GameMode.BATTLE;
+  }
   
   void extraPlayerSurprised() {
     extraSurprise = GAME_SPEED*30f;

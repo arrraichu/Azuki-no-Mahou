@@ -15,10 +15,10 @@ class TextReader {
   int wait_counter = -1;
   
   // constructor
-  TextReader(String filepath, TextRoll roll) {
+  TextReader(Game g, String filepath, TextRoll roll) {
     reader = createReader(filepath);
     tr = roll;
-    parent = null;
+    parent = g;
   }
   
   void run() {
@@ -32,10 +32,6 @@ class TextReader {
       wait_counter--;
     }
     
-  }
-  
-  void setParent(Game g) {
-    parent = g;
   }
   
   void stall() {
@@ -63,6 +59,10 @@ class TextReader {
       
       if (command.equals("off")) {
         parent.extraOff();
+        return;
+      }
+      else if (command.equals("fight")) {
+        parent.extraFight();
         return;
       }
       else if (command.equals("surprise")) parent.extraPlayerSurprised();

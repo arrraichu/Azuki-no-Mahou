@@ -4,5 +4,5 @@ static final class Tiles {
   static int NUM_TILES = 1;
  
   static String paths[] = { "",
-    "assets/tiles/grass.png" };  
+    "assets/tiles/grass7.png" };  
 }

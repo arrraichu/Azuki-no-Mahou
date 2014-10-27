@@ -41,7 +41,8 @@ class TextRoll {
   int wait_counter;
   
   // constructor reads box coordinates and sets default values
-  TextRoll(float left, float top, float w, float h) {
+  TextRoll(Game g, float left, float top, float w, float h) {
+    parent = g;
     left_coor = left;
     top_coor = top;
     box_width = w;
@@ -56,12 +57,6 @@ class TextRoll {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
     current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
-    
-    parent = null;
-  }
-  
-  void setParent(Game g) {
-    parent = g;
   }
   
   // set where the text should begin
