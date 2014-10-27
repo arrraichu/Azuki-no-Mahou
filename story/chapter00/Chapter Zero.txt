@@ -10,6 +10,7 @@ Emote Commands: These commands are for a picture of some kind to appear over the
 
 Sprite Commands: These commands require the sprite to do something. These will be rare so Nick doesn't hate me.
 	<"name" enters> = That particular sprite enters the scene.
+	< "name" leaves> = The particular sprite in question leaves the scene.
 ------------------------------
 
 <leaves> = That particular sprite leaves the scene.
