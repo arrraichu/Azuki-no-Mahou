@@ -1,4 +1,19 @@
-﻿[Use the SPACEBAR to progress through text.]
+﻿COMMANDS
+------------------------------
+Emote Commands: These commands are for a picture of some kind to appear over the sprite in question.
+
+	<sigh> = Bubble with sweat drop.
+	<headache> = Anime Vein in a bubble.
+	<happy> = Happy face in a bubble.
+	<surprised> = Exclamation Point in a bubble.
+	<scared> = Scared Face in a bubble.
+
+Sprite Commands: These commands require the sprite to do something. These will be rare so Nick doesn't hate me.
+	<"name" enters> = That particular sprite enters the scene.
+------------------------------
+
+<leaves> = That particular sprite leaves the scene.
+[Use the SPACEBAR to progress through text.]
 You: Where...where am I?
 
 <Screen fade in>
@@ -15,6 +30,7 @@ You get up slowly, walking towards the stream.
 
 [Use the WASD controls to move your character.]
 [New Objective: Walk to your right and find a river.]
+<off>
 
 <surprise>
 The water looks clean enough to drink from, so you try to move your hands. Except...
@@ -41,8 +57,9 @@ You: What the hell happened to me!?
 ???????????: You’re a bean!
 
 <surprise>
-<caterpillar enters>
+You: Huh?
 
+<enters>
 ???????????: It’s been a while since we saw one of you. Welcome to the Plains.
 
 You: What the hell man!? You scared me have to death. Who are you?
@@ -87,6 +104,7 @@ The caterpillar doesn’t say anything as it seems to cower in fear over the ant
 <surprise>
 You: So, what do I do?
 
+<scared>
 Caterpillar: Fight them!
 
 You: Fight them? How?
@@ -95,7 +113,7 @@ Caterpillar: I dunno, think of something!
 
 <Weird Monster Sounds>
 
-<Battle Sequence>
+<fight>
 
 <Happy Caterpillar>
 Caterpillar: See, I told you that you could do it.
@@ -120,6 +138,7 @@ You: Guess I don't have much of a choice. Guess I'll go see him then.
 Caterpillar: Awesome. Just head south from here. He usually hangs out near a large sun flower.
 
 [New Objective: Find the Old Worm]
+<off>
 
 
 <surprise>
@@ -131,7 +150,7 @@ Caterpillar: Please don't wake him. They eat beans too.
 <surprise>
 You: We should probably keep going then.
 
-[Continue to Find the Old Worm]
+<off>
 
 Caterpillar: Hey Old man! Look what I found!
 
@@ -142,11 +161,11 @@ Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
 You: One of me? You mean I'm not...
 
 <roaring sounds>
-<surprise>
 
+<surprise>
 You: What was that?
 
-<cowering caterpillar>
+<scared>
 Caterpillar: The Rabbit
 
 <roaring sound>
