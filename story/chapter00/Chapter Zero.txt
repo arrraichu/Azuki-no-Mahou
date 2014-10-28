@@ -9,55 +9,51 @@ Emote Commands: These commands are for a picture of some kind to appear over the
 	<scared> = Scared Face in a bubble.
 
 Sprite Commands: These commands require the sprite to do something. These will be rare so Nick doesn't hate me.
-	<"name" enters> = That particular sprite enters the scene.
+	<"name" enters> = That particular sprite enters the scene with their walking animation.
 	< "name" leaves> = The particular sprite in question leaves the scene.
+
+Sound Commands: These commands involve sounds that would need to play.
+	<monster sounds> = A noise you'll commonly hear when a battle is apporaching after a dialogue sequence.
+	<roaring sound> = A noise you'll usually hear before encountering a boss of some kind.
 ------------------------------
 
-<leaves> = That particular sprite leaves the scene.
+WAKING UP SCENE
+------------------------------
+
 [Use the SPACEBAR to progress through text.]
 You: Where...where am I?
 
-<Screen fade in>
-You wake up, your eyes opening slowly as you see nothing but blades of grass and a nearby stream. The world seems peaceful, so you slowly move your head up. The wind is blowing gently against the back of your head, making this almost feel like a dream. 
-
 You: How...did I get here?
 
-You look around, but you see no people around you. You try to remember what happened or why you’re here, but you can’t really remember anything. 
-
 <headache>
-You: Maybe I’m just dehydrated.
-
-You get up slowly, walking towards the stream.
+You: Maybe I’m just dehydrated. I can hear a river nearby, I can drink there.
 
 [Use the WASD controls to move your character.]
 [New Objective: Walk to your right and find a river.]
 <off>
+------------------------------
 
+RIVER SCENE
+------------------------------
 <surprise>
-The water looks clean enough to drink from, so you try to move your hands. Except...
 
 You: Wait...
-
-You quickly realize you don't have any arms.
 
 <surprise>
 You: Where are my arms?
 
-Or legs...
-
-<surprise>
 You: Where are my legs?
 
 <surprise>
 You: No...What the hell? This can’t be right.
 
-Your arms are gone. There were no nubs, no blood, nothing. It was as if his arms were never even on his body. You look down at your body and you notice other weird things. Your legs are gone, your clothing gone, and your skin looks...almost grey. You peer into the water and what you see looking back at you is a giant grey bean.
-
+<surprise>
 You: What the hell happened to me!?
 
+<surprise>
 ???????????: You’re a bean!
 
-<surprise>
+<scared>
 You: Huh?
 
 <enters>
@@ -71,36 +67,28 @@ You: Do you at least have a name?
 
 ???????????: Caterpillar, of course.
 
-You sigh as you pinch your nose, or you would if you had any arms...or hands...
-
 <sigh>
-You: You’re name’s caterpillar?
+You: You’re name’s Caterpillar?
 
 Caterpillar: Yea. What else would I be named? Butterfly? I’m not quite there yet, ya know. I’m still missing the wings.
 
 <headache>
-You can’t believe this right now. You’re a bean, in the middle of nowhere, talking to a caterpillar. This has to be a dream. You’d try to slap yourself, but again you have no arms.
 
 Caterpillar: You, okay mister? It’s such a beautiful day today.
 
 You: Well for one thing, I’m a bean. I wasn’t a bean yesterday. At least...I think I wasn’t.
-
-You try to remember what happened, but it still hurts to even try.
 
 <headache>
 You: Ugh...still can’t remember.
 
 Caterpillar: Well mister if its help you need, I could take you to see Old man Worm. He knows just about everything about...
 
-Before he can finish, you can hear strange sounds. You can make out long black bodies moving towards you.
-<Weird Monster Sounds>
+<monster sounds>
 
 You: Are those ants? Are they like...ya know? Like you? Friendly?
 
 <cowering caterpillar>
 Caterpillar: No, they eat caterpillars...and beans.
-
-The caterpillar doesn’t say anything as it seems to cower in fear over the ants that are headed towards you. The ants hiss as they creep towards you and your new companion. You’re not quite sure what to do, until you hear the caterpillar shout something.
 
 <surprise>
 You: So, what do I do?
@@ -115,15 +103,18 @@ Caterpillar: I dunno, think of something!
 <Weird Monster Sounds>
 
 <fight>
+------------------------------
 
-<Happy Caterpillar>
+AFTER THE FIGHT SCENE
+------------------------------
+<happy>
 Caterpillar: See, I told you that you could do it.
 
 You honestly don’t know what happened. How did you do any of that?
 
 You: What...what am I?
 
-<Happy Caterpillar>
+<happy>
 Caterpillar: You're a bean!
 
 Whatever it is, it’s clear that you need answers.
@@ -135,27 +126,33 @@ Caterpillar: Yep! He’s the smartest guy I know!
 <sigh>
 You: Guess I don't have much of a choice. Guess I'll go see him then.
 
-<Happy Caterpillar>
+<happy>
 Caterpillar: Awesome. Just head south from here. He usually hangs out near a large sun flower.
 
 [New Objective: Find the Old Worm]
 <off>
+------------------------------
 
-
+RABBIT
+------------------------------
 <surprise>
 You: Is that a rabbit?
 
-<cowering caterpillar>
+<scared>
 Caterpillar: Please don't wake him. They eat beans too.
 
 <surprise>
 You: We should probably keep going then.
 
 <off>
+------------------------------
 
+
+BOSS FIGHT
+------------------------------
 Caterpillar: Hey Old man! Look what I found!
 
-<inching worm>
+<worm enters>
 
 Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
 
@@ -170,6 +167,5 @@ You: What was that?
 Caterpillar: The Rabbit
 
 <roaring sound>
-[New Objective: Defeat the Rabbit]
-
-<off>
+<fight>
+------------------------------
