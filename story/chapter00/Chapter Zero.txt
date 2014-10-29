@@ -1,102 +1,123 @@
 ﻿COMMANDS
 ------------------------------
+
+
 Emote Commands: These commands are for a picture of some kind to appear over the sprite in question.
 
-	<sigh> = Bubble with sweat drop.
-	<headache> = Anime Vein in a bubble.
-	<happy> = Happy face in a bubble.
+	<sigh> = Ellipses in a bubble.
 	<surprised> = Exclamation Point in a bubble.
-	<scared> = Scared Face in a bubble.
-
-Sprite Commands: These commands require the sprite to do something. These will be rare so Nick doesn't hate me.
-	<"name" enters> = That particular sprite enters the scene with their walking animation.
-	< "name" leaves> = The particular sprite in question leaves the scene.
+	<confused> = Question mark in a bubble.
 
 Sound Commands: These commands involve sounds that would need to play.
+
 	<monster sounds> = A noise you'll commonly hear when a battle is apporaching after a dialogue sequence.
 	<roaring sound> = A noise you'll usually hear before encountering a boss of some kind.
 ------------------------------
 
 WAKING UP SCENE
+
 ------------------------------
 
 [Use the SPACEBAR to progress through text.]
 You: Where...where am I?
 
-You: How...did I get here?
+How...did I get here?
 
-<headache>
-You: Maybe I’m just dehydrated. I can hear a river nearby, I can drink there.
+<confused>
+Where am I?
+
+Maybe I should look around.
 
 [Use the WASD controls to move your character.]
 [New Objective: Walk to your right and find a river.]
 <off>
+
 ------------------------------
 
-RIVER SCENE
+AFTER WAKING FOR A WHILE
+
 ------------------------------
-<surprise>
-
-You: Wait...
 
 <surprise>
-You: Where are my arms?
 
-You: Where are my legs?
-
-<surprise>
-You: No...What the hell? This can’t be right.
+Wait...
 
 <surprise>
-You: What the hell happened to me!?
+Where are my arms?
+
+Where are my legs?
 
 <surprise>
-???????????: You’re a bean!
+No...What the hell? This can’t be right.
+
+<surprise>
+What the hell happened to me!?
+
+<surprise>
+??: You’re a bean!
 
 <scared>
-You: Huh?
+Huh?
+
+Who said that!?
+
+??: Over here! Above you!
+
+[New Objective: Wak upward and find the mystery person.]
+<off>
+------------------------------
+
+MEETING THE CATERPILLAR
+
+------------------------------
 
 <enters>
-???????????: It’s been a while since we saw one of you. Welcome to the Plains.
+??: It’s been a while since we saw one of you. Welcome to the Plains.
 
-You: What the hell man!? You scared me have to death. Who are you?
+What the hell man!? You scared me have to death. Who are you?
 
-???????????: Well gee mister, haven’t you see a caterpillar before. Guess this time we got a weird one.
+??: Well gee mister, haven’t you see a caterpillar before. Guess this time we got a weird one.
 
-You: Do you at least have a name?
+Do you at least have a name?
 
-???????????: Caterpillar, of course.
+??: Caterpillar, of course.
 
 <sigh>
-You: You’re name’s Caterpillar?
+You’re name’s Caterpillar?
 
 Caterpillar: Yea. What else would I be named? Butterfly? I’m not quite there yet, ya know. I’m still missing the wings.
 
-<headache>
+<sigh>
+...
 
 Caterpillar: You, okay mister? It’s such a beautiful day today.
 
-You: Well for one thing, I’m a bean. I wasn’t a bean yesterday. At least...I think I wasn’t.
+Well for one thing, I’m a bean. I wasn’t a bean yesterday. At least...I think I wasn’t.
 
-<headache>
-You: Ugh...still can’t remember.
+<sigh>
+Ugh...still can’t remember.
 
 Caterpillar: Well mister if its help you need, I could take you to see Old man Worm. He knows just about everything about...
 
 <monster sounds>
 
-You: Are those ants? Are they like...ya know? Like you? Friendly?
+<confused>
+Are those...ants? 
 
-<cowering caterpillar>
+<surprise>
+Caterpillar: Y-yea. Those are ants.
+
+Are they like...ya know? Like you? Friendly?
+
 Caterpillar: No, they eat caterpillars...and beans.
 
 <surprise>
-You: So, what do I do?
+So, what do I do?
 
 <scared>
 Caterpillar: Fight them!
 
-You: Fight them? How?
+Fight them? How?
 
 Caterpillar: I dunno, think of something!
 
@@ -107,24 +128,27 @@ Caterpillar: I dunno, think of something!
 
 AFTER THE FIGHT SCENE
 ------------------------------
-<happy>
+<confused>
+Caterpillar: Wait...you beat them?
+
+<surprised>
 Caterpillar: See, I told you that you could do it.
 
 You honestly don’t know what happened. How did you do any of that?
 
-You: What...what am I?
+What...what am I?
 
 <happy>
 Caterpillar: You're a bean!
 
 Whatever it is, it’s clear that you need answers.
 
-You: So, you said this worm guy would be able to help?
+So, you said this worm guy would be able to help?
 
 Caterpillar: Yep! He’s the smartest guy I know!
 
 <sigh>
-You: Guess I don't have much of a choice. Guess I'll go see him then.
+Guess I don't have much of a choice. Guess I'll go see him then.
 
 <happy>
 Caterpillar: Awesome. Just head south from here. He usually hangs out near a large sun flower.
@@ -134,20 +158,18 @@ Caterpillar: Awesome. Just head south from here. He usually hangs out near a lar
 ------------------------------
 
 RABBIT
+
 ------------------------------
 <surprise>
-You: Is that a rabbit?
+Is that a rabbit?
 
-<scared>
-Caterpillar: Please don't wake him. They eat beans too.
+<sigh>
+Rabbits...rabbits eat beans...
 
-<surprise>
-You: We should probably keep going then.
+I should leave it be.
 
 <off>
 ------------------------------
-
-
 BOSS FIGHT
 ------------------------------
 Caterpillar: Hey Old man! Look what I found!
@@ -156,12 +178,12 @@ Caterpillar: Hey Old man! Look what I found!
 
 Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
 
-You: One of me? You mean I'm not...
+One of me? You mean I'm not...
 
 <roaring sounds>
 
 <surprise>
-You: What was that?
+What was that?
 
 <scared>
 Caterpillar: The Rabbit

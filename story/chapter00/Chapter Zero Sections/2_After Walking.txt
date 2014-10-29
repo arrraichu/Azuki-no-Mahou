@@ -1,0 +1,28 @@
+<surprise>
+
+Wait...
+
+<surprise>
+Where are my arms?
+
+Where are my legs?
+
+<surprise>
+No...What the hell? This can’t be right.
+
+<surprise>
+What the hell happened to me!?
+
+<surprise>
+??: You’re a bean!
+
+<scared>
+Huh?
+
+Who said that!?
+
+??: Over here! Above you!
+
+[New Objective: Wak upward and find the mystery person.]
+
+<off>
