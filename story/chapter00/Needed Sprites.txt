@@ -1,7 +1,17 @@
-------CHAPTER ZERO SPRITE------
-Bean Sprite: Main character. Overworld Sprite and combat sprite.
+These are sprites that wi
 
-Cicada: Small insect that digs holes. Reoccuring NPC that is usually seen half coming out of a hole. Overworld sprite.
+------CHAPTER ZERO SPRITES------
+Bean Sprite: Main character. Overworld Sprite and combat sprite. Player Controlled.
 
-Ants: Enemy Mobs. Travel via digging. 
+Cicada: Small insect that digs holes. NPC that is usually seen half coming out of a hole. Overworld sprite. Location doesn't really matter as of yet. Will appear multiple times.
+
+Ants: Enemy Mobs. Travel via digging. No need for overworld sprite. Just combat sprites. The ants attacks should be based on bites, since they'd want to eat the bean.
+
+------LATER CHAPTER SPRITES------
+
+Worm: NPC that explains some lore. Not reoccuring.
+
+Rabbit: NPC and first boss. Overworld sprite is of him sleeping. Combat sprite is of him looking active and fully awake.
+
+Crab Grass: Magic evil grass. Wants to absorb the beans nutrients. Keep trying to bind him and bury him. Combat sprite.
 
