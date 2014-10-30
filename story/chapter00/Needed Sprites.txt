@@ -1,0 +1,7 @@
+------CHAPTER ZERO SPRITE------
+Bean Sprite: Main character. Overworld Sprite and combat sprite.
+
+Cicada: Small insect that digs holes. Reoccuring NPC that is usually seen half coming out of a hole. Overworld sprite.
+
+Ants: Enemy Mobs. Travel via digging. 
+

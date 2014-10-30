@@ -29,7 +29,7 @@ Where am I?
 Maybe I should look around.
 
 [Use the WASD controls to move your character.]
-[New Objective: Walk to your right and find a river.]
+[New Objective: Walk to your right and look around the area.]
 <off>
 
 ------------------------------
@@ -64,10 +64,11 @@ Who said that!?
 ??: Over here! Above you!
 
 [New Objective: Wak upward and find the mystery person.]
+
 <off>
 ------------------------------
 
-MEETING THE CATERPILLAR
+MEETING CADI
 
 ------------------------------
 
@@ -76,28 +77,28 @@ MEETING THE CATERPILLAR
 
 What the hell man!? You scared me have to death. Who are you?
 
-??: Well gee mister, haven’t you see a caterpillar before. Guess this time we got a weird one.
+??: Well gee mister, haven’t you see a cicada before. Guess this time we got a weird one.
 
 Do you at least have a name?
 
-??: Caterpillar, of course.
+??: Cadi, of course.
 
 <sigh>
-You’re name’s Caterpillar?
+You’re name’s Cadi?
 
-Caterpillar: Yea. What else would I be named? Butterfly? I’m not quite there yet, ya know. I’m still missing the wings.
+Cad: Yea. What else would I be named? Inse?
 
 <sigh>
-...
+Cadi the Cicada. Right...
 
-Caterpillar: You, okay mister? It’s such a beautiful day today.
+Cadi: You, okay mister? It’s such a beautiful day today and you look a little...pale.
 
 Well for one thing, I’m a bean. I wasn’t a bean yesterday. At least...I think I wasn’t.
 
 <sigh>
-Ugh...still can’t remember.
+And I still can’t remember anything either.
 
-Caterpillar: Well mister if its help you need, I could take you to see Old man Worm. He knows just about everything about...
+Cadi: Well mister if its help you need, I could take you to see Old man Worm. He knows just about everything about...
 
 <monster sounds>
 
@@ -105,21 +106,21 @@ Caterpillar: Well mister if its help you need, I could take you to see Old man W
 Are those...ants? 
 
 <surprise>
-Caterpillar: Y-yea. Those are ants.
+Cadi: Y-yea. Those are ants.
 
 Are they like...ya know? Like you? Friendly?
 
-Caterpillar: No, they eat caterpillars...and beans.
+Cadi: No, they eat caterpillars...and beans.
 
 <surprise>
 So, what do I do?
 
 <scared>
-Caterpillar: Fight them!
+Cadi: Fight them!
 
 Fight them? How?
 
-Caterpillar: I dunno, think of something!
+Cadi: I dunno, think of something!
 
 <Weird Monster Sounds>
 
@@ -127,31 +128,38 @@ Caterpillar: I dunno, think of something!
 ------------------------------
 
 AFTER THE FIGHT SCENE
+
 ------------------------------
 <confused>
 Caterpillar: Wait...you beat them?
 
 <surprised>
-Caterpillar: See, I told you that you could do it.
+Caterpillar: I mean...see, I told you that you could do it.
 
-You honestly don’t know what happened. How did you do any of that?
+<sigh>
+I honestly don’t know what happened. How did I do any of that?
 
 What...what am I?
 
-<happy>
-Caterpillar: You're a bean!
+Cadi: You're a bean!
 
 Whatever it is, it’s clear that you need answers.
 
 So, you said this worm guy would be able to help?
 
-Caterpillar: Yep! He’s the smartest guy I know!
+Cadi: Yep! He’s the smartest guy I know!
 
 <sigh>
 Guess I don't have much of a choice. Guess I'll go see him then.
 
-<happy>
-Caterpillar: Awesome. Just head south from here. He usually hangs out near a large sun flower.
+Cadi: Awesome! Just head south from here. He usually hangs out near a large sun flower. You can't miss it!
+
+<confused>
+Wait, aren't you coming too?
+
+Cadi: Cicada's dig underground, so you won't see me. Don't you know anything mister?
+
+<sigh>
 
 [New Objective: Find the Old Worm]
 <off>
@@ -163,19 +171,26 @@ RABBIT
 <surprise>
 Is that a rabbit?
 
-<sigh>
-Rabbits...rabbits eat beans...
+<surprise>
+Cadi: Yea. I think so.
 
-I should leave it be.
+<confused>
+Should we wake it? Do you think it'll help.
+
+<sigh>
+Rabbits eat beans.
+
+Which, is why I said we'll be leaving it alone.
 
 <off>
 ------------------------------
-BOSS FIGHT
+
+FOUND THE WORM
+
 ------------------------------
-Caterpillar: Hey Old man! Look what I found!
+Cadi: Hey Old man! Look what I found!
 
-<worm enters>
-
+<surprise>
 Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
 
 One of me? You mean I'm not...
