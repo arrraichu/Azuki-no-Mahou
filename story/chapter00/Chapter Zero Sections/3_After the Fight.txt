@@ -1,10 +1,7 @@
-<question>
 Cicada: Wait...you beat them?
 
-<exclamation>
 Cicada: I mean...see, I told you that you could do it.
 
-<ellipses>
 I honestly don’t know what happened. How did I do any of that?
 
 Cicada: Well, you're a bean. Fighting stuff comes with the territory.You're a bean!
@@ -15,17 +12,15 @@ Huh? What do you mean?
 Cicada: Well mister, in this land beans are a rarity. They always seem to be great fighters, but they're also supposed to be very tasty. So, lots of people will be trying to eat you.
 
 <ellipses>
-This day just gets better and better.
+This day just gets better and better...
 
-<ellipses>
 And I still can’t remember anything either.
 
 Cicada: Well mister if its help you need, I could take you to see old worm. He's just north from where we are.
 
-<question>
 An old worm?
 
-Cicada:  Yeo! He knows just about everything about anything. He can probably tell you what's going on here too.
+Cicada:  Yep! He knows just about everything about anything. He can probably tell you what's going on here too.
 
 Well, I guess I don't have much of a choice, now do I. Got a name Cicada?
 
@@ -36,7 +31,6 @@ Alright then, Cadi. Let's go see this "old worm" then.
 Cadi: Awesome! He's usually just digging in the dirt looking for something to eat right about now. And, he doesn't eat beans...I think.
 
 <exclamation>
-
 You think?
 
 Cadi: Well, it's not like I know everything about anything. Besides, you got any better ideas?
@@ -46,7 +40,6 @@ I suppose not.
 
 Cadi: That's what I thought. Just head north from here and you'll find him in no time.
 
-<question>
 Wait, aren't you coming too?
 
 Cadi: Well, cicadas usually dig, so you wouldn't really see me if I was near you. Besides, now that you beat all those ants it might be safe to dig for some food.

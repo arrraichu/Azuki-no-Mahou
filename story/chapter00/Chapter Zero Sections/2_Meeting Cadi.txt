@@ -2,7 +2,6 @@
 
 Are...are you giant caterpillar?
 
-<exclamation>
 ??: Cicada! Not a caterpillar, not a roach, not a worm. A CI-CA-DA!
 
 <exclamation>
@@ -14,18 +13,16 @@ I meant I've never seen a giant talking one before.
 
 Cicada: That's pretty rich coming from a talking bean.
 
-Bean?
-
 <question>
+Bean?
 
 Wait...
 
-<surprise>
 Where are my arms?
 
+<surprise>
 Where are my legs?
 
-<surprise>
 No...What the hell? This can’t be right.
 
 <surprise>
@@ -44,7 +41,6 @@ Cicada: It could be worse. You could be...
 
 <monster sounds>
 
-<ellipses>
 Cicada: ...Lunch...
 
 <surprise>
@@ -52,12 +48,10 @@ What was that?
 
 Cicada: That, would be some ants. And they sound hungry.
 
-<surprise>
 Are they friendly?
 
 Cicada: If by friendly, you mean blood thirsty, then yea. 
 
-<surprise>
 Shouldn't we run?
 
 Cicada: Won't do you any good. Ants are fast, and they can dig. We wouldn't get far.
