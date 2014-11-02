@@ -106,6 +106,7 @@ class BattleText {
   }
   
   void setText(String text) {
+    for (int i = 0; i < NUM_LINES; ++i) wrap_index[i] = -1;
     input = text;
     text_done = false;
   }

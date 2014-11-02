@@ -9,7 +9,8 @@ class Game {
   
   PFont default_font;
   TextRoll tr;
-  BattleText battle_prompt;
+  BattleText battle_text;
+  BattlePrompt battle_prompt;
   
   
   TextReader reader;
@@ -29,6 +30,13 @@ class Game {
   float extraFade = 0f;
   final float EXTRA_SURPRISE_LENGTH = GAME_SPEED*50f;
   float extraSurprise = 0f;
+  final int EMOTE_LENGTH = 35;
+  int emote_time = -1;
+  PImage emote;
+  
+  PlayerStats pstats;
+  
+  int battle_index;
     
   Game(int w, int h) {
     game_width = w; game_height = h;
@@ -42,11 +50,14 @@ class Game {
     tr.setTextStart(width*0.03, height*0.91);
     tr.setNewlinePlacement(width*0.94, height*0.05);
     
-    battle_prompt = new BattleText(this, width*0.01, height*0.6, width*0.23, height*0.39);
-    battle_prompt.setTextStart(width*0.03, height*0.66);
-    battle_prompt.setNewlinePlacement(18, height*0.04);
+    battle_text = new BattleText(this, width*0.01, height*0.6, width*0.23, height*0.39);
+    battle_text.setTextStart(width*0.03, height*0.66);
+    battle_text.setNewlinePlacement(18, height*0.04);
+    battle_prompt = new BattlePrompt(this, width*0.76, height*0.6, width*0.23, height*0.39);
+    battle_prompt.setTextStart(width*0.78, height*0.66);
+    battle_prompt.setNewlinePlacement(18, height*0.065);
     
-    reader = new TextReader(this, "gametexts/0.txt", tr);
+    reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
     for (int i = 0; i <= Tiles.NUM_TILES; ++i) {
       if (i == 0) tiles[0] = null;
       else tiles[i] = loadImage(Tiles.paths[i]);
@@ -55,6 +66,10 @@ class Game {
     current_chapter = 0;
     
     initialize = false;
+    
+    pstats = new PlayerStats(this, "assets/sprites/player/right0.png", 10, 4, 2, 2, 2);
+    
+    battle_index = -1;
   }
 
   void run() {
@@ -74,8 +89,10 @@ class Game {
     }
     
     else {
+      battle_text.display();
       battle_prompt.display();
     }
+    
   }
   
   void receiveKey(char k) {
@@ -85,11 +102,9 @@ class Game {
     if (DEBUG) {
       if (k == '`') {
         mode = GameMode.BATTLE;
+        resetBgm();
       }
-      if (k == '1' && mode == GameMode.BATTLE)
-      {
-        battle_prompt.setText("Hello World my name is Raichu i like potatoes yolo what up yoyos hurt anpanman synchro summon omg haha lmfao yogurtz are bomb!"); 
-      }
+      
     }
     
     // STORY MODE
@@ -120,6 +135,11 @@ class Game {
         p.move(-GAME_SPEED, 0);
         current_map.move(-GAME_SPEED, 0);
       }
+      return;
+    }
+    
+    if (mode == GameMode.BATTLE) {
+      battle_prompt.receiveKeys(k);
       return;
     }
   }
@@ -164,9 +184,29 @@ class Game {
     if (index < 0 || index >= 20) return;
     
     reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
+    battle_index = index;
     mode = GameMode.STORY;
     reader.sendNextLine();
   }
+  
+  void finishBattle() {
+    extraFade = EXTRA_FADE_LENGTH;
+    
+    if (battle_index >= 0) {
+      if (ChapterNpcs.afterbattlepaths[current_chapter][battle_index] != "") {
+        reader = new TextReader(this, ChapterNpcs.afterbattlepaths[current_chapter][battle_index], tr);
+        battle_index = -1;
+        mode = GameMode.STORY;
+      }
+      else {
+        mode = GameMode.EXPLORE;
+        resetBgm();
+      }
+    }
+    else mode = GameMode.EXPLORE;
+    resetBgm();
+  }
+  
   
   void handleExtras() {
     if (extraFade > 0) {
@@ -182,17 +222,35 @@ class Game {
       extraSurprise -= GAME_SPEED*10f;
       return;
     }
+    
+    if (emote_time >= 0) {
+      image(emote, width/2 + 40, height/2 - 15);
+      --emote_time;
+    }
   }
   
   void extraOff() {
     mode = GameMode.EXPLORE;
+    battle_index = -1;
   }
   
   void extraFight() {
     mode = GameMode.BATTLE;
+    resetBgm();
   }
   
   void extraPlayerSurprised() {
-    extraSurprise = GAME_SPEED*30f;
+    emote = loadImage("assets/sprites/excl.png");
+    emote_time = EMOTE_LENGTH;
+  }
+  
+  void extraPlayerQuestion() {
+    emote = loadImage("assets/sprites/question.png");
+    emote_time = EMOTE_LENGTH;
+  }
+  
+  void extraPlayerEllipses() {
+    emote = loadImage("assets/sprites/ellip03.png");
+    emote_time = EMOTE_LENGTH;
   }
 }

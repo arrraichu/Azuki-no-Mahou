@@ -70,15 +70,26 @@ class Map {
     
     float test_x = center_x - x * MOVE_MAGNITUDE;
     float test_y = center_y - y * MOVE_MAGNITUDE;
-    
-    // check the bottom right point instead when checking down and right boundaries
-    if (x+y < 0f) {
-      test_x += 49f;
-      test_y += 49f;
+    float test2_x = test_x;
+    float test2_y = test_y;
+
+    if (y != 0f) {
+      if (y < 0f) {
+        test_y += 49f;
+        test2_y = test_y;
+      }
+      test2_x += 49f;
+    } else {
+      if (x < 0f) {
+        test_x += 49f;
+        test2_x = test_x;
+      }
+      test2_y += 49f;
     }
     
     int test_char = coordinateOn(test_x, test_y) - '0';
-    if (test_char > 0 && test_char <= 20) {
+    int test2_char = coordinateOn(test2_x, test2_y) - '0';
+    if (test_char > 0 && test_char <= 20 && test2_char > 0 && test2_char <= 20) {
       starting_x -= x * MOVE_MAGNITUDE;
       starting_y -= y * MOVE_MAGNITUDE;
     }

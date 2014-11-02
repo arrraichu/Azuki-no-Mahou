@@ -40,6 +40,7 @@ class TextReader {
   
   // read one line and display it
   void sendNextLine() {
+    if (reader == null) return;
     if (!tr.ready()) return;
     
     String line;
@@ -57,21 +58,41 @@ class TextReader {
     } else if (line.length() > 1 && line.charAt(0) == '<' && line.charAt(line.length()-1) == '>') {
       String command = line.substring(1, line.length()-1);
       
-      if (command.equals("off")) {
-        parent.extraOff();
-        return;
-      }
-      else if (command.equals("fight")) {
-        parent.extraFight();
-        return;
-      }
-      else if (command.equals("surprise")) parent.extraPlayerSurprised();
+      handleCommands(command);
       
       sendNextLine();
       return;
     }
     
     tr.setText(line, false);
+  }
+  
+  void handleCommands(String command) {
+    if (command.equals("off")) {
+        try {
+          reader.close();
+        } catch (IOException e) {
+          
+        } finally {
+          reader = null;
+          parent.extraOff();
+        }
+        return;
+      }
+      else if (command.equals("fight")) {
+        try {
+          reader.close();
+        } catch (IOException e) {
+        } finally {
+          reader = null;
+          parent.extraFight();
+        }
+        return;
+      }
+      else if (command.equals("surprise")) parent.extraPlayerSurprised();
+      else if (command.equals("question")) parent.extraPlayerQuestion();
+      else if (command.equals("ellipses")) parent.extraPlayerEllipses();
+      
   }
 }
     

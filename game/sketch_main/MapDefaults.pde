@@ -6,7 +6,7 @@ public static class MapDefaults {
   };
   
   public static char playerTiles[] = {
-    '1'
+    '5'
   };
   
   private MapDefaults() {}
