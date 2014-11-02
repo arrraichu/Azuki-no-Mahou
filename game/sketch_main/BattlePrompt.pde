@@ -105,13 +105,18 @@ class BattlePrompt {
     if (state != 0) { // display hp bar
       image(hpbar, player_pos[0]+45, player_pos[1], 100, 20);
       noStroke();
-      fill(100, 100, 255); // HP BAR FILLING GOES HERE
       float hp_pctg = 68f * (float)(parent.pstats.rem_health) / (float)(parent.pstats.health);
+      if (hp_pctg <= 68f * 0.25f) fill(255, 0, 0);
+      else if (hp_pctg <= 68f * 0.5f) fill(255, 170, 0);
+      else fill(100, 100, 255);
       rect(player_pos[0]+62, player_pos[1]+9, hp_pctg, 3);
       for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
         if (enemies[i] == null) continue;
         image(hpbar, enemies_pos[i][0]+45, enemies_pos[i][1], 100, 20);
         hp_pctg = 68f * (float)(enemies[i].rem_health) / (float)(enemies[i].health);
+        if (hp_pctg <= 68f * 0.25f) fill(255, 0, 0);
+        else if (hp_pctg <= 68f * 0.5f) fill(255, 170, 0);
+        else fill(100, 100, 255);
         rect(enemies_pos[i][0]+62, enemies_pos[i][1]+9, hp_pctg, 3);
       }
     }
@@ -145,7 +150,7 @@ class BattlePrompt {
       
       if (selection == 1) {
         fill(150);
-        setText("Do nothing for this turn");
+        setText("Do nothing for this turn.");
       }
       else fill(0);
       text("SKIP", text_startx, text_starty + 3*nextline_disp);

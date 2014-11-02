@@ -28,6 +28,7 @@ class Game {
   
   final float EXTRA_FADE_LENGTH = GAME_SPEED*700f; // 70 frames
   float extraFade = 0f;
+  boolean chapter_ending = false;
   final float EXTRA_SURPRISE_LENGTH = GAME_SPEED*50f;
   float extraSurprise = 0f;
   final int EMOTE_LENGTH = 35;
@@ -37,6 +38,8 @@ class Game {
   PlayerStats pstats;
   
   int battle_index;
+  
+  PImage limbo;
     
   Game(int w, int h) {
     game_width = w; game_height = h;
@@ -70,6 +73,8 @@ class Game {
     pstats = new PlayerStats(this, "assets/sprites/player/right0.png", 10, 4, 2, 2, 2);
     
     battle_index = -1;
+    
+    limbo = loadImage("assets/others/tobecont.jpg");
   }
 
   void run() {
@@ -77,6 +82,17 @@ class Game {
        current_map = new Map(this, 100, 100, MapDefaults.mapfiles[current_chapter], game_width/2, game_height/2);
        extraFade = EXTRA_FADE_LENGTH;
        initialize = true;
+    }
+    
+    if (mode == GameMode.LIMBO) {
+      image(limbo, 0, 0, width, height);
+      handleExtras();
+      return;
+    }
+    if (current_chapter > 0) {
+      --current_chapter;
+      mode = GameMode.LIMBO;
+      extraFade = EXTRA_FADE_LENGTH;
     }
     
     if (mode != GameMode.BATTLE) {
@@ -210,9 +226,17 @@ class Game {
   
   void handleExtras() {
     if (extraFade > 0) {
-      fill(20, extraFade * 255 / EXTRA_FADE_LENGTH);
+      float fade = extraFade * 255 / EXTRA_FADE_LENGTH;
+      if (chapter_ending) fade = 255 - fade;
+      fill(20, fade);
       rect(0, 0, game_width, game_height);
-      if (--extraFade <= 0) reader.sendNextLine();
+      if (--extraFade <= 0) {
+        reader.sendNextLine();
+        if (chapter_ending) {
+          chapter_ending = false;
+          ++current_chapter;
+        }
+      }
       return;
     }
     

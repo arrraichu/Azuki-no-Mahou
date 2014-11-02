@@ -89,6 +89,11 @@ class TextReader {
         }
         return;
       }
+      else if (command.equals("chapterend")) {
+        parent.extraFade = parent.EXTRA_FADE_LENGTH;
+        parent.chapter_ending = true;
+        return; 
+      }
       else if (command.equals("surprise")) parent.extraPlayerSurprised();
       else if (command.equals("question")) parent.extraPlayerQuestion();
       else if (command.equals("ellipses")) parent.extraPlayerEllipses();
