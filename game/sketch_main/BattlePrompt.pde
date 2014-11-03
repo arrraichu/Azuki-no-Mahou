@@ -209,7 +209,7 @@ class BattlePrompt {
         }
         
         if (enemy_ptr >= ChapterEnemies.NUM_ENEMIES[parent.current_chapter]) {
-          state = 2;
+          state = 1;
           enemy_ptr = 0;
           return;
         }

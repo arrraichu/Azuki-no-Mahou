@@ -20,7 +20,7 @@ int bg_index = 0;
 
 Minim minim;
 AudioPlayer bgm;
-AudioPlayer othersounds[];
+AudioPlayer othersound;
 
 final int NUM_MISCSOUNDS = 1;
 
@@ -32,6 +32,7 @@ void setup() {
   size(WIDTH, HEIGHT);
   
   minim = new Minim(this);
+  othersound = minim.loadFile("assets/sounds/battle_command.mp3");
   
   game = new Game(WIDTH, HEIGHT);
   backg = loadImage(Backgrounds.paths[game.current_chapter][bg_index]);
@@ -40,10 +41,6 @@ void setup() {
 void draw() {  
   image(backg, 0, 0, width, height);
   
-  if (!init) {
-    initSounds();
-    init = true;
-  }
   
   if (bgm == null || !bgm.isPlaying()) resetBgm();
   
@@ -69,15 +66,18 @@ void resetBgm() {
 void playSound(int i) {
    if (i < 0 || i >= NUM_MISCSOUNDS) return;
    
-   othersounds[i].play();
+   if (i == 0) {
+     othersound = minim.loadFile("assets/sounds/battle_command.mp3");
+     othersound.play();
+   }
 }
 
-void initSounds() {
-  othersounds = new AudioPlayer[NUM_MISCSOUNDS];
-  othersounds[0] = minim.loadFile("assets/sounds/battle_command.mp3");
-}
 
 void keyPressed() {
   char k = key;
   game.receiveKey(k);
+  
+  if (k == '4')  {
+    playSound(0);
+  }
 }
