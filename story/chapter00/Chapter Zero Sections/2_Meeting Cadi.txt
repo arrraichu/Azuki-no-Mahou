@@ -9,9 +9,9 @@ Okay, okay I get it. Just never seen one before.
 
 Cicada: Well gee mister, haven’t you see a cicada before. Guess this time we got a weird one.
 
-I meant I've never seen a giant talking one before.
+I meant this is the first time seeing a giant talking one.
 
-Cicada: That's pretty rich coming from a talking bean.
+Cicada: That sounds pretty rich coming from a talking bean.
 
 <question>
 Bean?
@@ -28,11 +28,11 @@ No...What the hell? This can’t be right.
 <surprise>
 What the hell happened to me!?
 
-Cicada: Like I said, you're a bean
+Cicada: Are you listening mister? You. Are. A. Bean.
 
-Bean!? What the hell do you mean I'm a bean!
+Bean!? What the hell do you mean a bean!
 
-Well, you look like a bean, and you smell like one. So, I'd guess that you are one.
+Cicada: Well, you look like a bean, and you smell like one. So, it would be a safe guess that you are one.
 
 <ellipses>
 This is a nightmare.
@@ -52,10 +52,11 @@ Are they friendly?
 
 Cicada: If by friendly, you mean blood thirsty, then yea. 
 
-Shouldn't we run?
+Well why are we just standing here? 
 
-Cicada: Won't do you any good. Ants are fast, and they can dig. We wouldn't get far.
+Cicada: Because ants are faster than us and can dig under ground. Getting away is not really possible.
 
+<surprise>
 Well, what can we do then?
 
 Cicada: Fight them!
