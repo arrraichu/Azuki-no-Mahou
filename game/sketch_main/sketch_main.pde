@@ -32,7 +32,7 @@ void setup() {
   size(WIDTH, HEIGHT);
   
   minim = new Minim(this);
-  othersound = minim.loadFile("assets/sounds/battle_command.mp3");
+  othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
   
   game = new Game(WIDTH, HEIGHT);
   backg = loadImage(Backgrounds.paths[game.current_chapter][bg_index]);
@@ -67,7 +67,7 @@ void playSound(int i) {
    if (i < 0 || i >= NUM_MISCSOUNDS) return;
    
    if (i == 0) {
-     othersound = minim.loadFile("assets/sounds/battle_command.mp3");
+     othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
      othersound.play();
    }
 }
