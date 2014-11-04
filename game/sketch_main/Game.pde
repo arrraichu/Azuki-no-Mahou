@@ -31,7 +31,7 @@ class Game {
   boolean chapter_ending = false;
   final float EXTRA_SURPRISE_LENGTH = GAME_SPEED*50f;
   float extraSurprise = 0f;
-  final int EMOTE_LENGTH = 35;
+  final int EMOTE_LENGTH = 40;
   int emote_time = -1;
   PImage emote;
   
