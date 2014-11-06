@@ -4,7 +4,7 @@ Use the following characters for only:
 
 P - where the player begins
 0 - empty space
-1 - tile # 1: grass tile
+1 - tile # 1: NW dirt (ASSET DONE)
 2 - tile # 2:
 3 - tile # 3:
 4 - tile # 4:
@@ -13,8 +13,8 @@ P - where the player begins
 7 - tile # 7:
 8 - tile # 8:
 9 - tile # 9:
-: - tile # 10:
-; - tile # 11:
+: - tile # 10: grass tile (ASSET DONE)
+; - tile # 11: sign post (ASSET DONE)
 < - tile # 12:
 = - tile # 13:
 > - tile # 14:
@@ -26,7 +26,7 @@ C - tile # 19:
 
 Use the following characters for characters:
 
-b - character # 1
+b - character # 1 : cicada (ASSET DONE)
 c - character # 2
 d - character # 3
 e - character # 4
