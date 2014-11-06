@@ -1,9 +1,0 @@
-BATTLE COMMANDS
-
-------------------
-
-Attack: A basic attack used to damage an enemy.
-
-Guard: Defend yourself against incoming attacks for a turn.
-
-Skip: Skipping your turn.
