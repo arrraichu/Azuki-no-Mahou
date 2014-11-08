@@ -93,7 +93,45 @@ class Map {
       starting_x -= x * MOVE_MAGNITUDE;
       starting_y -= y * MOVE_MAGNITUDE;
     }
+    else {
+      repeatMove(x, y, MOVE_MAGNITUDE/2);
+    }
+  }
+  
+  private void repeatMove(float x, float y, float magnitude) {
+    if (magnitude < 0.4f) return;
     
+    if (x == 0 && y == 0) return;
+    if (x != 0 && y != 0) return;
+    
+    float test_x = center_x - x * magnitude;
+    float test_y = center_y - y * magnitude;
+    float test2_x = test_x;
+    float test2_y = test_y;
+
+    if (y != 0f) {
+      if (y < 0f) {
+        test_y += 49f;
+        test2_y = test_y;
+      }
+      test2_x += 49f;
+    } else {
+      if (x < 0f) {
+        test_x += 49f;
+        test2_x = test_x;
+      }
+      test2_y += 49f;
+    }
+    
+    int test_char = coordinateOn(test_x, test_y) - '0';
+    int test2_char = coordinateOn(test2_x, test2_y) - '0';
+    if (test_char > 0 && test_char <= 20 && test2_char > 0 && test2_char <= 20) {
+      starting_x -= x * magnitude;
+      starting_y -= y * magnitude;
+    }
+    else {
+      repeatMove(x, y, magnitude/2);
+    }
   }
   
   char coordinateOn(float x, float y) {

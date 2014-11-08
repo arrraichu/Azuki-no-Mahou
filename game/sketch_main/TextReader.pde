@@ -41,7 +41,10 @@ class TextReader {
   // read one line and display it
   void sendNextLine() {
     if (reader == null) return;
-    if (!tr.ready()) return;
+    if (!tr.ready()) {
+      tr.flushBuffer();
+      return;
+    }
     
     String line;
     try {

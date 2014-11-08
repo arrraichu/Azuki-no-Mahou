@@ -36,9 +36,6 @@ class TextRoll {
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
   
-  // for fading?
-  final int WAIT_INTERVAL = 15;
-  int wait_counter;
   
   // constructor reads box coordinates and sets default values
   TextRoll(Game g, float left, float top, float w, float h) {
@@ -78,21 +75,21 @@ class TextRoll {
     fill(255);
     rect(left_coor, top_coor, box_width, box_height);
     
-    if (wait_counter <= 0) {
-      this.rollText();
-      this.updateReady();
-    } else wait_counter--;
+    this.rollText();
+    this.updateReady();
+
   }
   
   // returns whether the textbox is ready to accept the next input
   boolean ready() {
-    if (wait_counter > 0) return false;
     return readyNext;
   }
   
   // set text function; CHECK IF READY FIRST!
   void setText(String text, boolean prompt) {
-    if (!readyNext) return;
+    if (!readyNext) {
+      return;
+    }
     
     isPrompt = prompt;
     inputBuffer = (isPrompt) ? text : "";
@@ -122,8 +119,9 @@ class TextRoll {
     
     if (fedInput.length() == 0) return;
     
+    readyNext = false;
     if (inputBuffer == fedInput) {
-
+      readyNext = true;
     } else if (++textroll_count % TEXTROLL_INTERVAL == 0) {
       inputBuffer = fedInput.substring(0, inputBuffer.length()+1);
       if (inputBuffer.charAt(inputBuffer.length()-1) == ' ') current_spcindex = inputBuffer.length();
@@ -139,6 +137,11 @@ class TextRoll {
     } else {
       text(inputBuffer, text_startx, text_starty);
     }
+  }
+  
+  void flushBuffer() {
+    if (fedInput == "") return;
+    inputBuffer = fedInput;
   }
   
   // hard reset on displaying text

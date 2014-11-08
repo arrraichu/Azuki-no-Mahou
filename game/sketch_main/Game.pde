@@ -25,6 +25,7 @@ class Game {
   boolean initialize;
   
   final float GAME_SPEED = 0.1f;
+  final float MOVEMENT_SPEED = 1.6f;
   
   final float EXTRA_FADE_LENGTH = GAME_SPEED*700f; // 70 frames
   float extraFade = 0f;
@@ -139,17 +140,17 @@ class Game {
       }
       
       else if (k == 'w') { // up
-        p.move(0, GAME_SPEED);
-        current_map.move(0, GAME_SPEED);
+        p.move(0, MOVEMENT_SPEED*GAME_SPEED);
+        current_map.move(0, MOVEMENT_SPEED*GAME_SPEED);
       } else if (k == 's') { // down
-        p.move(0, -GAME_SPEED);
-        current_map.move(0, -GAME_SPEED);
+        p.move(0, -MOVEMENT_SPEED*GAME_SPEED);
+        current_map.move(0, -MOVEMENT_SPEED*GAME_SPEED);
       } else if (k == 'a') { // left
-        p.move(GAME_SPEED, 0);
-        current_map.move(GAME_SPEED, 0);
+        p.move(MOVEMENT_SPEED*GAME_SPEED, 0);
+        current_map.move(MOVEMENT_SPEED*GAME_SPEED, 0);
       } else if (k == 'd') { // right
-        p.move(-GAME_SPEED, 0);
-        current_map.move(-GAME_SPEED, 0);
+        p.move(-MOVEMENT_SPEED*GAME_SPEED, 0);
+        current_map.move(-MOVEMENT_SPEED*GAME_SPEED, 0);
       }
       return;
     }
