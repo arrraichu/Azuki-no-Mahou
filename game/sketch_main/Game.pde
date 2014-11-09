@@ -218,6 +218,8 @@ class Game {
     if (index < 0 || index >= 20) return;
     
     reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
+    tr.profileLeft = loadImage(PlayerSprites.profile);
+    tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
     battle_index = index;
     mode = GameMode.STORY;
     reader.sendNextLine();

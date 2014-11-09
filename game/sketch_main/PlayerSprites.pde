@@ -1,6 +1,8 @@
 static class PlayerSprites {
   static int SIZE = 16;
   
+  static String profile = "assets/sprites/profiles/beanny_sq.png";
+  
   static String paths[] = {
     "assets/sprites/player/left0.png",
     "assets/sprites/player/left1.png",

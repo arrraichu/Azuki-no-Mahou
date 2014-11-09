@@ -14,6 +14,19 @@ class TextRoll {
   float box_width;
   float box_height;
   
+  final float PROFILE_SIZE = width*0.08;
+  PImage profileLeft;
+  PImage profileRight;
+  // corner of the left image
+  final float LEFT_PROFCORNER_X = width*0.01;
+  final float LEFT_PROFCORNER_Y = height*0.7;
+  
+  // corner of the right image
+  final float RIGHT_PROFCORNER_X = width*0.91;
+  final float RIGHT_PROFCORNER_Y = height*0.7;
+  
+  boolean leftTalking = true;
+  
   // where the text should start & the max width per line
   float text_startx;
   float text_starty;
@@ -87,8 +100,10 @@ class TextRoll {
     strokeWeight(4);
     fill(255);
     rect(left_coor, top_coor, box_width, box_height);
+      
     
     this.rollText();
+    displayProfiles();
     this.updateReady();
 
     flicker();
@@ -98,6 +113,28 @@ class TextRoll {
     if (--finish_counter <= 0) {
       finish_counter = FINISH_FLICKR;
       finish_index = 1 - finish_index;
+    }
+  }
+  
+  private void displayProfiles() {
+    if (profileLeft != null && profileRight != null) {
+      noFill();
+      stroke(50);
+      strokeWeight(3);
+      rect(LEFT_PROFCORNER_X-1, LEFT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
+      rect(RIGHT_PROFCORNER_X-1, RIGHT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
+      if (leftTalking) {
+        image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        tint(255, 100);
+        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        noTint();
+      } else {
+        tint(255, 100);
+        image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        noTint();
+        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+      }
+      noStroke();
     }
   }
   
@@ -118,6 +155,8 @@ class TextRoll {
     fedInput = text;
     current_spcindex = -1;
     wrap_index = -1;
+    
+    leftTalking = text.indexOf(':') == -1;
   }
   
   // update whether textbox is ready at each iteration

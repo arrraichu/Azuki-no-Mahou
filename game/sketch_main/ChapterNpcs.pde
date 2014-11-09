@@ -17,6 +17,12 @@ static class ChapterNpcs {
     }
   };
   
+  static String spriteprofiles[][] = {
+    { // Chapter 0
+      "assets/sprites/profiles/cicada_sq.png"
+    }
+  };
+  
   static String speechpaths[][] = {
     { // Chapter 0
       "gametexts/c0/2_Meeting_Cadi.txt"

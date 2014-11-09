@@ -14,6 +14,7 @@ class TextReader {
   final int WAIT_TIME = 30;
   int wait_counter = -1;
   
+  
   // constructor
   TextReader(Game g, String filepath, TextRoll roll) {
     reader = createReader(filepath);
