@@ -21,4 +21,10 @@ Cadi: Just be careful if you see anymore seedcorn.
 <question>
 Why seed corn?
 
+Cadi: Well, aside from what might come out of them. Sometimes they attract...
+
+<monster sounds>
+
+Cadi: More ants...
+
 <fight>
