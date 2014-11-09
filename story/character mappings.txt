@@ -16,7 +16,7 @@ P - where the player begins
 : - tile # 10: grass tile (ASSET DONE) (CODED)
 ; - tile # 11: sign post (ASSET DONE) (CODED)
 < - tile # 12: wet grass
-= - tile # 13:
+= - tile # 13: 
 > - tile # 14:
 ? - tile # 15:
 @ - tile # 16:

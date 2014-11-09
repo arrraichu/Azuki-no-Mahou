@@ -1,8 +1,8 @@
 Cadi: Just what the hell did you do?
 
-I'm not really sure myself. It felt...like I was borrowing energy from something.
+Not really sure myself. It felt...like I was borrowing energy from something.
 
-Cadi: I've heard that before. Think plants do it.
+Cadi: I think I heard that before. Think plants do it.
 
 Do you remember what the name is?
 
@@ -13,7 +13,7 @@ Photosynthesis?
 Cadi: No, not that.
 
 <ellipses>
-I don't think that was the correct term anyway.
+That probably was the correct term anyway.
 
 Cadi: Well, whatever the name, it means you absorb stuff from the ground an use it to do stuff.
 
@@ -24,7 +24,7 @@ Cadi: I think so. But usually, people just say it makes them tastier. Not really
 <ellipses>
 ...
 
-I'm gonna go on ahead.
+So, meet you on the other side?
 
 Cadi: Aright. Try not to die.
 
