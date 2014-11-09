@@ -1,6 +1,5 @@
 Cadi: Hey Old man! Look what I found!
 
-<surprise>
 Old Worm: We’ll I’ll be. Haven’t seen one of you in a while.
 
 One of me? You mean I'm not...
@@ -10,8 +9,7 @@ One of me? You mean I'm not...
 <surprise>
 What was that?
 
-<scared>
-Caterpillar: The Rabbit
+Cadi: The Rabbit
 
 <roaring sound>
 <fight>
