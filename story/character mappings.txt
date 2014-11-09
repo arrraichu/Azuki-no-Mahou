@@ -30,7 +30,7 @@ b - character # 1 : cicada (ASSET DONE) (CODED)
 c - character # 2 : ant 
 d - character # 3 : seedcorn
 e - character # 4 : maggots
-f - character # 5 : 
+f - character # 5 : worm
 g - character # 6 : 
 h - character # 7 : 
 i - character # 8 : 
