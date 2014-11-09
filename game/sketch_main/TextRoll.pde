@@ -36,6 +36,14 @@ class TextRoll {
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
   
+  final String FINISH_PATH[] = {
+    "assets/sprites/text_completion1.png",
+    "assets/sprites/text_completion2.png" };
+  PImage finishers[];
+  final int FINISH_FLICKR = 40;
+  int finish_counter;
+  int finish_index;
+  
   
   // constructor reads box coordinates and sets default values
   TextRoll(Game g, float left, float top, float w, float h) {
@@ -54,6 +62,11 @@ class TextRoll {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
     current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
+    
+    finishers = new PImage[2];
+    for (int i = 0; i < 2; ++i) finishers[i] = loadImage(FINISH_PATH[i]);
+    finish_counter = FINISH_FLICKR;
+    finish_index = 0;
   }
   
   // set where the text should begin
@@ -78,6 +91,14 @@ class TextRoll {
     this.rollText();
     this.updateReady();
 
+    flicker();
+  }
+  
+  private void flicker() {
+    if (--finish_counter <= 0) {
+      finish_counter = FINISH_FLICKR;
+      finish_index = 1 - finish_index;
+    }
   }
   
   // returns whether the textbox is ready to accept the next input
@@ -121,6 +142,7 @@ class TextRoll {
     
     readyNext = false;
     if (inputBuffer == fedInput) {
+      image(finishers[finish_index], width*0.96, height*0.94, 23, 23);
       readyNext = true;
     } else if (++textroll_count % TEXTROLL_INTERVAL == 0) {
       inputBuffer = fedInput.substring(0, inputBuffer.length()+1);

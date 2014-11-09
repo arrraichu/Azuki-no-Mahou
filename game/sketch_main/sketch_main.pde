@@ -66,9 +66,9 @@ void draw() {
 void resetBgm() {
   minim.stop();
   if (game.mode == GameMode.BATTLE) {
-    bgm = minim.loadFile("assets/sounds/battleMusic2.mp3");
+    bgm = minim.loadFile("assets/sounds/battle_music.mp3");
   } else {
-    bgm = minim.loadFile("assets/sounds/overworldMusic.mp3");
+    bgm = minim.loadFile("assets/sounds/overworld.mp3");
   }
   bgm.play();
 }

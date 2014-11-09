@@ -11,6 +11,8 @@ class BattlePrompt {
   float text_startx;
   float text_starty;
   
+  final float SELECTOR_WIDTH = 16;
+  
   float nextline_disp;
   
   int charsperline;
@@ -27,6 +29,9 @@ class BattlePrompt {
   final int SLIDEIN_INTERVAL = 8;
   final String HPBAR_PATH = "assets/others/hp.png";
   
+  final String ARROW_PATH = "assets/sprites/arrow.png";
+  
+  PImage arrow;
   PImage hpbar;
   
   int enemies_left;
@@ -70,6 +75,7 @@ class BattlePrompt {
     }
     
     hpbar = loadImage(HPBAR_PATH);
+    arrow = loadImage(ARROW_PATH);
     
     enemies_left = ChapterEnemies.NUM_ENEMIES[parent.current_chapter];
     
@@ -142,18 +148,20 @@ class BattlePrompt {
       textSize(28);
       
       if (selection == 0) {
-        fill(150);
+        fill(0);
         setText("Select an enemy to attack.");
+        image(arrow, text_startx, text_starty + 2*nextline_disp - SELECTOR_WIDTH, SELECTOR_WIDTH, SELECTOR_WIDTH);
       }
-      else fill(0);
-      text("ATTACK", text_startx, text_starty + 2*nextline_disp);
+      else fill(150);
+      text("ATTACK", text_startx + SELECTOR_WIDTH + 5, text_starty + 2*nextline_disp);
       
       if (selection == 1) {
-        fill(150);
+        fill(0);
         setText("Do nothing for this turn.");
+        image(arrow, text_startx, text_starty + 3*nextline_disp - SELECTOR_WIDTH, SELECTOR_WIDTH, SELECTOR_WIDTH);
       }
-      else fill(0);
-      text("SKIP", text_startx, text_starty + 3*nextline_disp);
+      else fill(150);
+      text("SKIP", text_startx + SELECTOR_WIDTH + 5, text_starty + 3*nextline_disp);
       return; 
     }
     
@@ -165,10 +173,13 @@ class BattlePrompt {
       for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
         if (enemies[i] == null) continue;
         
-        if (selection == index) fill(150);
-        else fill(0);
+        if (selection == index) {
+          fill(0);
+          image(arrow, text_startx, text_starty + (index+1)*nextline_disp - SELECTOR_WIDTH, SELECTOR_WIDTH, SELECTOR_WIDTH);
+        }
+        else fill(150);
                 
-        text(enemies[i].name, text_startx, text_starty + (index+1)*nextline_disp);
+        text(enemies[i].name, text_startx + SELECTOR_WIDTH + 5, text_starty + (index+1)*nextline_disp);
         ++index;
       }
       return;

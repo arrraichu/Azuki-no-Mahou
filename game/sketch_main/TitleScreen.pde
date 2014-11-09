@@ -61,6 +61,8 @@ class TitleScreen {
       fill(0, text_pctg);
       text(pressText, width * 0.52, height * 0.67);
       
+      textSize(22);
+      ready = true;
 
       --iw_time;
     }

@@ -41,6 +41,14 @@ class Game {
   int battle_index;
   
   PImage limbo;
+  
+  final String TALK_PATH[] = {
+    "assets/sprites/talkA01.png",
+    "assets/sprites/talkA02.png" };
+  PImage talk_notices[];
+  final int TALK_FLICKR = 40;
+  int talk_counter;
+  int talk_index;
     
   Game(int w, int h) {
     game_width = w; game_height = h;
@@ -76,6 +84,13 @@ class Game {
     battle_index = -1;
     
     limbo = loadImage("assets/others/tobecont.jpg");
+    
+    talk_notices = new PImage[2];
+    talk_notices[0] = loadImage(TALK_PATH[0]);
+    talk_notices[1] = loadImage(TALK_PATH[1]);
+    talk_index = 0;
+    talk_counter = TALK_FLICKR;
+    
   }
 
   void run() {
@@ -102,10 +117,11 @@ class Game {
       if (mode == GameMode.STORY) tr.display();
       reader.run();
       
+      flickerTalk();
       handleExtras();
     }
     
-    else {
+    else {      
       battle_text.display();
       battle_prompt.display();
     }
@@ -173,9 +189,10 @@ class Game {
         int c_index = (int) c - '0';
         
         if (c_index <= 0) continue;
-        if (c_index >= 50 && current_map.extras[c_index-50] != null) {
-          image(tiles[ChapterNpcs.spritebottoms[current_chapter][c_index-50]], x, y, 50, 50);
-          image(current_map.extras[c_index-50], x, y, 50, 50);
+        if (c_index >= 50 && current_map.extras[c_index-50] != null) { // characters
+          image(tiles[ChapterNpcs.spritebottoms[current_chapter][c_index-50]], x, y, 50, 50); // standing on
+          image(current_map.extras[c_index-50], x, y, 50, 50); // the character
+          image(talk_notices[talk_index], x+40, y-30, 40, 40); // talkable
           continue;
         }
         if (c_index > Tiles.NUM_TILES) continue;
@@ -224,6 +241,12 @@ class Game {
     resetBgm();
   }
   
+  private void flickerTalk() {
+    if (--talk_counter <= 0) {
+      talk_counter = TALK_FLICKR;
+      talk_index = 1 - talk_index;
+    }
+  }
   
   void handleExtras() {
     if (extraFade > 0) {
