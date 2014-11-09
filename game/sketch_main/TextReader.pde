@@ -14,6 +14,7 @@ class TextReader {
   final int WAIT_TIME = 30;
   int wait_counter = -1;
   
+  
   // constructor
   TextReader(Game g, String filepath, TextRoll roll) {
     reader = createReader(filepath);
@@ -41,7 +42,10 @@ class TextReader {
   // read one line and display it
   void sendNextLine() {
     if (reader == null) return;
-    if (!tr.ready()) return;
+    if (!tr.ready()) {
+      tr.flushBuffer();
+      return;
+    }
     
     String line;
     try {

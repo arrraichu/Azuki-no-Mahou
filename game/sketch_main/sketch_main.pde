@@ -18,6 +18,8 @@ final int BG_FLIPPR = 100;
 int bg_itr = 0;
 int bg_index = 0;
 
+TitleScreen title;
+
 Minim minim;
 AudioPlayer bgm;
 AudioPlayer othersound;
@@ -25,6 +27,8 @@ AudioPlayer othersound;
 final int NUM_MISCSOUNDS = 1;
 
 boolean init = false;
+
+boolean starting_state = true;
 
 
 /*===== FUNCTIONS =====*/
@@ -34,13 +38,19 @@ void setup() {
   minim = new Minim(this);
   othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
   
+  title = new TitleScreen("assets/titlescreen/menuscreen_01.jpg", "assets/titlescreen/logo.png");
+  
   game = new Game(WIDTH, HEIGHT);
   backg = loadImage(Backgrounds.paths[game.current_chapter][bg_index]);
 }
 
-void draw() {  
-  image(backg, 0, 0, width, height);
+void draw() {
+  if (starting_state) {
+    title.run();
+    return;
+  }
   
+  image(backg, 0, 0, width, height);
   
   if (bgm == null || !bgm.isPlaying()) resetBgm();
   
@@ -56,9 +66,9 @@ void draw() {
 void resetBgm() {
   minim.stop();
   if (game.mode == GameMode.BATTLE) {
-    bgm = minim.loadFile("assets/sounds/battleMusic2.mp3");
+    bgm = minim.loadFile("assets/sounds/battle_music.mp3");
   } else {
-    bgm = minim.loadFile("assets/sounds/overworldMusic.mp3");
+    bgm = minim.loadFile("assets/sounds/overworld.mp3");
   }
   bgm.play();
 }
@@ -77,7 +87,12 @@ void keyPressed() {
   char k = key;
   game.receiveKey(k);
   
+  if (starting_state && title.ready && key == ' ') {
+    starting_state = false;
+  }
+  
   if (k == '4')  {
     playSound(0);
+    return;
   }
 }

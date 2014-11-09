@@ -14,6 +14,19 @@ class TextRoll {
   float box_width;
   float box_height;
   
+  final float PROFILE_SIZE = width*0.08;
+  PImage profileLeft;
+  PImage profileRight;
+  // corner of the left image
+  final float LEFT_PROFCORNER_X = width*0.01;
+  final float LEFT_PROFCORNER_Y = height*0.7;
+  
+  // corner of the right image
+  final float RIGHT_PROFCORNER_X = width*0.91;
+  final float RIGHT_PROFCORNER_Y = height*0.7;
+  
+  boolean leftTalking = true;
+  
   // where the text should start & the max width per line
   float text_startx;
   float text_starty;
@@ -36,9 +49,14 @@ class TextRoll {
   boolean isPrompt; // false is roll isn't needed
   boolean readyNext;
   
-  // for fading?
-  final int WAIT_INTERVAL = 15;
-  int wait_counter;
+  final String FINISH_PATH[] = {
+    "assets/sprites/text_completion1.png",
+    "assets/sprites/text_completion2.png" };
+  PImage finishers[];
+  final int FINISH_FLICKR = 40;
+  int finish_counter;
+  int finish_index;
+  
   
   // constructor reads box coordinates and sets default values
   TextRoll(Game g, float left, float top, float w, float h) {
@@ -57,6 +75,11 @@ class TextRoll {
     fedInput = ""; inputBuffer = ""; textroll_count = 0;
     current_spcindex = -1; wrap_index = -1;
     isPrompt = false; readyNext = true;
+    
+    finishers = new PImage[2];
+    for (int i = 0; i < 2; ++i) finishers[i] = loadImage(FINISH_PATH[i]);
+    finish_counter = FINISH_FLICKR;
+    finish_index = 0;
   }
   
   // set where the text should begin
@@ -77,22 +100,54 @@ class TextRoll {
     strokeWeight(4);
     fill(255);
     rect(left_coor, top_coor, box_width, box_height);
+      
     
-    if (wait_counter <= 0) {
-      this.rollText();
-      this.updateReady();
-    } else wait_counter--;
+    this.rollText();
+    displayProfiles();
+    this.updateReady();
+
+    flicker();
+  }
+  
+  private void flicker() {
+    if (--finish_counter <= 0) {
+      finish_counter = FINISH_FLICKR;
+      finish_index = 1 - finish_index;
+    }
+  }
+  
+  private void displayProfiles() {
+    if (profileLeft != null && profileRight != null) {
+      noFill();
+      stroke(50);
+      strokeWeight(3);
+      rect(LEFT_PROFCORNER_X-1, LEFT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
+      rect(RIGHT_PROFCORNER_X-1, RIGHT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
+      if (leftTalking) {
+        image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        tint(255, 100);
+        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        noTint();
+      } else {
+        tint(255, 100);
+        image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        noTint();
+        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+      }
+      noStroke();
+    }
   }
   
   // returns whether the textbox is ready to accept the next input
   boolean ready() {
-    if (wait_counter > 0) return false;
     return readyNext;
   }
   
   // set text function; CHECK IF READY FIRST!
   void setText(String text, boolean prompt) {
-    if (!readyNext) return;
+    if (!readyNext) {
+      return;
+    }
     
     isPrompt = prompt;
     inputBuffer = (isPrompt) ? text : "";
@@ -100,6 +155,8 @@ class TextRoll {
     fedInput = text;
     current_spcindex = -1;
     wrap_index = -1;
+    
+    leftTalking = text.indexOf(':') == -1;
   }
   
   // update whether textbox is ready at each iteration
@@ -122,8 +179,10 @@ class TextRoll {
     
     if (fedInput.length() == 0) return;
     
+    readyNext = false;
     if (inputBuffer == fedInput) {
-
+      image(finishers[finish_index], width*0.96, height*0.94, 23, 23);
+      readyNext = true;
     } else if (++textroll_count % TEXTROLL_INTERVAL == 0) {
       inputBuffer = fedInput.substring(0, inputBuffer.length()+1);
       if (inputBuffer.charAt(inputBuffer.length()-1) == ' ') current_spcindex = inputBuffer.length();
@@ -139,6 +198,11 @@ class TextRoll {
     } else {
       text(inputBuffer, text_startx, text_starty);
     }
+  }
+  
+  void flushBuffer() {
+    if (fedInput == "") return;
+    inputBuffer = fedInput;
   }
   
   // hard reset on displaying text

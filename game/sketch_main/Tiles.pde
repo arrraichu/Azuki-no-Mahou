@@ -13,5 +13,5 @@ static final class Tiles {
     "assets/tiles/dirt_07.png",
     "assets/tiles/dirt_08.png",
     "assets/tiles/dirt_09.png",
-    "assets/tiles/grass7.png" };  
+    "assets/tiles/grassB_01.png" };  
 }

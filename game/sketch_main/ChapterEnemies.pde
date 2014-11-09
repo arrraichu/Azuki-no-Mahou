@@ -16,4 +16,5 @@ static class ChapterEnemies {
       "Cicada # 2"
     }
   };
+  
 }

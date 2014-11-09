@@ -3,7 +3,7 @@ class Player {
   int sprite_num;
   int direction; // left = 0, right = 1, up = 2, down = 3
   
-  final float SPRITE_SPEED = 0.3f;
+  final float SPRITE_SPEED = 0.8f;
   float sprite_counter;
   
   Player() {
