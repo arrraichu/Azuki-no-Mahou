@@ -31,7 +31,7 @@ c - character # 2 : ant
 d - character # 3 : seedcorn
 e - character # 4 : maggots
 f - character # 5 : worm
-g - character # 6 : 
+g - character # 6 : rabbit
 h - character # 7 : 
 i - character # 8 : 
 j - character # 9 : 
