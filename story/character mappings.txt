@@ -15,7 +15,7 @@ P - where the player begins
 9 - tile # 9: SE dirt (ASSET DONE) (CODED)
 : - tile # 10: grass tile (ASSET DONE) (CODED)
 ; - tile # 11: sign post (ASSET DONE) (CODED)
-< - tile # 12: wet grass
+< - tile # 12: wet grass (ASSET DONE)
 = - tile # 13: 
 > - tile # 14:
 ? - tile # 15:
@@ -27,8 +27,8 @@ C - tile # 19:
 Use the following characters for characters:
 
 b - character # 1 : cicada (ASSET DONE) (CODED)
-c - character # 2 : ant 
-d - character # 3 : seedcorn
+c - character # 2 : ant (ASSET DONE)
+d - character # 3 : seedcorn (ASSET DONE)
 e - character # 4 : maggots
 f - character # 5 : worm
 g - character # 6 : rabbit
