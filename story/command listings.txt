@@ -1,3 +1,5 @@
-<excl> : Exclamation mark, speech.
-<questionmark>
-<chapterend>
+<surprise> : Exclamation mark, speech
+<question> : quesiton mark, speech
+<ellipses> : ellipses, speech
+<off> : close the text file
+<chapterend> : end the chapter
