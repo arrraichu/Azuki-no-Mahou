@@ -29,7 +29,7 @@ Use the following characters for characters:
 b - character # 1 : cicada (ASSET DONE) (CODED)
 c - character # 2 : ant (ASSET DONE)
 d - character # 3 : seedcorn (ASSET DONE)
-e - character # 4 : maggots
+e - character # 4 : maggots (ASSET DONE)
 f - character # 5 : worm
 g - character # 6 : rabbit
 h - character # 7 : 
