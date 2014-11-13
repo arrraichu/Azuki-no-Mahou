@@ -32,8 +32,9 @@ class Game {
   boolean chapter_ending = false;
   final float EXTRA_SURPRISE_LENGTH = GAME_SPEED*50f;
   float extraSurprise = 0f;
-  final int EMOTE_LENGTH = 40;
+  final int EMOTE_LENGTH = 51;
   int emote_time = -1;
+  boolean isEllipse = false;
   PImage emote;
   
   PlayerStats pstats;
@@ -49,10 +50,18 @@ class Game {
   final int TALK_FLICKR = 40;
   int talk_counter;
   int talk_index;
-    
+  
+  Transition t;
+  
+  final int CHAPTERS_IMPLEMENTED = 1;
+  
+  
+  /*
+      INTIALIZE ALL ASSETS
+  */
   Game(int w, int h) {
     game_width = w; game_height = h;
-    mode = GameMode.STORY;
+    mode = GameMode.TRANSITION;
     p = new Player();
       
     default_font = createFont("assets/fonts/EightBit.ttf", 22);
@@ -69,7 +78,7 @@ class Game {
     battle_prompt.setTextStart(width*0.78, height*0.66);
     battle_prompt.setNewlinePlacement(18, height*0.065);
     
-    reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
+//    reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
     for (int i = 0; i <= Tiles.NUM_TILES; ++i) {
       if (i == 0) tiles[0] = null;
       else tiles[i] = loadImage(Tiles.paths[i]);
@@ -91,26 +100,50 @@ class Game {
     talk_index = 0;
     talk_counter = TALK_FLICKR;
     
+    t = new Transition(this);
   }
+  
+  
 
+  /*
+      RUN & DISPLAY LOOP
+  */
   void run() {
+    
+    // Chapter Transition
+    if (mode == GameMode.TRANSITION) {
+      println("current chapter: " + current_chapter + "\nTransition mode\n\n");
+      t.display();
+      if (t.done)  {
+        mode = GameMode.STORY;
+        initialize = false;
+      }
+      return; 
+    }
+    
+    // Fade ins before the chapter starts
     if (!initialize) {
        current_map = new Map(this, 100, 100, MapDefaults.mapfiles[current_chapter], game_width/2, game_height/2);
+       reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
        extraFade = EXTRA_FADE_LENGTH;
        initialize = true;
     }
     
+    
+    // Limbo state for if the chapter is not coded yet
     if (mode == GameMode.LIMBO) {
       image(limbo, 0, 0, width, height);
       handleExtras();
       return;
     }
-    if (current_chapter > 0) {
+    if (current_chapter > CHAPTERS_IMPLEMENTED) {
       --current_chapter;
       mode = GameMode.LIMBO;
       extraFade = EXTRA_FADE_LENGTH;
     }
     
+    
+    // Battle state
     if (mode != GameMode.BATTLE) {
       displayMap();
       p.display(game_width/2, game_height/2);
@@ -121,6 +154,7 @@ class Game {
       handleExtras();
     }
     
+    // Story and Explore state
     else {      
       battle_text.display();
       battle_prompt.display();
@@ -128,14 +162,28 @@ class Game {
     
   }
   
+  
+  
+  /*
+      HANDLE KEY PRESSES (TO BE DEPRECATED)
+  */
   void receiveKey(char k) {
     if (!initialize || extraFade > 0) return;
     
     // DEBUG MODE
     if (DEBUG) {
       if (k == '`') {
-        mode = GameMode.BATTLE;
-        resetBgm();
+        if (mode == GameMode.STORY) {
+          println("Story Mode\n");
+        } else if (mode == GameMode.EXPLORE) {
+          println("Explore Mode\n");
+        } else if (mode == GameMode.BATTLE) {
+          println("Battle Mode\n");
+        } else if (mode == GameMode.TRANSITION) {
+          println("Transition Mode\n");
+        } else {
+          println("unknown mode\n");
+        }
       }
       
     }
@@ -177,6 +225,12 @@ class Game {
     }
   }
   
+  
+  
+  /*
+      PROCESS RESOURCES FROM TEXTROLL AND DISPLAY THE MAP
+      (PERHAPS PUT THIS IN TEXTROLL CLASS?)
+  */
   void displayMap() {
     for (int i = 0; i < current_map.rows; ++i) {
       for (int j = 0; j < current_map.columns; ++j) {
@@ -207,6 +261,8 @@ class Game {
     return true;
   }
   
+  
+  
   void playerTalk() {
     float x = GAME_SPEED; float y = GAME_SPEED;
     if (p.direction > 1) x *= 0;
@@ -219,7 +275,8 @@ class Game {
     
     reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
     tr.profileLeft = loadImage(PlayerSprites.profile);
-    tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
+    if (ChapterNpcs.spriteprofiles[current_chapter][index] != "") 
+      tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
     battle_index = index;
     mode = GameMode.STORY;
     reader.sendNextLine();
@@ -261,6 +318,7 @@ class Game {
         if (chapter_ending) {
           chapter_ending = false;
           ++current_chapter;
+          mode = GameMode.TRANSITION;
         }
       }
       return;
@@ -274,6 +332,9 @@ class Game {
     }
     
     if (emote_time >= 0) {
+      if (isEllipse && emote_time == 2*EMOTE_LENGTH/3) emote = loadImage("assets/sprites/ellip02.png");
+      else if (isEllipse && emote_time == EMOTE_LENGTH/3) emote = loadImage("assets/sprites/ellip03.png");
+      
       image(emote, width/2 + 40, height/2 - 15);
       --emote_time;
     }
@@ -292,15 +353,18 @@ class Game {
   void extraPlayerSurprised() {
     emote = loadImage("assets/sprites/excl.png");
     emote_time = EMOTE_LENGTH;
+    isEllipse = false;
   }
   
   void extraPlayerQuestion() {
     emote = loadImage("assets/sprites/question.png");
     emote_time = EMOTE_LENGTH;
+    isEllipse = false;
   }
   
   void extraPlayerEllipses() {
-    emote = loadImage("assets/sprites/ellip03.png");
+    emote = loadImage("assets/sprites/ellip01.png");
     emote_time = EMOTE_LENGTH;
+    isEllipse = true;
   }
 }

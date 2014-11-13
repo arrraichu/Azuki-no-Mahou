@@ -117,21 +117,30 @@ class TextRoll {
   }
   
   private void displayProfiles() {
-    if (profileLeft != null && profileRight != null) {
+    if (profileLeft != null) {
       noFill();
       stroke(50);
       strokeWeight(3);
       rect(LEFT_PROFCORNER_X-1, LEFT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
-      rect(RIGHT_PROFCORNER_X-1, RIGHT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
       if (leftTalking) {
         image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
-        tint(255, 100);
-        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
-        noTint();
       } else {
         tint(255, 100);
         image(profileLeft, LEFT_PROFCORNER_X, LEFT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
         noTint();
+      }
+      noStroke();
+    }
+    if (profileRight != null) {
+      noFill();
+      stroke(50);
+      strokeWeight(3);
+      rect(RIGHT_PROFCORNER_X-1, RIGHT_PROFCORNER_Y-1, PROFILE_SIZE+2, PROFILE_SIZE+2);
+      if (leftTalking) {
+        tint(255, 100);
+        image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
+        noTint();
+      } else {
         image(profileRight, RIGHT_PROFCORNER_X, RIGHT_PROFCORNER_Y, PROFILE_SIZE, PROFILE_SIZE);
       }
       noStroke();
