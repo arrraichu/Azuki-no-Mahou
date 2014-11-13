@@ -15,7 +15,7 @@ P - where the player begins
 9 - tile # 9: SE dirt (ASSET DONE) (CODED)
 : - tile # 10: grass tile (ASSET DONE) (CODED)
 ; - tile # 11: sign post (ASSET DONE) (CODED)
-< - tile # 12: wet grass (ASSET DONE)
+< - tile # 12: wet grass (ASSET DONE) (CODED)
 = - tile # 13: 
 > - tile # 14:
 ? - tile # 15:
