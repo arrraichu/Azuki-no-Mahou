@@ -20,12 +20,12 @@ Wait...
 
 Where are my arms?
 
-<surprise>
+<exclamation>
 Where are my legs?
 
 No...What the hell? This can’t be right.
 
-<surprise>
+<exclamation>
 What the hell happened to me!?
 
 Cicada: Are you listening mister? You. Are. A. Bean.
@@ -43,7 +43,7 @@ Cicada: It could be worse. You could be...
 
 Cicada: ...Lunch...
 
-<surprise>
+<exclamation>
 What was that?
 
 Cicada: That, would be some ants. And they sound hungry.
@@ -56,7 +56,7 @@ Well why are we just standing here?
 
 Cicada: Because ants are faster than us and can dig under ground. Getting away is not really possible.
 
-<surprise>
+<exclamation>
 Well, what can we do then?
 
 Cicada: Fight them!

@@ -26,8 +26,12 @@ Cadi: I think so. But usually, people just say it makes them tastier. Not really
 
 So, meet you on the other side?
 
-Cadi: Aright. Try not to die.
+Cadi: That's a plan. Oh and some advice.
+
+Yea?
+
+Cadi: Don't die.
 
 ...
 
-<chapterend>
+<chapter end>

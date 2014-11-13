@@ -14,7 +14,7 @@ Sleeping? I thought you meant...
 
 Never mind. So, should we wake him?
 
-Cadi: Dunno think we can. He usually sleeps pretty heavily. He once slept through a mud tsunami.
+Cadi: Dunno think we can. He usually sleeps pretty heavily. He once slept through a mud tsunami. Didn't wake til three days after it ended.
 
 So, how do we ask him questions?
 
@@ -24,7 +24,7 @@ Well, hopefully no one attacks me til then.
 
 Cadi: Well, someone seems interested in us. Look, that rabbit is coming to say hi.
 
-<surprised>
+<exclamation>
 Rabbit?
 
 Cadi: Yea, look over there. Coming right towards us.
