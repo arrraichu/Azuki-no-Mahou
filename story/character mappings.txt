@@ -3,7 +3,7 @@ NOTE: All characters are VERY CASE SENSITIVE!!!
 Use the following characters for only:
 
 P - where the player begins
-0 - empty space
+0 - tile # 0: rock (ASSET DONE) (CODED)
 1 - tile # 1: NW dirt (ASSET DONE) (CODED)
 2 - tile # 2: N dirt (ASSET DONE) (CODED)
 3 - tile # 3: NE dirt (ASSET DONE) (CODED)
@@ -16,13 +16,23 @@ P - where the player begins
 : - tile # 10: grass tile (ASSET DONE) (CODED)
 ; - tile # 11: sign post (ASSET DONE) (CODED)
 < - tile # 12: wet grass (ASSET DONE) (CODED)
-= - tile # 13: 
-> - tile # 14:
-? - tile # 15:
-@ - tile # 16:
-A - tile # 17:
-B - tile # 18:
-C - tile # 19:
+= - tile # 13: corner tree left top (ASSET DONE) (CODED)
+> - tile # 14: corner tree left bottom (ASSET DONE) (CODED)
+? - tile # 15: corner tree right top (ASSET DONE) (CODED)
+@ - tile # 16: corner tree right bottom (ASSET DONE) (CODED)
+A - tile # 17: tree top (ASSET DONE) (CODED)
+B - tile # 18: tree bottom left (ASSET DONE) (CODED)
+C - tile # 19: tree bottom right (ASSET DONE) (CODED)
+D - tile # 20: tree top left (ASSET DONE) (CODED)
+E - tile # 21: tree top right (ASSET DONE) (CODED)
+F - tile # 22: corner hind tree left (ASSET DONE) (CODED)
+G - tile # 23: cornder hind tree right (ASSET DONE) (CODED)
+H - tile # 24: 
+I - tile # 25: 
+J - tile # 26: 
+K - tile # 27: 
+L - tile # 28: 
+M - tile # 29: 
 
 Use the following characters for characters:
 

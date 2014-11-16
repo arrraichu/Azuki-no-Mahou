@@ -1,30 +1,83 @@
 class Map {
-  Game parent;
   
-  public int rows;
-  public int columns;
-  BufferedReader map_reader;
+  /* MEMBERS */
+  Game parent;                             // Game parent
+  public int rows, columns;                // number of rows and columns in the map
+  public int center_x, center_y;           // the center of the screen
+  BufferedReader map_reader;               // used in initialization to read the map text file
+  public int starting_x, starting_y;       // the coordinates where the player is standing
+  PImage extras[];                         // other characters, etc.
+  public char map[][];                     // the map itself
+  PImage tiles[];                          // the tile sprites
+  PImage talk_notices[];                   // sprites the signal talking to npcs, etc.
   
-  public char map[][];
-  public int starting_x;
-  public int starting_y;
+  /* CONTROL VARIABLES */
+  int talk_counter;                        // time counter to flicker talk indication animation
+  int talk_index;                          // the index of the talk animation sprite
   
-  public int center_x, center_y;
+  /* CONSTANTS */
+  final float MOVE_MAGNITUDE = 50f;        // the movement speed of the map
+  final String TALK_PATH[] = {             // asset path for talk indication sprites
+    "assets/sprites/talkA01.png",
+    "assets/sprites/talkA02.png"
+  };
+  final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
+  final int NUM_EXTRAS = 20;               // number of npc charcters and the like
+  final int NUM_TILES = 23;                // number of tiles
+  final String TILE_PATHS[] = { // asset paths for npcs
+    "assets/tiles/rock.png",        
+    "assets/tiles/dirt_01.png",
+    "assets/tiles/dirt_02.png",
+    "assets/tiles/dirt_03.png",
+    "assets/tiles/dirt_04.png",
+    "assets/tiles/dirt_05.png",
+    "assets/tiles/dirt_06.png",
+    "assets/tiles/dirt_07.png",
+    "assets/tiles/dirt_08.png",
+    "assets/tiles/dirt_09.png",
+    "assets/tiles/grassB_01.png",
+    "assets/tiles/signpost.png",
+    "assets/tiles/wetgrass.png",
+    "assets/tiles/cornertree_L01.png",
+    "assets/tiles/cornertree_L02.png",
+    "assets/tiles/cornertree_R01.png",
+    "assets/tiles/cornertree_R02.png",
+    "assets/tiles/treetop.png",
+    "assets/tiles/treebottom_01.png",
+    "assets/tiles/treebottom_02.png",
+    "assets/tiles/trees_TL.png",
+    "assets/tiles/trees_TR.png",
+    "assets/tiles/hindtree_01.png",
+    "assets/tiles/hindtree_02.png",
+  };
+  final String MAP_FILES[] = {             // paths for the map files
+    "assets/maps/0.txt",
+    "assets/maps/1.txt"
+  };
+  final char PLAYER_STANDING[] = {         // the asset index of what the player is standing on
+    '5',
+    '5'
+  };
   
-  final float MOVE_MAGNITUDE = 50f;
-  
-  PImage extras[] = new PImage[20];
 
-  Map(Game g, int r, int c, String path, int x, int y) {
+
+  /*
+      INTIALIZE ALL MEMBERS
+  */
+  Map(Game g, int r, int c, int x, int y) {
     parent = g;
+    
     rows = r; columns = c;
-    map_reader = createReader(path);
+    
+    center_x = x; center_y = y;
+    
+    map_reader = createReader(MAP_FILES[parent.current_chapter]);
     
     map = new char[rows][columns];
     
-    center_x = x;
-    center_y = y;
+    extras = new PImage[NUM_EXTRAS];
     
+    // initialize the map, the starting x and y, and extras
     String line;
     for (int i = 0; i < rows; ++i) {
       try {
@@ -46,7 +99,7 @@ class Map {
         if (cur == 'P') {
           starting_x = j * 50;
           starting_y = i * 50;
-          map[i][j] = MapDefaults.playerTiles[parent.current_chapter];
+          map[i][j] = PLAYER_STANDING[parent.current_chapter];
         }
         
         else if (cur >= ('0'+50)) { // character sprites
@@ -54,6 +107,60 @@ class Map {
           extras[index] = loadImage(ChapterNpcs.spritepaths[parent.current_chapter][index]);
         }
       }
+    }
+    
+    tiles = new PImage[NUM_TILES+1]; // !move Tiles class to here?
+    for (int i = 0; i <= NUM_TILES; ++i) {
+      tiles[i] = loadImage(TILE_PATHS[i]);
+    }
+    
+    talk_notices = new PImage[2];
+    talk_notices[0] = loadImage(TALK_PATH[0]);
+    talk_notices[1] = loadImage(TALK_PATH[1]);
+    talk_index = 0;
+    talk_counter = TALK_FLICKR;
+  }
+  
+  
+  /*
+      RUN & DISPLAY LOOP
+  */
+  void displayMap() {
+    for (int i = 0; i < rows; ++i) {
+      for (int j = 0; j < columns; ++j) {
+        int x = center_x + j*50 - starting_x;
+        int y = center_y + i*50 - starting_y;
+       
+        if (!tileWithinBounds(x, y)) continue;
+        
+        char c = map[i][j];
+        int c_index = (int) c - '0';
+        
+        if (c_index < 0) continue;
+        if (c_index >= 50 && extras[c_index-50] != null) { // characters
+          image(tiles[ChapterNpcs.spritebottoms[parent.current_chapter][c_index-50]], x, y, 50, 50); // standing on
+          image(extras[c_index-50], x, y, 50, 50); // the character
+          image(talk_notices[talk_index], x+40, y-30, 40, 40); // talkable
+          continue;
+        }
+        if (c_index > NUM_TILES) continue;
+        image(tiles[c_index], x, y, 50, 50);
+      }
+    }
+    
+    if (parent.mode == GameMode.BATTLE) flickerTalk();
+  }
+  
+  boolean tileWithinBounds(int x, int y) {
+    if (x > WIDTH || y > HEIGHT) return false;
+    if (x+50 < 0 || y+50 < 0) return false;
+    return true;
+  }
+  
+  private void flickerTalk() {
+    if (--talk_counter <= 0) {
+      talk_counter = TALK_FLICKR;
+      talk_index = 1 - talk_index;
     }
   }
   
@@ -89,13 +196,20 @@ class Map {
     
     int test_char = coordinateOn(test_x, test_y) - '0';
     int test2_char = coordinateOn(test2_x, test2_y) - '0';
-    if (test_char > 0 && test_char <= 20 && test2_char > 0 && test2_char <= 20) {
+    if (walkAllowed(test_char) && walkAllowed(test2_char)) {
       starting_x -= x * MOVE_MAGNITUDE;
       starting_y -= y * MOVE_MAGNITUDE;
     }
     else {
       repeatMove(x, y, MOVE_MAGNITUDE/2);
     }
+  }
+  
+  private boolean walkAllowed(int index) {
+    if (index <= 0) return false;
+    if (index >= 13 && index <= 23) return false;
+    if (index > NUM_TILES) return false;
+    return true;
   }
   
   private void repeatMove(float x, float y, float magnitude) {
@@ -125,7 +239,7 @@ class Map {
     
     int test_char = coordinateOn(test_x, test_y) - '0';
     int test2_char = coordinateOn(test2_x, test2_y) - '0';
-    if (test_char > 0 && test_char <= 20 && test2_char > 0 && test2_char <= 20) {
+    if (walkAllowed(test_char) && walkAllowed(test2_char)) {
       starting_x -= x * magnitude;
       starting_y -= y * magnitude;
     }

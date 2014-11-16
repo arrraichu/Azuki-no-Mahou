@@ -1,71 +1,200 @@
 /*
-  Raymond Chu, Nick Yeung, Damien McKie, Stanford Mendenhall
-  Media in Game Design
-  Azuki no Mahou / Magical Beans
-  Main File
+    Raymond Chu, Nick Yeung, Damien McKie, Stanford Mendenhall
+    Media in Game Design
+    Azuki no Mahou / Magical Beans
+    Main File
+*/
+
+/*
+    The Main file should initialize as few things as possible,
+    and it should also control the sound and keyboard input interfaces.
 */
 
 import ddf.minim.*;
+import java.util.Random;
 
-/*===== CONSTANTS =====*/
-final static int WIDTH = 1024;
+/* MEMBERS */
+Game game;                                   // the game itself
+TitleScreen title;                           // the titlescreen
+GameOver gameover;                           // game over screen
+Minim minim;                                 // audio player object
+AudioPlayer bgm;                             // background music
+AudioPlayer othersound;                      // miscellaneous sounds
+
+/* CONTROL VARIABLES */
+boolean starting_state = true;               // title screen state
+boolean gameover_state = false;              // game over state
+boolean lastkey_pressed = false;             // whether a button was pressed at the previous loop iteration
+char lastkey = '`';                          // the last key that was pressed
+
+/* CONSTANTS */
+final static int WIDTH = 1024;               // game screen width & height
 final static int HEIGHT = 576;
-
-Game game;
-PImage backg;
-
-final int BG_FLIPPR = 100;
-int bg_itr = 0;
-int bg_index = 0;
-
-TitleScreen title;
-
-Minim minim;
-AudioPlayer bgm;
-AudioPlayer othersound;
-
-final int NUM_MISCSOUNDS = 1;
-
-boolean init = false;
-
-boolean starting_state = true;
+final boolean DEBUG = false;                 // display debug text
+final int NUM_MISCSOUNDS = 1;                // number of miscellaneous sounds
+final char BUTTON_UP = UP;                   // directional controls for when coded controls are used
+final char BUTTON_DOWN = DOWN;
+final char BUTTON_LEFT = LEFT;
+final char BUTTON_RIGHT = RIGHT;
+final char U_BUTTON_UP = 'w';                // directional controls for when coded controls aren't used
+final char U_BUTTON_DOWN = 's';
+final char U_BUTTON_LEFT = 'a';
+final char U_BUTTON_RIGHT = 'd';
+final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
+final char BUTTON_A = ' ';                   // affirmative button
 
 
-/*===== FUNCTIONS =====*/
+
+/*
+    INTIALIZE ALL MEMBERS
+*/
 void setup() {
   size(WIDTH, HEIGHT);
   
-  minim = new Minim(this);
-  othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
+  // control variables reinitialized for when game is repeated
+  starting_state = true;
+  gameover_state = false;
+  lastkey_pressed = false;
+  lastkey = '`';
   
+  game = new Game();
+
   title = new TitleScreen("assets/titlescreen/menuscreen_01.jpg", "assets/titlescreen/logo.png");
+  gameover = new GameOver();
+
+  minim = new Minim(this);
+  resetBgm();
   
-  game = new Game(WIDTH, HEIGHT);
-  backg = loadImage(Backgrounds.paths[game.current_chapter][bg_index]);
+  othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
 }
 
+
+/*
+    RUN & DISPLAY LOOP
+*/
 void draw() {
+  handleKeys();
+  
   if (starting_state) {
     title.run();
     return;
   }
   
-  image(backg, 0, 0, width, height);
-  
-  if (bgm == null || !bgm.isPlaying()) resetBgm();
-  
-  if (++bg_itr >= BG_FLIPPR) {
-    bg_itr = 0;
-    bg_index = (bg_index+1) % Backgrounds.variations[game.current_chapter];
-    backg = loadImage(Backgrounds.paths[game.current_chapter][bg_index]);
+  if (gameover_state) {
+    gameover.display();
+    return;
   }
+  
+  background(0);
+
+  if (bgm == null || !bgm.isPlaying()) resetBgm();
   
   game.run();
 }
 
+
+/*
+    PROCESS KEYBOARD INPUTS AND SEND THEM TO APPROPRIATE METHODS
+*/
+void handleKeys() {
+  
+  if (keyPressed) {
+    
+    if (game == null) return;
+    
+    if (starting_state && title.ready && key == ' ') {
+      starting_state = false;
+      return;
+    }
+    
+    if (gameover_state && key == ' ') {
+      setup();
+    }
+    
+    if (game.mode == GameMode.EXPLORE) {
+      if (key == ' ') game.playerTalk();
+      
+      else if (USE_CODED_CONTROLS) {
+        if (key == CODED) {
+          if (keyCode == BUTTON_UP) {
+            game.sendSignalMove(2);
+          } else if (keyCode == BUTTON_DOWN) {
+            game.sendSignalMove(3);
+          } else if (keyCode == BUTTON_LEFT) {
+            game.sendSignalMove(0);
+          } else if (keyCode == BUTTON_RIGHT) {
+            game.sendSignalMove(1);
+          }
+        }
+      }
+      
+      else {
+        if (key == U_BUTTON_UP) {
+          game.sendSignalMove(2);
+        } else if (key == U_BUTTON_DOWN) {
+          game.sendSignalMove(3);
+        } else if (key == U_BUTTON_LEFT) {
+          game.sendSignalMove(0);
+        } else if (key == U_BUTTON_RIGHT) {
+          game.sendSignalMove(1);
+        }
+      }
+    }
+    
+    else if (game.mode == GameMode.STORY) {
+      if (key == ' ') {
+        if (DEBUG) game.reader.sendNextLine();
+        if (!lastkey_pressed) game.reader.sendNextLine();
+        else if (lastkey != key) game.reader.sendNextLine();
+      }
+    }
+    
+    else if (game.mode == GameMode.BATTLE) { // 0123 for direction, 4 for space
+      if (!DEBUG && lastkey_pressed && lastkey == key) return;
+    
+      if (key == ' ') game.battle_prompt.handleControls(4);
+      
+      else if (USE_CODED_CONTROLS) {
+        if (key == CODED) {
+          if (keyCode == BUTTON_UP) {
+            game.battle_prompt.handleControls(2);
+          } else if (keyCode == BUTTON_DOWN) {
+            game.battle_prompt.handleControls(3);
+          } else if (keyCode == BUTTON_LEFT) {
+            game.battle_prompt.handleControls(0);
+          } else if (keyCode == BUTTON_RIGHT) {
+            game.battle_prompt.handleControls(1);
+          }
+        }
+      }
+      
+      else {
+        if (key == U_BUTTON_UP) {
+          game.battle_prompt.handleControls(2);
+        } else if (key == U_BUTTON_DOWN) {
+          game.battle_prompt.handleControls(3);
+        } else if (key == U_BUTTON_LEFT) {
+          game.battle_prompt.handleControls(0);
+        } else if (key == U_BUTTON_RIGHT) {
+          game.battle_prompt.handleControls(1);
+        }
+      }
+    }
+    
+    lastkey_pressed = true;
+    lastkey = key;
+    
+  } else {
+    lastkey_pressed = false;
+  }
+}
+
 void resetBgm() {
   minim.stop();
-  if (game.mode == GameMode.BATTLE) {
+  if (bgm != null) {bgm.close(); bgm = null;}
+  if (starting_state) {
+    return;
+  } else if (game.mode == GameMode.BATTLE) {
     bgm = minim.loadFile("assets/sounds/battle_music.mp3");
   } else {
     bgm = minim.loadFile("assets/sounds/overworld.mp3");
@@ -80,19 +209,4 @@ void playSound(int i) {
      othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
      othersound.play();
    }
-}
-
-
-void keyPressed() {
-  char k = key;
-  game.receiveKey(k);
-  
-  if (starting_state && title.ready && key == ' ') {
-    starting_state = false;
-  }
-  
-  if (k == '4')  {
-    playSound(0);
-    return;
-  }
 }
