@@ -97,7 +97,8 @@ class TextRoll {
     
     // do not roll. just display text
     if (isPrompt) {
-      text(fedInput, text_startx, text_starty);
+      inputBuffer = fedInput;
+      displayText();
       readyNext = true;
       return;
     }
@@ -106,8 +107,7 @@ class TextRoll {
     
     // finished rolling all of the text
     if (inputBuffer == fedInput) {
-      text(inputBuffer, text_startx, text_starty);
-      image(finishers[finish_index], width*0.96, height*0.94, 23, 23);
+      displayText();
       readyNext = true;
       return;
     }
@@ -124,10 +124,15 @@ class TextRoll {
       wrap_index = current_spcindex;
     }
     
+    displayText();
+    
+  }
+  
+  private void displayText() {
     // if wrap index was recorded, then the text needs to split into two lines
     if (wrap_index != -1) {
       text(inputBuffer.substring(0, wrap_index), text_startx, text_starty);
-      text(inputBuffer.substring(wrap_index), text_startx, text_starty+nextline_disp);
+      text(inputBuffer.substring(wrap_index+1), text_startx, text_starty+nextline_disp);
     }
     // everything fits into one line 
     else {
@@ -217,5 +222,19 @@ class TextRoll {
   public void flushBuffer() {
     if (fedInput == "") return;
     inputBuffer = fedInput;
+    
+    if (wrap_index == -1) {
+      if (textWidth(inputBuffer) >= text_width) {
+        int i = 0;
+        for (i = inputBuffer.length(); textWidth(inputBuffer.substring(0, i)) >= text_width; --i) {
+          if (i < 0) return;
+        }
+        for (int j = i; j >= 0; --j) {
+          if (inputBuffer.charAt(j) == ' ') {
+            wrap_index = j; break;
+          }
+        }
+      }
+    }
   }
 }

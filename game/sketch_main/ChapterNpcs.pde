@@ -26,7 +26,7 @@ static class ChapterNpcs {
     { // Chapter 0
       10
     }, { // Chapter 1
-      9,
+      10,
       0, // empty
       5
     }, { // Chapter 2

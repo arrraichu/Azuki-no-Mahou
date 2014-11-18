@@ -30,18 +30,28 @@ G - tile # 23: hind tree right (ASSET DONE) (CODED)
 H - tile # 24: corner hind tree left (ASSET DONE) (CODED)
 I - tile # 25: corner hind tree right (ASSET DONE) (CODED)
 J - tile # 26: bush (ASSET DONE) (CODED)
-K - tile # 27: 
-L - tile # 28: 
-M - tile # 29: 
+K - tile # 27: NW wet dirt (ASSET DONE) (CODED)
+L - tile # 28: N wet dirt (ASSET DONE) (CODED)
+M - tile # 29: NE wet dirt (ASSET DONE) (CODED)
+N - tile # 30: W wet dirt (ASSET DONE) (CODED)
+O - tile # 31: Center wet dirt (ASSET DONE) (CODED)
+P - tile # 32: E wet dirt (ASSET DONE) (CODED)
+Q - tile # 33: SW wet dirt (ASSET DONE) (CODED)
+R - tile # 34: S wet dirt (ASSET DONE) (CODED)
+S - tile # 35: SE wet dirt (ASSET DONE) (CODED)
+T - tile # 36: 
+U - tile # 37: 
+V - tile # 38: 
+W - tile # 39: 
 
 Use the following characters for characters:
 
 b - character # 1 : cicada (ASSET DONE) (CODED)
 c - character # 2 : ant (ASSET DONE) (CODED)
 d - character # 3 : seedcorn (ASSET DONE) (CODED)
-e - character # 4 : maggots (ASSET DONE)
-f - character # 5 : worm (ASSET DONE)
-g - character # 6 : rabbit (ASSET DONE)
+e - character # 4 : maggots (ASSET DONE) (CODED)
+f - character # 5 : worm (ASSET DONE) (CODED)
+g - character # 6 : rabbit (ASSET DONE) (CODED)
 h - character # 7 : 
 i - character # 8 : 
 j - character # 9 : 

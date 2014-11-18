@@ -24,7 +24,7 @@ class Map {
   };
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
   final int NUM_EXTRAS = 20;               // number of npc charcters and the like
-  final int NUM_TILES = 26;                // number of tiles
+  final int NUM_TILES = 35;                // number of tiles
   final String TILE_PATHS[] = { // asset paths for npcs
     "assets/tiles/rock.png",        
     "assets/tiles/dirt_01.png",
@@ -52,7 +52,16 @@ class Map {
     "assets/tiles/hindtree_02.png",
     "assets/tiles/cornerhindtree_01.png",
     "assets/tiles/cornerhindtree_02.png",
-    "assets/tiles/grass_tile_7.png"
+    "assets/tiles/grass_tile_7.png",
+    "assets/tiles/wetdirt_01.png",
+    "assets/tiles/wetdirt_02.png",
+    "assets/tiles/wetdirt_03.png",
+    "assets/tiles/wetdirt_04.png",
+    "assets/tiles/wetdirt_05.png",
+    "assets/tiles/wetdirt_06.png",
+    "assets/tiles/wetdirt_07.png",
+    "assets/tiles/wetdirt_08.png",
+    "assets/tiles/wetdirt_09.png"
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
@@ -102,7 +111,7 @@ class Map {
         map[i][j] = line.charAt(j);
         
         char cur = line.charAt(j);
-        if (cur == 'P') {
+        if (cur == '*') {
           starting_x = j * 50;
           starting_y = i * 50;
           map[i][j] = (char) ('0' + PLAYER_STANDING[parent.current_chapter]);
