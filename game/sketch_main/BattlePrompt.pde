@@ -279,7 +279,7 @@ class BattlePrompt {
             ++enemy_ptr;
           }
           
-          if (enemy_ptr >= ChapterEnemies.NUM_ENEMIES[parent.current_chapter]) {
+          if (enemy_ptr >= ChapterEnemies.NUM_ENEMIES[parent.current_chapter]) { // end of state 4
             state = 1;
             enemy_ptr = 0;
             return;
@@ -294,7 +294,7 @@ class BattlePrompt {
         }
         
         else {
-          target = -1;
+          target = -1; // reset for next enemy
           
           int atk_dmg = enemies[enemy_ptr].attack();
           if (atk_dmg < 0) atk_dmg *= -1;
@@ -403,6 +403,15 @@ class BattlePrompt {
         if (selection < enemies_left-1) ++selection;
         return;
       }
+      
+      if (ctrl == 5) {
+        selection = 0;
+        enemy_ptr = 0;
+        state = 1;
+        playSound(0);
+        return;
+      }
+      
       return;
     }
     
@@ -442,6 +451,14 @@ class BattlePrompt {
       if (ctrl == 3) {
         int max_selection = parent.p.stats.skill.NUM_IMPLEMENTEDSKILLS[parent.p.stats.skill.skillcolor];
         if (selection < max_selection - 1) ++selection;
+        return;
+      }
+      
+      if (ctrl == 5) {
+        selection = 0;
+        enemy_ptr = 0;
+        state = 1;
+        playSound(0);
         return;
       }
     }

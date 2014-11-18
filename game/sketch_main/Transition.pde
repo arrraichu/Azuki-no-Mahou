@@ -3,6 +3,7 @@ public class Transition {
   /* MEMBERS */
   Game parent;
   String chapterText;
+  PImage bg;
   
   /* CONTROL VARIABLES */
   boolean fadeIn = true;
@@ -20,6 +21,7 @@ public class Transition {
   final float TITLE_X = width*0.5;
   final float TITLE_Y = height*0.5;
   final int NEWLINE_DISPARITY = 35;
+  final String ASSET_BACKGROUND = "assets/backgrounds/foresttactile.png";
   
   
   /*
@@ -29,6 +31,7 @@ public class Transition {
     parent = g;
     chapterText = CHAPTER + " " + parent.current_chapter;
     fade_counter = FADE_LENGTH;
+    bg = loadImage(ASSET_BACKGROUND);
   }
   
   
@@ -36,18 +39,18 @@ public class Transition {
       RUN & DISPLAY LOOP
   */
   void display() {
-    background(0);
+    image(bg, 0, 0, width, height);
     textSize(36);
     
     if (!done) {
       if (fadeIn) {
         if (--fade_counter > 0) {
           float pctg = 255f * ((float) (FADE_LENGTH - fade_counter)/FADE_LENGTH);
-          fill(pctg);
+          fill(255, pctg);
           text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
           text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {
-          fill(255);
+          fill(255, 255);
           text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
           text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
           fade_counter = FADE_LENGTH;
@@ -56,7 +59,7 @@ public class Transition {
       } else {
         if (--fade_counter > 0) {
           float pctg = 255f * ((float) fade_counter/FADE_LENGTH);
-          fill(pctg);
+          fill(255, pctg);
           text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
           text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {

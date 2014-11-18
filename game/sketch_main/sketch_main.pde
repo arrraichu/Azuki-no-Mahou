@@ -26,6 +26,7 @@ boolean starting_state = true;               // title screen state
 boolean gameover_state = false;              // game over state
 boolean lastkey_pressed = false;             // whether a button was pressed at the previous loop iteration
 char lastkey = '`';                          // the last key that was pressed
+boolean needRewind = false;
 
 /* CONSTANTS */
 final static int WIDTH = 1024;               // game screen width & height
@@ -42,6 +43,7 @@ final char U_BUTTON_LEFT = 'a';
 final char U_BUTTON_RIGHT = 'd';
 final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
 final char BUTTON_A = ' ';                   // affirmative button
+final char BUTTON_B = 'z';                   // cancel button
 static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequent chapters
 
 
@@ -91,6 +93,7 @@ void draw() {
   if (bgm == null || !bgm.isPlaying()) resetBgm();
   
   game.run();
+  
 }
 
 
@@ -154,10 +157,11 @@ void handleKeys() {
       }
     }
     
-    else if (game.mode == GameMode.BATTLE) { // 0123 for direction, 4 for space
+    else if (game.mode == GameMode.BATTLE) { // 0123 for direction, 4 for space, 5 for cancel
       if (!DEBUG && lastkey_pressed && lastkey == key) return;
     
-      if (key == ' ') game.battle.battle_prompt.handleControls(4);
+      if (key == BUTTON_A) game.battle.battle_prompt.handleControls(4);
+      if (key == BUTTON_B) game.battle.battle_prompt.handleControls(5);
       
       else if (USE_CODED_CONTROLS) {
         if (key == CODED) {
@@ -211,8 +215,14 @@ void playSound(int i) {
    if (i < 0 || i >= NUM_MISCSOUNDS) return;
    
    if (i == 0) {
+     if (needRewind) {
+       othersound.close();
+       needRewind = false;
+     }
+     
      othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
      othersound.play();
+     needRewind = true;
    }
 }
 
