@@ -23,7 +23,7 @@ class Map {
   };
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
   final int NUM_EXTRAS = 20;               // number of npc charcters and the like
-  final int NUM_TILES = 23;                // number of tiles
+  final int NUM_TILES = 25;                // number of tiles
   final String TILE_PATHS[] = { // asset paths for npcs
     "assets/tiles/rock.png",        
     "assets/tiles/dirt_01.png",
@@ -49,6 +49,8 @@ class Map {
     "assets/tiles/trees_TR.png",
     "assets/tiles/hindtree_01.png",
     "assets/tiles/hindtree_02.png",
+    "assets/tiles/cornerhindtree_01.png",
+    "assets/tiles/cornerhindtree_02.png"
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
