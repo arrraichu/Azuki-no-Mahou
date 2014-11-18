@@ -12,8 +12,7 @@ class Game {
   PFont default_font;                // font used in the game
   TextRoll tr;                       // used for rolling text
   TextReader reader;                 // reading text from a text file
-  BattleText battle_text;            // left box in battle
-  BattlePrompt battle_prompt;        // right box in battle
+  Battle battle;                     // battle interface
   Map current_map;                   // the map of a game
   Transition t;                      // fade in to the chapter
   PImage limbo;                      // to be continued art
@@ -47,13 +46,7 @@ class Game {
     
     // reader initialized in run function
     
-    battle_text = new BattleText(this, width*0.01, height*0.6, width*0.23, height*0.39);
-    battle_text.setTextStart(width*0.03, height*0.66);
-    battle_text.setNewlinePlacement(18, height*0.04);
-    
-    battle_prompt = new BattlePrompt(this, width*0.76, height*0.6, width*0.23, height*0.39, width*0.78, height*0.66, 18, height*0.065);
-//    battle_prompt.setTextStart(width*0.78, height*0.66);
-//    battle_prompt.setNewlinePlacement(18, height*0.065);
+    battle = new Battle(this);
     
     // map initialized in intialize control of run function
     
@@ -109,14 +102,16 @@ class Game {
       current_map.displayMap();
       p.display(WIDTH/2, HEIGHT/2);
       if (mode == GameMode.STORY) tr.display();
+      else {
+         
+      }
       
       handleExtras();
     }
     
     // Battle state
     else {      
-      battle_text.display();
-      battle_prompt.display();
+      battle.display();
     }
     
   }
@@ -139,13 +134,7 @@ class Game {
   
   
   void playerTalk() {
-    float x = GAME_SPEED; float y = GAME_SPEED;
-    if (p.direction > 1) x *= 0;
-    else y *= 0;
-    if (p.direction == 0) x *= -1;
-    if (p.direction == 3) y *= -1;
-    
-    int index = current_map.contact(x,y) - '0' - 50;
+    int index = current_map.character_contact(GAME_SPEED, p.direction);
     if (index < 0 || index >= 20) return;
     
     reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);

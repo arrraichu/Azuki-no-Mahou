@@ -23,7 +23,7 @@ class Map {
   };
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
   final int NUM_EXTRAS = 20;               // number of npc charcters and the like
-  final int NUM_TILES = 25;                // number of tiles
+  final int NUM_TILES = 26;                // number of tiles
   final String TILE_PATHS[] = { // asset paths for npcs
     "assets/tiles/rock.png",        
     "assets/tiles/dirt_01.png",
@@ -50,7 +50,8 @@ class Map {
     "assets/tiles/hindtree_01.png",
     "assets/tiles/hindtree_02.png",
     "assets/tiles/cornerhindtree_01.png",
-    "assets/tiles/cornerhindtree_02.png"
+    "assets/tiles/cornerhindtree_02.png",
+    "assets/tiles/grass_tile_7.png"
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
@@ -173,6 +174,49 @@ class Map {
     return coordinateOn(test_x, test_y);
   }
   
+  int character_contact(float speed, int direction) {
+    if (direction < 0 || direction > 3) return -1;
+    float point1x = 0, point1y = 0, point2x = 0, point2y = 0;
+   
+    if (direction == 2) { // up
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 - speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 - speed;
+    } else if (direction == 3) { // down
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 + 50 + speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 + 50 + speed;
+    } else if (direction == 0) { // left
+      point1x = WIDTH/2 - speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 - speed;
+      point2y = HEIGHT/2 + 50;
+    } else if (direction == 1) { // right
+      point1x = WIDTH/2 + 50 + speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 + 50 + speed;
+      point2y = HEIGHT/2 + 50;
+    }
+    
+    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
+    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
+    
+    if (coor1 < 0 && coor2 < 0) return -1;
+    if (coor1 >= 0 && coor2 >= 0) {
+      float point3x = (point1x + point2x) / 2;
+      float point3y = (point1y + point2y) / 2;
+      int coor3 = coordinateOn(point3x, point3y) - '0' - 50;
+      return coor3;
+    }
+    if (coor1 >= 0) {
+      return coor1;
+    }
+    return coor2;
+   
+  }
+  
   void move(float x, float y) {
     if (x == 0 && y == 0) return;
     if (x != 0 && y != 0) return;
@@ -209,7 +253,7 @@ class Map {
   
   private boolean walkAllowed(int index) {
     if (index <= 0) return false;
-    if (index >= 13 && index <= 23) return false;
+    if (index >= 13 && index <= 25) return false;
     if (index > NUM_TILES) return false;
     return true;
   }

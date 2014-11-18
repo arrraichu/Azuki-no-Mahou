@@ -27,9 +27,9 @@ D - tile # 20: tree top left (ASSET DONE) (CODED)
 E - tile # 21: tree top right (ASSET DONE) (CODED)
 F - tile # 22: hind tree left (ASSET DONE) (CODED)
 G - tile # 23: hind tree right (ASSET DONE) (CODED)
-H - tile # 24: corner hind tree left (ASSET DONE)
-I - tile # 25: corner hind tree right (ASSET DONE)
-J - tile # 26: 
+H - tile # 24: corner hind tree left (ASSET DONE) (CODED)
+I - tile # 25: corner hind tree right (ASSET DONE) (CODED)
+J - tile # 26: bush (ASSET DONE) (CODED)
 K - tile # 27: 
 L - tile # 28: 
 M - tile # 29: 

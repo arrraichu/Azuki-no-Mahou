@@ -143,6 +143,7 @@ void handleKeys() {
     
     else if (game.mode == GameMode.STORY) {
       if (key == ' ') {
+        if (game.reader == null) return;
         if (DEBUG) game.reader.sendNextLine();
         if (!lastkey_pressed) game.reader.sendNextLine();
         else if (lastkey != key) game.reader.sendNextLine();
@@ -152,31 +153,31 @@ void handleKeys() {
     else if (game.mode == GameMode.BATTLE) { // 0123 for direction, 4 for space
       if (!DEBUG && lastkey_pressed && lastkey == key) return;
     
-      if (key == ' ') game.battle_prompt.handleControls(4);
+      if (key == ' ') game.battle.battle_prompt.handleControls(4);
       
       else if (USE_CODED_CONTROLS) {
         if (key == CODED) {
           if (keyCode == BUTTON_UP) {
-            game.battle_prompt.handleControls(2);
+            game.battle.battle_prompt.handleControls(2);
           } else if (keyCode == BUTTON_DOWN) {
-            game.battle_prompt.handleControls(3);
+            game.battle.battle_prompt.handleControls(3);
           } else if (keyCode == BUTTON_LEFT) {
-            game.battle_prompt.handleControls(0);
+            game.battle.battle_prompt.handleControls(0);
           } else if (keyCode == BUTTON_RIGHT) {
-            game.battle_prompt.handleControls(1);
+            game.battle.battle_prompt.handleControls(1);
           }
         }
       }
       
       else {
         if (key == U_BUTTON_UP) {
-          game.battle_prompt.handleControls(2);
+          game.battle.battle_prompt.handleControls(2);
         } else if (key == U_BUTTON_DOWN) {
-          game.battle_prompt.handleControls(3);
+          game.battle.battle_prompt.handleControls(3);
         } else if (key == U_BUTTON_LEFT) {
-          game.battle_prompt.handleControls(0);
+          game.battle.battle_prompt.handleControls(0);
         } else if (key == U_BUTTON_RIGHT) {
-          game.battle_prompt.handleControls(1);
+          game.battle.battle_prompt.handleControls(1);
         }
       }
     }

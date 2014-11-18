@@ -22,16 +22,32 @@ class BattlePrompt {
   boolean response = false;                                 // if a response is needed
   int enemy_ptr = 0;                                        // selection for enemies
   int fade_counter = -1;                                    // time counter for fades when game over happens           
-  int using_skill = -1;                                     // whether the player is using a skill 
+  int using_skill = -1;                                     // whether the player is using a skill
+  int target = -1;                                          // indicate the target when animating
+  boolean isAnimateFinished = true;                         // indicate whether the animation is finished
+  int animationState = 0;                                   // state machine controller for animations
+  int hit_counter = 0;
+  boolean activate_hitani = false;
   
   /* CONSTANTS */
-  final float SELECTOR_WIDTH = 16;                          // width of the selector
-  final int HEIGHT_REALESTATE = (int)(height*0.75);         // amount of height the screen allows for viewing players and enemies
-  final float PLACEMENT_AWAYFROMBOUNDARY = width*0.3;       // how far from the left and right ends of screen the characters should finalize on
-  final int SLIDEIN_INTERVAL = 8;                           // the speed of the slide-ins for characters
-  final String HPBAR_PATH = "assets/others/hp.png";         // asset path for hp bar
-  final String ARROW_PATH = "assets/sprites/arrow.png";     // asset path for selection arrow
-  final int FADE_LENGTH = 70;                               // total time for fade
+  final float SELECTOR_WIDTH = 16;                                      // width of the selector
+  final int HEIGHT_REALESTATE = (int)(height*0.75);                     // amount of height the screen allows for viewing players and enemies
+  final float PLACEMENT_AWAYFROMBOUNDARY = width*0.3;                   // how far from the left and right ends of screen the characters should finalize on
+  final int SLIDEIN_INTERVAL = 8;                                       // the speed of the slide-ins for characters
+  final String HPBAR_PATH = "assets/others/hp.png";                     // asset path for hp bar
+  final String ARROW_PATH = "assets/sprites/arrow.png";                 // asset path for selection arrow
+  final int FADE_LENGTH = 70;                                           // total time for fade
+  final float SHAKING_THRESHOLD = width * 0.025;                        // how much the target shakes in a hit animation
+  final float SHAKING_INTERVAL = 5;                                     // speed of animation hit shaking
+  final int NUM_BATTLEANIS = 5;                                         // number of assets for the hitting animation
+  final String ASSET_BATTLEANIS[] = {                                     // asset paths for hitting animation
+    "assets/animations/hit_01.png",
+    "assets/animations/hit_02.png",
+    "assets/animations/hit_03.png",
+    "assets/animations/hit_04.png",
+    "assets/animations/hit_05.png"
+  };
+  final int TOTAL_HITTING_TIME = 15;
   
   
   
@@ -79,6 +95,7 @@ class BattlePrompt {
     
     player_hpbuffer = parent.p.stats.rem_health;
     
+    
   }
   
   
@@ -91,14 +108,14 @@ class BattlePrompt {
     fill(255);
     rect(left_coor, top_coor, box_width, box_height);
     
-    stateSettings();
-    
     // display sprites
     image(parent.p.stats.sprite, player_pos[0], player_pos[1], 50, 50);
     for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
       if (enemies[i] == null) continue;
       image(enemies[i].sprite, enemies_pos[i][0], enemies_pos[i][1]);
     }
+    
+    stateSettings();
     
     // display hp bar for states after 0
     if (state != 0) { 
@@ -216,61 +233,83 @@ class BattlePrompt {
     
     if (state == 3) { // attack mechanism
       if (!response) {
-        /* attacking target */
-        int target = 0;
-        for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
-          if (enemies[i] == null) continue;
-          if (selection == 0) {
-            target = i;
-            break;
+        /* identifying the attack target */
+        if (target == -1) {
+          for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
+            if (enemies[i] == null) continue;
+            if (selection == 0) {
+              target = i;
+              break;
+            }
+            --selection;
           }
-          --selection;
+          isAnimateFinished = false;
         }
         
-        int atk_dmg = (using_skill < 0) ? parent.p.stats.attack() : parent.p.stats.skill.activateAbility(using_skill);
-        if (atk_dmg < 0) atk_dmg *= -1;
-        enemies[target].takeDamage(atk_dmg);
-        String text = enemies[target].name + " has taken a hit.";
-        
-        /* handling knockouts */
-        if (enemies[target].rem_health < 0) {
-          text += " " + enemies[target].name + " has been knocked out!";
-          enemies[target] = null;
-          --enemies_left;
+        if (!isAnimateFinished) {
+          animateAttack(true);
         }
-        setText(text);
-        response = true;
-        selection = 0;
-        using_skill = -1;
+        
+        else {
+          int atk_dmg = (using_skill < 0) ? parent.p.stats.attack() : parent.p.stats.skill.activateAbility(using_skill);
+          if (atk_dmg < 0) atk_dmg *= -1;
+          enemies[target].takeDamage(atk_dmg);
+          String text = enemies[target].name + " has taken a hit.";
+  
+          /* handling knockouts */
+          if (enemies[target].rem_health < 0) {
+            text += " " + enemies[target].name + " has been knocked out!";
+            enemies[target] = null;
+            --enemies_left;
+          }
+          setText(text);
+          response = true;
+          selection = 0;
+          using_skill = -1;
+          target = -1;
+        }
       }
       return;
     }
     
     if (state == 4) { // enemies turn to move
       if (!response) {
-        while (enemy_ptr < ChapterEnemies.NUM_ENEMIES[parent.current_chapter] && enemies[enemy_ptr] == null) {
+        if (target == -1) {
+          while (enemy_ptr < ChapterEnemies.NUM_ENEMIES[parent.current_chapter] && enemies[enemy_ptr] == null) {
+            ++enemy_ptr;
+          }
+          
+          if (enemy_ptr >= ChapterEnemies.NUM_ENEMIES[parent.current_chapter]) {
+            state = 1;
+            enemy_ptr = 0;
+            return;
+          }
+          
+          target = enemy_ptr;
+          isAnimateFinished = false;
+        }
+        
+        if (!isAnimateFinished) {
+          animateAttack(false);
+        }
+        
+        else {
+          target = -1;
+          
+          int atk_dmg = enemies[enemy_ptr].attack();
+          if (atk_dmg < 0) atk_dmg *= -1;
+          parent.p.stats.takeDamage(atk_dmg);
+          setText(enemies[enemy_ptr].name + " has attacked you.");
+          if (parent.p.stats.rem_health <= 0) {
+            state = 6;
+            enemy_ptr = 0;
+            return;
+          }
+          
           ++enemy_ptr;
+          
+          response = true;
         }
-        
-        if (enemy_ptr >= ChapterEnemies.NUM_ENEMIES[parent.current_chapter]) {
-          state = 1;
-          enemy_ptr = 0;
-          return;
-        }
-        
-        int atk_dmg = enemies[enemy_ptr].attack();
-        if (atk_dmg < 0) atk_dmg *= -1;
-        parent.p.stats.takeDamage(atk_dmg);
-        setText(enemies[enemy_ptr].name + " has attacked you.");
-        if (parent.p.stats.rem_health <= 0) {
-          state = 6;
-          enemy_ptr = 0;
-          return;
-        }
-        
-        ++enemy_ptr;
-        
-        response = true;
       }
       return;
     }
@@ -408,7 +447,71 @@ class BattlePrompt {
     }
   }
   
+  private void animateAttack(boolean playerAttacking) {
+    if (isAnimateFinished || target == -1) return;
+    
+    if (animationState == -1 && hit_counter >= TOTAL_HITTING_TIME) {
+      animationState = 0;
+      hit_counter = 0;
+      isAnimateFinished = true;
+      return;
+    }
+    
+    if (animationState >= 2) {
+      activate_hitani = true;
+      }
+      
+    if (activate_hitani) {
+      for (int i = NUM_BATTLEANIS-1; i >= 0; --i) {
+        if (hit_counter >= i * TOTAL_HITTING_TIME / 5) {
+          PImage hitter = loadImage(ASSET_BATTLEANIS[i]);
+          if (!playerAttacking) {
+            image(hitter, PLACEMENT_AWAYFROMBOUNDARY, player_pos[1]);
+          } else {
+            image(hitter, width - PLACEMENT_AWAYFROMBOUNDARY - 50, enemies_pos[target][1]);
+          }
+          
+          break;
+        }
+      }
+      ++hit_counter;
+    }
+        
+    
+    if (playerAttacking) {
+      if (animationState == 0) {
+        player_pos[0] += SHAKING_INTERVAL;
+        if (player_pos[0] >= PLACEMENT_AWAYFROMBOUNDARY + SHAKING_THRESHOLD) animationState = 1;
+      } else if (animationState == 1) {
+        player_pos[0] -= SHAKING_INTERVAL;
+        if (player_pos[0] <= PLACEMENT_AWAYFROMBOUNDARY) animationState = 2;
+      } else if (animationState == 2) {
+        enemies_pos[target][0] += SHAKING_INTERVAL;
+        if (enemies_pos[target][0] >= width - PLACEMENT_AWAYFROMBOUNDARY + SHAKING_THRESHOLD - 50) animationState = 3;
+      } else if (animationState == 3) {
+        enemies_pos[target][0] -= SHAKING_INTERVAL;
+        if (enemies_pos[target][0] <= width - PLACEMENT_AWAYFROMBOUNDARY - 50) animationState = -1;
+      }
+    }
+    
+    else {
+      if (animationState == 0) {
+        enemies_pos[target][0] -= SHAKING_INTERVAL;
+        if (enemies_pos[target][0] <= width - PLACEMENT_AWAYFROMBOUNDARY - SHAKING_THRESHOLD - 50) animationState = 1;
+      } else if (animationState == 1) {
+        enemies_pos[target][0] += SHAKING_INTERVAL;
+        if (enemies_pos[target][0] >= width - PLACEMENT_AWAYFROMBOUNDARY - 50) animationState = 2;
+      } else if (animationState == 2) {
+        player_pos[0] -= SHAKING_INTERVAL;
+        if (player_pos[0] <= PLACEMENT_AWAYFROMBOUNDARY - SHAKING_THRESHOLD) animationState = 3;
+      } else if (animationState == 3) {
+        player_pos[0] += SHAKING_INTERVAL;
+        if (player_pos[0] >= PLACEMENT_AWAYFROMBOUNDARY) { isAnimateFinished = true; animationState = 0; return; }
+      }
+    }
+  }
+  
   void setText(String t) {
-    parent.battle_text.setText(t);
+    parent.battle.battle_text.setText(t);
   }
 }
