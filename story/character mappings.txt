@@ -37,11 +37,11 @@ M - tile # 29:
 Use the following characters for characters:
 
 b - character # 1 : cicada (ASSET DONE) (CODED)
-c - character # 2 : ant (ASSET DONE)
-d - character # 3 : seedcorn (ASSET DONE)
+c - character # 2 : ant (ASSET DONE) (CODED)
+d - character # 3 : seedcorn (ASSET DONE) (CODED)
 e - character # 4 : maggots (ASSET DONE)
 f - character # 5 : worm (ASSET DONE)
-g - character # 6 : rabbit
+g - character # 6 : rabbit (ASSET DONE)
 h - character # 7 : 
 i - character # 8 : 
 j - character # 9 : 

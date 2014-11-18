@@ -28,7 +28,6 @@ class Game {
   final float GAME_SPEED = 0.1f;                         // overall game speed
   final float MOVEMENT_SPEED = 1.6f;                     // movement speed
   final float EXTRA_FADE_LENGTH = GAME_SPEED*700f;       // fade in and out time length (70 frames)
-  final int CHAPTERS_IMPLEMENTED = 1;                    // controls whether to play subsequent chapters
   
   
   /*
@@ -43,6 +42,9 @@ class Game {
     textFont(default_font, 22);
     
     tr = new TextRoll(this, width*0.01, height*0.85, width*0.98, height*0.14, width*0.03, height*0.91, width*0.94, height*0.05);
+    tr.profileLeft = loadImage(p.SPRITE_PROFILE);
+    if (ChapterNpcs.STARTING_RIGHTPROFS[current_chapter] != "")
+      tr.profileRight = loadImage(ChapterNpcs.STARTING_RIGHTPROFS[current_chapter]);
     
     // reader initialized in run function
     
@@ -91,6 +93,8 @@ class Game {
     // Fade ins before the chapter starts
     if (!initialize) {
        current_map = new Map(this, 100, 100, WIDTH/2, HEIGHT/2);
+       if (ChapterNpcs.STARTING_RIGHTPROFS[current_chapter] != "")
+         tr.profileRight = loadImage(ChapterNpcs.STARTING_RIGHTPROFS[current_chapter]);
        reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
        battle = new Battle(this);
        extraFade = EXTRA_FADE_LENGTH;
@@ -138,13 +142,13 @@ class Game {
     int index = current_map.character_contact(GAME_SPEED, p.direction);
     if (index < 0 || index >= 20) return;
     
-//    reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
     if (current_map.isState(GAME_SPEED, p.direction)) {
       reader = new TextReader(this, State.SPEECH_PATHS[current_chapter][current_map.state], tr);
-      tr.profileLeft = loadImage(p.SPRITE_PROFILE);
-      if (ChapterNpcs.spriteprofiles[current_chapter][index] != "") 
-        tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
-      battle_index = index;
+      String rightpath = State.SPRITE_PROFILES[current_chapter][current_map.state];
+      if (rightpath != "")
+        tr.profileRight = loadImage(rightpath);
+      else tr.profileRight = null;
+      battle_index = current_map.state;
       mode = GameMode.STORY;
       reader.sendNextLine();
       ++current_map.state;
@@ -155,8 +159,10 @@ class Game {
     extraFade = EXTRA_FADE_LENGTH;
     
     if (battle_index >= 0) {
-      if (ChapterNpcs.afterbattlepaths[current_chapter][battle_index] != "") {
-        reader = new TextReader(this, ChapterNpcs.afterbattlepaths[current_chapter][battle_index], tr);
+      if (State.AFTERBATTLE_TEXTS[current_chapter][battle_index] != "") {
+        reader = new TextReader(this, State.AFTERBATTLE_TEXTS[current_chapter][battle_index], tr);
+//      if (ChapterNpcs.afterbattlepaths[current_chapter][battle_index] != "") {
+//        reader = new TextReader(this, ChapterNpcs.afterbattlepaths[current_chapter][battle_index], tr);
         battle_index = -1;
         mode = GameMode.STORY;
       }
@@ -168,7 +174,7 @@ class Game {
     else mode = GameMode.EXPLORE;
     resetBgm();
   }
-  
+
   void handleExtras() {
     /*
         CHAPTER ENDING FADES AND CODE
@@ -211,10 +217,10 @@ class Game {
     }
   }
   
-  void DEBUGnextChapter() {
+  void DEBUGnextChapter(int ch) {
     if (current_chapter >= CHAPTERS_IMPLEMENTED) return;
     chapter_ending = false;
-    ++current_chapter;
+    current_chapter = ch;
     t = new Transition(this);
     mode = GameMode.TRANSITION;
   }

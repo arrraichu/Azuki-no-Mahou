@@ -1,9 +1,8 @@
-static class ChapterNpcs {
-  static int NUM_CHAPTERS = 1;
-  
+static class ChapterNpcs {  
   static String startscenes[] = {
     "gametexts/c0/1_Opening_Scene.txt",
-    "gametexts/c1/4_Question.txt"
+    "gametexts/c1/4_Question.txt",
+    "gametexts/c2/9_Walking_Alone.txt"
   };
   
   static String spritepaths[][] = {
@@ -13,6 +12,13 @@ static class ChapterNpcs {
       "assets/sprites/enemies/cicada.png",
       "",
       "assets/sprites/enemies/seedcorn.png"
+    }, { // Chapter 2
+      "assets/sprites/enemies/cicada.png",
+      "",
+      "assets/sprites/enemies/seedcorn.png",
+      "",
+      "assets/sprites/enemies/maggot_sprite.png",
+      "assets/sprites/enemies/rabbit-sprite.png"
     }
   };
   
@@ -23,37 +29,19 @@ static class ChapterNpcs {
       9,
       0, // empty
       5
+    }, { // Chapter 2
+      5,
+      0,
+      12,
+      0,
+      5,
+      10
     }
   };
   
-  static String spriteprofiles[][] = {
-    { // Chapter 0
-      "assets/sprites/profiles/cicada_sq.png"
-    }, { // Chapter 1
-      "assets/sprites/profiles/cicada_sq.png",
-      "", // no ants
-      "" // no profile for seedcorns
-    }  
-  };
-  
-//  static String speechpaths[][] = {
-//    { // Chapter 0
-//      "gametexts/c0/2_Meeting_Cadi.txt"
-//    }, { // Chapter 1
-//      "gametexts/c1/7_All Alone.txt", // talking to Cadi
-//      "", // leave empty
-//      "gametexts/c1/5_Problem.txt" // approaching a seedcorn
-//    }
-//  };
-  
-  // the second index correlates to which asset triggered the battle
-  static String afterbattlepaths[][] = {
-    { // Chapter 0
-      "gametexts/c0/3_After_the_Fight.txt" // Cadi
-    }, { // Chapter 1
-      "gametexts/c1/8_New_Enemies.txt", // Cadi
-      "", // no ants in chapter
-      "" // no battle in seedcorn
-    }
+  static String STARTING_RIGHTPROFS[] = {
+    "", // Chapter 0
+    "assets/sprites/profiles/cicada_sq.png", // Chapter 1
+    "" // Chapter 2
   };
 }

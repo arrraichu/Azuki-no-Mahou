@@ -42,6 +42,7 @@ final char U_BUTTON_LEFT = 'a';
 final char U_BUTTON_RIGHT = 'd';
 final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
 final char BUTTON_A = ' ';                   // affirmative button
+static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequent chapters
 
 
 
@@ -111,7 +112,8 @@ void handleKeys() {
       setup();
     }
     
-    if (key == '1' && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter();
+    if (key == '1' && game.current_chapter != 1 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter(1);
+    if (key == '2' && game.current_chapter != 2 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter(2);
     
     if (game.mode == GameMode.EXPLORE) {
       if (key == ' ') game.playerTalk();
@@ -213,3 +215,4 @@ void playSound(int i) {
      othersound.play();
    }
 }
+

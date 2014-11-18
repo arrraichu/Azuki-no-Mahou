@@ -56,11 +56,13 @@ class Map {
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
-    "assets/maps/1.txt"
+    "assets/maps/1.txt",
+    "assets/maps/2.txt"
   };
-  final char PLAYER_STANDING[] = {         // the asset index of what the player is standing on
-    '5',
-    '5'
+  final int PLAYER_STANDING[] = {         // the asset index of what the player is standing on
+    5,
+    5,
+    12
   };
   
 
@@ -103,7 +105,7 @@ class Map {
         if (cur == 'P') {
           starting_x = j * 50;
           starting_y = i * 50;
-          map[i][j] = PLAYER_STANDING[parent.current_chapter];
+          map[i][j] = (char) ('0' + PLAYER_STANDING[parent.current_chapter]);
         }
         
         else if (cur >= ('0'+50)) { // character sprites
@@ -273,54 +275,6 @@ class Map {
     return State.isCoor(parent.current_chapter, state, fy, fx);
   }
   
-//  void checkState(float speed, int direction) {
-//    if (direction < 0 || direction > 3) return;
-//    float point1x = 0, point1y = 0, point2x = 0, point2y = 0;
-//   
-//    if (direction == 2) { // up
-//      point1x = WIDTH/2;
-//      point1y = HEIGHT/2 - speed;
-//      point2x = WIDTH/2 + 50;
-//      point2y = HEIGHT/2 - speed;
-//    } else if (direction == 3) { // down
-//      point1x = WIDTH/2;
-//      point1y = HEIGHT/2 + 50 + speed;
-//      point2x = WIDTH/2 + 50;
-//      point2y = HEIGHT/2 + 50 + speed;
-//    } else if (direction == 0) { // left
-//      point1x = WIDTH/2 - speed;
-//      point1y = HEIGHT/2;
-//      point2x = WIDTH/2 - speed;
-//      point2y = HEIGHT/2 + 50;
-//    } else if (direction == 1) { // right
-//      point1x = WIDTH/2 + 50 + speed;
-//      point1y = HEIGHT/2;
-//      point2x = WIDTH/2 + 50 + speed;
-//      point2y = HEIGHT/2 + 50;
-//    }
-//    
-//    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
-//    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
-//    
-//    float pointfx = 0, pointfy = 0;
-//    
-//    if (coor1 < 0 && coor2 < 0) return;
-//    if (coor1 >= 0 && coor2 >= 0) {
-//      pointfx = (point1x + point2x) / 2;
-//      pointfy = (point1y + point2y) / 2;
-//    }
-//    else {
-//      pointfx = (coor1 >= 0) ? point1x : point2x;
-//      pointfy = (coor1 >= 0) ? point1y : point2y;
-//    }
-//    
-//    int fx = tileOn(true, pointfx);
-//    int fy = tileOn(false, pointfy);
-//    
-//    if (State.isCoor(parent.current_chapter, state, fy, fx)) ++state;
-//    
-//  }
-  
   void move(float x, float y) {
     if (x == 0 && y == 0) return;
     if (x != 0 && y != 0) return;
@@ -357,7 +311,7 @@ class Map {
   
   private boolean walkAllowed(int index) {
     if (index <= 0) return false;
-    if (index >= 13 && index <= 25) return false;
+    if (index >= 13 && index <= 26) return false;
     if (index > NUM_TILES) return false;
     return true;
   }

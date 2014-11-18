@@ -12,11 +12,14 @@ public class Transition {
   /* CONSTANTS */
   final String CHAPTER = "Chapter ";
   final String CHAPTER_TITLES[] = {
-    "Introduction"
+    "{ Introduction }",
+    "{ Into the World }",
+    "{ Don't Anger the Rabbit }"
   };
   final int FADE_LENGTH = 75;
   final float TITLE_X = width*0.5;
   final float TITLE_Y = height*0.5;
+  final int NEWLINE_DISPARITY = 35;
   
   
   /*
@@ -41,10 +44,12 @@ public class Transition {
         if (--fade_counter > 0) {
           float pctg = 255f * ((float) (FADE_LENGTH - fade_counter)/FADE_LENGTH);
           fill(pctg);
-          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y);
+          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
+          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {
           fill(255);
-          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y);
+          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
+          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
           fade_counter = FADE_LENGTH;
           fadeIn = false;
         }
@@ -52,7 +57,8 @@ public class Transition {
         if (--fade_counter > 0) {
           float pctg = 255f * ((float) fade_counter/FADE_LENGTH);
           fill(pctg);
-          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y);
+          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
+          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {
           done = true;
         }
@@ -60,7 +66,8 @@ public class Transition {
       textSize(22);
     } else {
       fill(255);
-      text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y);
+      text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
+      text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
       textSize(22);
     }
   }

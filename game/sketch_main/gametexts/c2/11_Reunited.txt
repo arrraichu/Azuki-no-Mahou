@@ -1,0 +1,17 @@
+Cadi: Bout time you got here. Thought you got eaten or something.
+Well, ya know had a little bit of trouble just fighting may way through insects that wanna eat me. Nothing to worry about though.
+Cadi: Well good. I thought you were gonna complain about it or something.
+<ellipses>
+...
+So how did you get here so fast anyway?
+Cadi: Oh, well I remembered I could fly.
+<exclamation>
+You...how does someone forget that?
+Cadi: Forget what?
+That you can fly.
+Cadi: I can fly!?
+<ellipses>
+....
+I really hope this Worm guy is actually real...
+[Objective: Keep heading north.]
+<off>

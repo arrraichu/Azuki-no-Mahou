@@ -1,0 +1,8 @@
+Cadi: Yea, I think we should be close. Just gotta get past that big white rock.
+<question>
+Rock?
+Cadi: Yea, that big furry one over there.
+Rocks...rocks do not have fur.
+Cadi: Oh...the hell is that thing then?
+Guess, we'll find out.
+<off>
