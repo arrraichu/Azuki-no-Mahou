@@ -14,6 +14,7 @@ class Map {
   /* CONTROL VARIABLES */
   int talk_counter;                        // time counter to flicker talk indication animation
   int talk_index;                          // the index of the talk animation sprite
+  int state = 0;
   
   /* CONSTANTS */
   final float MOVE_MAGNITUDE = 50f;        // the movement speed of the map
@@ -129,6 +130,7 @@ class Map {
       RUN & DISPLAY LOOP
   */
   void displayMap() {
+    int talkx = -1, talky = -1;
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < columns; ++j) {
         int x = center_x + j*50 - starting_x;
@@ -143,7 +145,11 @@ class Map {
         if (c_index >= 50 && extras[c_index-50] != null) { // characters
           image(tiles[ChapterNpcs.spritebottoms[parent.current_chapter][c_index-50]], x, y, 50, 50); // standing on
           image(extras[c_index-50], x, y, 50, 50); // the character
-          image(talk_notices[talk_index], x+40, y-30, 40, 40); // talkable
+          
+          // register the index for the talk notice
+          if (state >= 0 && state < State.NUM_STATES[parent.current_chapter] && State.isCoor(parent.current_chapter, state, i, j)) {
+            talkx = x; talky = y;
+          }
           continue;
         }
         if (c_index > NUM_TILES) continue;
@@ -151,7 +157,10 @@ class Map {
       }
     }
     
-    if (parent.mode == GameMode.BATTLE) flickerTalk();
+    if (parent.mode == GameMode.EXPLORE && talkx >= 0 && talky >= 0) 
+      image(talk_notices[talk_index], talkx+40, talky-30, 40, 40);
+    
+    if (parent.mode == GameMode.EXPLORE) flickerTalk();
   }
   
   boolean tileWithinBounds(int x, int y) {
@@ -216,6 +225,101 @@ class Map {
     return coor2;
    
   }
+  
+  boolean isState(float speed, int direction) {
+    if (direction < 0 || direction > 3) return false;
+    float point1x = 0, point1y = 0, point2x = 0, point2y = 0;
+   
+    if (direction == 2) { // up
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 - speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 - speed;
+    } else if (direction == 3) { // down
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 + 50 + speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 + 50 + speed;
+    } else if (direction == 0) { // left
+      point1x = WIDTH/2 - speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 - speed;
+      point2y = HEIGHT/2 + 50;
+    } else if (direction == 1) { // right
+      point1x = WIDTH/2 + 50 + speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 + 50 + speed;
+      point2y = HEIGHT/2 + 50;
+    }
+    
+    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
+    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
+    
+    float pointfx = 0, pointfy = 0;
+    
+    if (coor1 < 0 && coor2 < 0) return false;
+    if (coor1 >= 0 && coor2 >= 0) {
+      pointfx = (point1x + point2x) / 2;
+      pointfy = (point1y + point2y) / 2;
+    }
+    else {
+      pointfx = (coor1 >= 0) ? point1x : point2x;
+      pointfy = (coor1 >= 0) ? point1y : point2y;
+    }
+    
+    int fx = tileOn(true, pointfx);
+    int fy = tileOn(false, pointfy);
+    
+    return State.isCoor(parent.current_chapter, state, fy, fx);
+  }
+  
+//  void checkState(float speed, int direction) {
+//    if (direction < 0 || direction > 3) return;
+//    float point1x = 0, point1y = 0, point2x = 0, point2y = 0;
+//   
+//    if (direction == 2) { // up
+//      point1x = WIDTH/2;
+//      point1y = HEIGHT/2 - speed;
+//      point2x = WIDTH/2 + 50;
+//      point2y = HEIGHT/2 - speed;
+//    } else if (direction == 3) { // down
+//      point1x = WIDTH/2;
+//      point1y = HEIGHT/2 + 50 + speed;
+//      point2x = WIDTH/2 + 50;
+//      point2y = HEIGHT/2 + 50 + speed;
+//    } else if (direction == 0) { // left
+//      point1x = WIDTH/2 - speed;
+//      point1y = HEIGHT/2;
+//      point2x = WIDTH/2 - speed;
+//      point2y = HEIGHT/2 + 50;
+//    } else if (direction == 1) { // right
+//      point1x = WIDTH/2 + 50 + speed;
+//      point1y = HEIGHT/2;
+//      point2x = WIDTH/2 + 50 + speed;
+//      point2y = HEIGHT/2 + 50;
+//    }
+//    
+//    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
+//    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
+//    
+//    float pointfx = 0, pointfy = 0;
+//    
+//    if (coor1 < 0 && coor2 < 0) return;
+//    if (coor1 >= 0 && coor2 >= 0) {
+//      pointfx = (point1x + point2x) / 2;
+//      pointfy = (point1y + point2y) / 2;
+//    }
+//    else {
+//      pointfx = (coor1 >= 0) ? point1x : point2x;
+//      pointfy = (coor1 >= 0) ? point1y : point2y;
+//    }
+//    
+//    int fx = tileOn(true, pointfx);
+//    int fy = tileOn(false, pointfy);
+//    
+//    if (State.isCoor(parent.current_chapter, state, fy, fx)) ++state;
+//    
+//  }
   
   void move(float x, float y) {
     if (x == 0 && y == 0) return;
@@ -299,6 +403,14 @@ class Map {
     int row = floor((y + starting_y - center_y) / 50f);
     
     return map[row][column];
+  }
+  
+  int tileOn(boolean isX, float num) {
+    if (isX) {
+      return floor((num + starting_x - center_x) / 50f);
+    } else {
+      return floor((num + starting_y - center_y) / 50f);
+    }
   }
   
   

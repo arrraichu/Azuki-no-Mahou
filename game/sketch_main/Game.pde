@@ -46,7 +46,7 @@ class Game {
     
     // reader initialized in run function
     
-    battle = new Battle(this);
+    // battle object initialized in initial control of run function
     
     // map initialized in intialize control of run function
     
@@ -92,6 +92,7 @@ class Game {
     if (!initialize) {
        current_map = new Map(this, 100, 100, WIDTH/2, HEIGHT/2);
        reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
+       battle = new Battle(this);
        extraFade = EXTRA_FADE_LENGTH;
        initialize = true;
     }
@@ -137,13 +138,17 @@ class Game {
     int index = current_map.character_contact(GAME_SPEED, p.direction);
     if (index < 0 || index >= 20) return;
     
-    reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
-    tr.profileLeft = loadImage(p.SPRITE_PROFILE);
-    if (ChapterNpcs.spriteprofiles[current_chapter][index] != "") 
-      tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
-    battle_index = index;
-    mode = GameMode.STORY;
-    reader.sendNextLine();
+//    reader = new TextReader(this, ChapterNpcs.speechpaths[current_chapter][index], tr);
+    if (current_map.isState(GAME_SPEED, p.direction)) {
+      reader = new TextReader(this, State.SPEECH_PATHS[current_chapter][current_map.state], tr);
+      tr.profileLeft = loadImage(p.SPRITE_PROFILE);
+      if (ChapterNpcs.spriteprofiles[current_chapter][index] != "") 
+        tr.profileRight = loadImage(ChapterNpcs.spriteprofiles[current_chapter][index]);
+      battle_index = index;
+      mode = GameMode.STORY;
+      reader.sendNextLine();
+      ++current_map.state;
+    }
   }
   
   void finishBattle() {
@@ -204,5 +209,13 @@ class Game {
     } else if (command.equals("ellipses")) {
       p.setEmote(3, true);
     }
+  }
+  
+  void DEBUGnextChapter() {
+    if (current_chapter >= CHAPTERS_IMPLEMENTED) return;
+    chapter_ending = false;
+    ++current_chapter;
+    t = new Transition(this);
+    mode = GameMode.TRANSITION;
   }
 }

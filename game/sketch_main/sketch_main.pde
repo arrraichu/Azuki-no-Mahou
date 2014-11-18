@@ -111,6 +111,8 @@ void handleKeys() {
       setup();
     }
     
+    if (key == '1' && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter();
+    
     if (game.mode == GameMode.EXPLORE) {
       if (key == ' ') game.playerTalk();
       

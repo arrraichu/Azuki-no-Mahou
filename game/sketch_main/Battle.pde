@@ -10,6 +10,10 @@ class Battle {
   /* CONSTANTS */
   final String ASSET_FOREGROUND = "assets/backgrounds/battlefg.png";    // asset path for battle foreground
 
+
+  /*
+      INTIALIZE ALL MEMBERS
+  */
   Battle(Game g) {
     battle_text = new BattleText(g, width*0.01, height*0.6, width*0.23, height*0.39);
     battle_text.setTextStart(width*0.03, height*0.66);
@@ -20,6 +24,11 @@ class Battle {
     foreground = loadImage(ASSET_FOREGROUND);
   }
  
+  
+  
+  /*
+      RUN & DISPLAY LOOP
+  */ 
   void display() {
     image(foreground, 0, 0, WIDTH, HEIGHT);
     battle_text.display();

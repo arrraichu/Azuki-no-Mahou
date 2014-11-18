@@ -1,28 +1,16 @@
 Cadi: Of all the stupid things!
-
 <question>
 What happened?
-
 Cadi: Ugh! This soil is bad.
-
 What do you mean?
-
 Cadi: The soil up ahead is wet so, trying to move through it is impossible for me. Gonna have to go through there by yourself.
-
 Oh, well hopefully I can manage. What are you gonna do?
-
 Cadi: Gonna try and go around. You just uh...be careful in there.
-
 <question>
 Why? Is there something in there other than ants?
-
 Cadi: Just be careful if you see anymore seedcorn.
-
 <question>
-Why seed corn?
-
+Why seedcorn?
 Cadi: Well, aside from what might come out of them. Sometimes they attract...
-
 Cadi: More ants...
-
 <fight>
