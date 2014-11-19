@@ -9,6 +9,7 @@ public class Transition {
   boolean fadeIn = true;
   boolean done = false;
   int fade_counter;
+  int current_chapter = -1;
   
   /* CONSTANTS */
   final String CHAPTER = "Chapter ";
@@ -21,7 +22,11 @@ public class Transition {
   final float TITLE_X = width*0.5;
   final float TITLE_Y = height*0.5;
   final int NEWLINE_DISPARITY = 35;
-  final String ASSET_BACKGROUND = "assets/backgrounds/foresttactile.png";
+  final String ASSET_BACKGROUND[] = {
+    "assets/backgrounds/foresttactile.png",
+    "assets/backgrounds/transition_1.png",
+    "assets/backgrounds/foresttactile.png"
+  };
   
   
   /*
@@ -31,7 +36,6 @@ public class Transition {
     parent = g;
     chapterText = CHAPTER + " " + parent.current_chapter;
     fade_counter = FADE_LENGTH;
-    bg = loadImage(ASSET_BACKGROUND);
   }
   
   
@@ -39,6 +43,10 @@ public class Transition {
       RUN & DISPLAY LOOP
   */
   void display() {
+    if (bg == null || current_chapter != parent.current_chapter) {
+      current_chapter = parent.current_chapter;
+      bg = loadImage(ASSET_BACKGROUND[current_chapter]);
+    }
     image(bg, 0, 0, width, height);
     textSize(36);
     
