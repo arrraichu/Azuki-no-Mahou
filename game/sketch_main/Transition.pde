@@ -25,7 +25,7 @@ public class Transition {
   final String ASSET_BACKGROUND[] = {
     "assets/backgrounds/transition_0.png",
     "assets/backgrounds/transition_1.png",
-    "assets/backgrounds/foresttactile.png"
+    "assets/backgrounds/transition_2.png"
   };
   
   
