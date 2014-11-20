@@ -17,7 +17,7 @@ static class ChapterNpcs {
       "",
       "assets/sprites/enemies/seedcorn.png",
       "",
-      "assets/sprites/enemies/maggot_sprite.png",
+      "assets/sprites/enemies/worm.png",
       "assets/sprites/enemies/rabbit-sprite.png"
     }
   };
