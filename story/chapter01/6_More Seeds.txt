@@ -1,14 +1,8 @@
 Another seed. I wonder what else is out there.
-
 ??: DAMMIT! NO! NO!
-
 <exclamation>
 Cadi?
-
 Cadi: THIS IS SO STUPID!
-
-Crap. Gotta find him.
-
-[Objective: Find Cadi.]
-
+I swear, if that idiot attracted more ants...
+[Objective: Keep Following the path til you find Cadi.]
 <off>

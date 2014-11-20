@@ -1,55 +1,31 @@
-<surprise>
-
+<exclamation>
 That...was one...angry...rabbit...
-
 Cadi: Man, I wish other people were here. Coulda sold tickets for this stuff.
-
 I still...can't believe that...worm didn't wake up.
-
 Cadi: Told you he was a heavy sleeper.
-
-Yea, but this is ridiclous.
-
+Yea, but this is ridiculous.
 Cadi: Well, at least we don't have to worry about waking him up then.
-
 Old Worm: HUH!? WHO GOES THERE!?
-
-<surprise>
-
+<exclamation>
 Guess, that did it.
-
 Cadi: Hey old man!
-
 Old Worm: Huh? Oh, Cadi. What brings you over here.
-
 Cadi: Found a bean. 
-
 Old worm: Oh...a bean? How ni-did you say bean?
-
 Hi...
-
 Old worm: Well, look at you. Been, a while since a beans been anywhere near here.
-
 So, I hear.
-
 Old worm: So, I guess you have some questions?
-
 A lot actually.
-
 Old worm: Well, let me just close my eyes for a second, to remember everything.
-
 ...
-
-...
-
-...
-
-Did he go back to sleep?
-
-Cadi: Yep.
-
+Cadi: ...
 <ellipses>
-
+...
+Cadi: ...
+Did he go back to sleep?
+Cadi: Yep.
+<ellipses>
 Of course he did...
-
+<chapterend>
 <chapterend>

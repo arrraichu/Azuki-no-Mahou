@@ -1,27 +1,14 @@
 Cadi: So...
-
-So...
-
+So?
 Cadi: Mind if I ask you a question?
-
 Sure.
-
 Cadi: What is it like?
-
 What is what like?
-
 Cadi: Being a bean.
-
-<ellipses>
 I miss my arms...
-
 Cadi: Arms? What are those?
-
 <ellipses>
 ....
-
 So, we keep going this way, right?
-
-[Objective: Keep heading towards the worm.]
-
+[Objective: Head North and try to reach the worm.]
 <off>

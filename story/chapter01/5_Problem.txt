@@ -1,21 +1,12 @@
 What is this?
-
 Cadi: What is what?
-
-Looks like some kind of seed on the ground. Looks beige. Kind of looks like a chickpea.
-
-Cadi: Oh. That would be a seedcorn.
-
-Well, it looks like whatever was inside popped out of it. Looks like something came out of it.
-
+Looks like some kind of seed on the ground. Looks beige. Kinda chickpea.
+Cadi: Oh. That would be a seed corn.
+Well, it looks like whatever was inside popped out of it. The side of it has a huge hole in it and the insides are gone.
 Cadi: Oh...that might be a problem.
-
 <question>
 Why?
-
 Cadi: Nothing to worry about. Probably nothing. Let me go try and scout a little bit ahead.
-
 <question>
 Okay...
-
 <off>

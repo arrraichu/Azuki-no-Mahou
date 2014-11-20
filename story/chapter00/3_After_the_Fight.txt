@@ -1,29 +1,28 @@
 Cicada: Wait...you beat them?
 Cicada: I mean...see! I told you that you could do it.
 How...how did I do any of that?
-Cicada: I wish I could tell you mister. You might be the first bean to be seen in the planes in quite some time.
+Cicada: I wish I could tell you mister. You might be the first bean here in quite some time.
 Huh? What do you mean?
-Cicada: Well mister, in this land beans are a rarity, because of how delicious they were. They might actually be extinct.
-<surprise>
+Cicada: Well mister, in this land beans are a rarity because of how delicious they were. They might actually be extinct.
+<exclamation>
 Extinct?
 Cicada: Yep. But, most people would rather use their stomach than their head. So, lots of people will be trying to eat you.
 <ellipses>
 This day just gets better and better. First, I get amnesia and now everyone wants to take a bite out of me.
 Cicada: Well, not everyone. Some people might be friendly.
 Like who?
-Cicada: First person that comes to mind old man worm. He lives just north from where we are. Smartest guy I know too.
+Cicada: First person that comes to mind is old man worm. He lives just north from where we are. Smartest guy I know too.
 An old worm?
 Cicada: Yep! He knows just about everything about anything. He can probably tell you why you changed into a bean or if you just lost it.
-Well, what choice do I have? Got a name?
-Cicada: Cadi. Cadi the Cicada.
-Alright then, Cadi. Lead the way.
 Cadi: Awesome! He would probably be just digging in the dirt looking for something to eat right about now. And, his diet is bean free...I think.
 <exclamation>
 You think!?
 Cadi: Well, unlike the old man, knowing everything about anything is not one of my skills. Besides, you got any better ideas?
-I suppose not...
+I suppose not. Got a name?
+Cicada: Cadi. Cadi the Cicada.
+Well then, Cadi. Lead the way.
 Cadi: Exactly! Just head north from here and you should see him soon enough.
-<surprise>
+<exclamation>
 Wait, are you staying here?
 Cadi: Well, cicadas usually dig instead of walk, so you would not see me if I was near you. Besides, now that you beat all those ants it might be safe to dig for some food.
 <ellipses>
