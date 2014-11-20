@@ -79,6 +79,10 @@ void draw() {
   handleKeys();
   
   if (starting_state) {
+    if (bgm == null || !bgm.isPlaying()) {
+      bgm = minim.loadFile("assets/sounds/titlemusic.mp3");
+      bgm.play();
+    }
     title.run();
     return;
   }
@@ -108,6 +112,8 @@ void handleKeys() {
     
     if (starting_state && title.ready && key == ' ') {
       starting_state = false;
+      bgm.close();
+      bgm = null;
       return;
     }
     

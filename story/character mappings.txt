@@ -39,8 +39,8 @@ P - tile # 32: E wet dirt (ASSET DONE) (CODED)
 Q - tile # 33: SW wet dirt (ASSET DONE) (CODED)
 R - tile # 34: S wet dirt (ASSET DONE) (CODED)
 S - tile # 35: SE wet dirt (ASSET DONE) (CODED)
-T - tile # 36: 
-U - tile # 37: 
+T - tile # 36: wetbush (ASSET DONE) (CODED)
+U - tile # 37: wetstep (ASSET DONE) (CODED)
 V - tile # 38: 
 W - tile # 39: 
 

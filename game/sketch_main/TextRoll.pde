@@ -132,7 +132,7 @@ class TextRoll {
     // if wrap index was recorded, then the text needs to split into two lines
     if (wrap_index >= 0) {
       text(inputBuffer.substring(0, wrap_index), text_startx, text_starty);
-      text(inputBuffer.substring(wrap_index), text_startx, text_starty+nextline_disp);
+      text(inputBuffer.substring(wrap_index+1), text_startx, text_starty+nextline_disp);
     }
     // everything fits into one line 
     else {
