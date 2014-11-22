@@ -161,8 +161,6 @@ class Game {
     if (battle_index >= 0) {
       if (State.AFTERBATTLE_TEXTS[current_chapter][battle_index] != "") {
         reader = new TextReader(this, State.AFTERBATTLE_TEXTS[current_chapter][battle_index], tr);
-//      if (ChapterNpcs.afterbattlepaths[current_chapter][battle_index] != "") {
-//        reader = new TextReader(this, ChapterNpcs.afterbattlepaths[current_chapter][battle_index], tr);
         battle_index = -1;
         mode = GameMode.STORY;
       }
