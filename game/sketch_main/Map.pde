@@ -25,6 +25,8 @@ class Map {
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
   final int NUM_EXTRAS = 20;               // number of npc charcters and the like
   final int NUM_TILES = 37;                // number of tiles
+  final int TILES_RANGE = 80;
+  final char STARTING_CHAR = '"';
   final String TILE_PATHS[] = { // asset paths for npcs
     "assets/tiles/rock.png",        
     "assets/tiles/dirt_01.png",
@@ -63,7 +65,40 @@ class Map {
     "assets/tiles/wetdirt_08.png",
     "assets/tiles/wetdirt_09.png",
     "assets/tiles/wetbush.png",
-    "assets/tiles/wetstep.png"
+    "assets/tiles/wetstep.png",
+    "assets/tiles/anthole_01.png",
+    "assets/tiles/anthole_02.png",
+    "assets/tiles/grasselevated_BL.png",
+    "assets/tiles/grasselevated_BR.png",
+    "assets/tiles/grasselevated_L1.png",
+    "assets/tiles/grasselevated_L2.png",
+    "assets/tiles/grasselevated_R1.png",
+    "assets/tiles/grasselevated_R2.png",
+    "assets/tiles/grasselevated_T.png",
+    "assets/tiles/grasselevated_TL.png",
+    "assets/tiles/grasselevated_TR.png",
+    "assets/tiles/grasselevated_WallBL.png",
+    "assets/tiles/grasselevated_WallBM.png",
+    "assets/tiles/grasselevated_WallBR.png",
+    "assets/tiles/grasselevated_path.png",
+    "assets/tiles/grassstep.png",
+    "assets/tiles/wetpuddle_hozi_01.png",
+    "assets/tiles/wetpuddle_hozi_02.png",
+    "assets/tiles/wetpuddle_hozi_04.png",
+    "assets/tiles/wetpuddle_hozi_05.png",
+    "assets/tiles/wetpuddle_vert_01.png",
+    "assets/tiles/wetpuddle_vert_02.png",
+    "assets/tiles/wetpuddle_vert_04.png",
+    "assets/tiles/wetpuddle_vert_05.png",
+    "assets/tiles/wetshallow_01.png",
+    "assets/tiles/wetshallow_02.png",
+    "assets/tiles/wetshallow_03.png",
+    "assets/tiles/wetshallow_04.png",
+    "assets/tiles/wetshallow_05.png",
+    "assets/tiles/wetshallow_06.png",
+    "assets/tiles/wetshallow_07.png",
+    "assets/tiles/wetshallow_08.png",
+    "assets/tiles/wetshallow_09.png"
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
@@ -113,14 +148,14 @@ class Map {
         map[i][j] = line.charAt(j);
         
         char cur = line.charAt(j);
-        if (cur == '*') {
+        if (cur == '!') {
           starting_x = j * 50;
           starting_y = i * 50;
-          map[i][j] = (char) ('0' + PLAYER_STANDING[parent.current_chapter]);
+          map[i][j] = (char) (STARTING_CHAR + PLAYER_STANDING[parent.current_chapter]);
         }
         
-        else if (cur >= ('0'+50)) { // character sprites
-          int index = cur - '0' - 50;
+        else if (cur >= (STARTING_CHAR+TILES_RANGE)) { // character sprites
+          int index = cur - STARTING_CHAR - TILES_RANGE;
           extras[index] = loadImage(ChapterNpcs.spritepaths[parent.current_chapter][index]);
         }
       }
@@ -152,12 +187,12 @@ class Map {
         if (!tileWithinBounds(x, y)) continue;
         
         char c = map[i][j];
-        int c_index = (int) c - '0';
+        int c_index = (int) c - STARTING_CHAR;
         
         if (c_index < 0) continue;
-        if (c_index >= 50 && extras[c_index-50] != null) { // characters
-          image(tiles[ChapterNpcs.spritebottoms[parent.current_chapter][c_index-50]], x, y, 50, 50); // standing on
-          image(extras[c_index-50], x, y, 50, 50); // the character
+        if (c_index >= TILES_RANGE && extras[c_index-TILES_RANGE] != null) { // characters
+          image(tiles[ChapterNpcs.spritebottoms[parent.current_chapter][c_index-TILES_RANGE]], x, y, 50, 50); // standing on
+          image(extras[c_index-TILES_RANGE], x, y, 50, 50); // the character
           
           // register the index for the talk notice
           if (state >= 0 && state < State.NUM_STATES[parent.current_chapter] && State.isCoor(parent.current_chapter, state, i, j)) {
@@ -222,14 +257,14 @@ class Map {
       point2y = HEIGHT/2 + 50;
     }
     
-    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
-    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
+    int coor1 = coordinateOn(point1x, point1y) - STARTING_CHAR - TILES_RANGE;
+    int coor2 = coordinateOn(point2x, point2y) - STARTING_CHAR - TILES_RANGE;
     
     if (coor1 < 0 && coor2 < 0) return -1;
     if (coor1 >= 0 && coor2 >= 0) {
       float point3x = (point1x + point2x) / 2;
       float point3y = (point1y + point2y) / 2;
-      int coor3 = coordinateOn(point3x, point3y) - '0' - 50;
+      int coor3 = coordinateOn(point3x, point3y) - STARTING_CHAR - TILES_RANGE;
       return coor3;
     }
     if (coor1 >= 0) {
@@ -265,8 +300,8 @@ class Map {
       point2y = HEIGHT/2 + 50;
     }
     
-    int coor1 = coordinateOn(point1x, point1y) - '0' - 50;
-    int coor2 = coordinateOn(point2x, point2y) - '0' - 50;
+    int coor1 = coordinateOn(point1x, point1y) - STARTING_CHAR - TILES_RANGE;
+    int coor2 = coordinateOn(point2x, point2y) - STARTING_CHAR - TILES_RANGE;
     
     float pointfx = 0, pointfy = 0;
     
@@ -309,8 +344,8 @@ class Map {
       test2_y += 49f;
     }
     
-    int test_char = coordinateOn(test_x, test_y) - '0';
-    int test2_char = coordinateOn(test2_x, test2_y) - '0';
+    int test_char = coordinateOn(test_x, test_y) - STARTING_CHAR;
+    int test2_char = coordinateOn(test2_x, test2_y) - STARTING_CHAR;
     if (walkAllowed(test_char) && walkAllowed(test2_char)) {
       starting_x -= x * MOVE_MAGNITUDE;
       starting_y -= y * MOVE_MAGNITUDE;
@@ -352,8 +387,8 @@ class Map {
       test2_y += 49f;
     }
     
-    int test_char = coordinateOn(test_x, test_y) - '0';
-    int test2_char = coordinateOn(test2_x, test2_y) - '0';
+    int test_char = coordinateOn(test_x, test_y) - STARTING_CHAR;
+    int test2_char = coordinateOn(test2_x, test2_y) - STARTING_CHAR;
     if (walkAllowed(test_char) && walkAllowed(test2_char)) {
       starting_x -= x * magnitude;
       starting_y -= y * magnitude;
