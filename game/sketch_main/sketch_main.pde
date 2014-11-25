@@ -54,6 +54,8 @@ static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequ
 void setup() {
   size(WIDTH, HEIGHT);
   
+
+  
   // control variables reinitialized for when game is repeated
   starting_state = true;
   gameover_state = false;
