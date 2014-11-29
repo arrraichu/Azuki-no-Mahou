@@ -3,15 +3,15 @@ NOTE: All characters are VERY CASE SENSITIVE!!!
 Use the following characters for only:
 
 ! - where the player begins
-" - tile # 1: rock (ASSET DONE) (CODED)
-# - tile # 2: NW dirt (ASSET DONE) (CODED)
-$ - tile # 3: N dirt (ASSET DONE) (CODED)
-% - tile # 4: NE dirt (ASSET DONE) (CODED)
-& - tile # 5: W dirt (ASSET DONE) (CODED)
-' - tile # 6: Center dirt (ASSET DONE) (CODED)
-( - tile # 7: E dirt (ASSET DONE) (CODED)
-) - tile # 8: SW dirt (ASSET DONE) (CODED)
-* - tile # 9: S dirt (ASSET DONE) (CODED)
+" - tile # 01: rock (ASSET DONE) (CODED)
+# - tile # 02: NW dirt (ASSET DONE) (CODED)
+$ - tile # 03: N dirt (ASSET DONE) (CODED)
+% - tile # 04: NE dirt (ASSET DONE) (CODED)
+& - tile # 05: W dirt (ASSET DONE) (CODED)
+' - tile # 06: Center dirt (ASSET DONE) (CODED)
+( - tile # 07: E dirt (ASSET DONE) (CODED)
+) - tile # 08: SW dirt (ASSET DONE) (CODED)
+* - tile # 09: S dirt (ASSET DONE) (CODED)
 + - tile # 10: SE dirt (ASSET DONE) (CODED)
 , - tile # 11: grass tile (ASSET DONE) (CODED)
 - - tile # 12: sign post (ASSET DONE) (CODED)
@@ -86,15 +86,15 @@ q - tile # 80:
 
 Use the following characters for characters:
 
-r - character # 1 : cicada (ASSET DONE) (CODED)
-s - character # 2 : ant (ASSET DONE) (CODED)
-t - character # 3 : seedcorn (ASSET DONE) (CODED)
-u - character # 4 : maggots (ASSET DONE) (CODED)
-v - character # 5 : worm (ASSET DONE) (CODED)
-w - character # 6 : rabbit (ASSET DONE) (CODED)
-x - character # 7 : 
-y - character # 8 : 
-z - character # 9 : 
+r - character # 01 : cicada (ASSET DONE) (CODED)
+s - character # 02 : ant (ASSET DONE) (CODED)
+t - character # 03 : seedcorn (ASSET DONE) (CODED)
+u - character # 04 : maggots (ASSET DONE) (CODED)
+v - character # 05 : worm (ASSET DONE) (CODED)
+w - character # 06 : rabbit (ASSET DONE) (CODED)
+x - character # 07 : 
+y - character # 08 : 
+z - character # 09 : 
 { - character # 10 : 
 | - character # 11 : 
 } - character # 12 : 

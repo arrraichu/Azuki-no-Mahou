@@ -123,8 +123,14 @@ void handleKeys() {
       setup();
     }
     
-    if (key == '1' && game.current_chapter != 1 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter(1);
-    if (key == '2' && game.current_chapter != 2 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) game.DEBUGnextChapter(2);
+    if (key == '1' && game.current_chapter != 1 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) {
+      game.DEBUGnextChapter(1);
+      resetBgm();
+    }
+    if (key == '2' && game.current_chapter != 2 && game.mode != GameMode.TRANSITION && game.mode != GameMode.LIMBO) {
+      game.DEBUGnextChapter(2);
+      resetBgm();
+    }
     
     if (game.mode == GameMode.EXPLORE) {
       if (key == ' ') game.playerTalk();
@@ -214,7 +220,9 @@ void resetBgm() {
   } else if (game.mode == GameMode.BATTLE) {
     bgm = minim.loadFile("assets/sounds/battle_music.mp3");
   } else {
-    bgm = minim.loadFile("assets/sounds/overworld.mp3");
+    if (game.current_chapter == 2) {
+      bgm = minim.loadFile("assets/sounds/Mystery_Forest.mp3");
+    } else bgm = minim.loadFile("assets/sounds/overworld.mp3");
   }
   bgm.play();
 }
