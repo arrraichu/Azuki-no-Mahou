@@ -8,7 +8,7 @@ Cicada - grass
 Chapter 1:
 
 Player - Center Dirt
-Cicada(1) - SE Dirt
+Cicada(1) - Center Dirt
 Seedcorn(1) - Center Dirt
 Cicada(2) - Grass
 Seedcorn(2-4) -Wet Grass
@@ -21,6 +21,6 @@ Player - Wet Grass
 Seedcorn (All) - Wet Grass
 Cicada(1) - Dirt
 Rabbit - Grass
-Cicada(2) - Grass
+Cicada(2) - Dirt
 Cicada(3) - Dirt
 Worm - Dirt
