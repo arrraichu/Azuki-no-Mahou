@@ -222,6 +222,8 @@ void resetBgm() {
   } else {
     if (game.current_chapter == 2) {
       bgm = minim.loadFile("assets/sounds/Mystery_Forest.mp3");
+    } else if (game.current_chapter == 1) {
+      bgm = minim.loadFile("assets/sounds/overworld4.0.mp3");
     } else bgm = minim.loadFile("assets/sounds/overworld.mp3");
   }
   bgm.play();

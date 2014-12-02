@@ -92,7 +92,7 @@ class Game {
     
     // Fade ins before the chapter starts
     if (!initialize) {
-       current_map = new Map(this, 100, 100, WIDTH/2, HEIGHT/2);
+       current_map = new Map(this, 100, 100, WIDTH/2, HEIGHT/2); // change to 200 here
        if (ChapterNpcs.STARTING_RIGHTPROFS[current_chapter] != "")
          tr.profileRight = loadImage(ChapterNpcs.STARTING_RIGHTPROFS[current_chapter]);
        reader = new TextReader(this, ChapterNpcs.startscenes[current_chapter], tr);
