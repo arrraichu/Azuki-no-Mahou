@@ -71,12 +71,12 @@ b - tile # 65: wet shallow 07 (ASSET DONE) (CODED)
 c - tile # 66: wet shallow 08 (ASSET DONE) (CODED)
 d - tile # 67: wet shallow 09 (ASSET DONE) (CODED)
 e - tile # 68: cave steps (ASSET DONE) (CODED)
-f - tile # 69: cave steps loop
-g - tile # 70: cave floor hole
-h - tile # 71: cave rock
-i - tile # 72: cave dirt
-j - tile # 73: ladder
-k - tile # 74: broken sign post
+f - tile # 69: cave steps loop (ASSET DONE) (CODED)
+g - tile # 70: cave floor hole (ASSET DONE) (CODED)
+h - tile # 71: cave rock (ASSET DONE) (CODED)
+i - tile # 72: cave dirt (ASSET DONE) (CODED)
+j - tile # 73: ladder (ASSET DONE) (CODED)
+k - tile # 74: broken sign post (ASSET DONE) (CODED)
 l - tile # 75: 
 m - tile # 76: 
 n - tile # 77: 
