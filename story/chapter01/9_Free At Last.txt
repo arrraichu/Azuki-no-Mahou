@@ -1,7 +1,12 @@
-Cadi: Of all the stupid things!
+Well, no way I will ever doing that again.
+Cadi: Glad you could join us. How was the tunnel?
+Terrifying and full of things that would love nothing better then to rip me limb from limb and swallow me whole. So, not that bad really.
+Cadi: Well, glad you had fun.
+So, what did I miss?
+Cadi: Well, we got another problem.
+Is there an army of groundhogs or something?
+Cadi: Actually it would be more of a personal problem. No way I can go through this grass.
 <question>
-What happened?
-Cadi: Ugh! This soil is bad.
 What do you mean?
 Cadi: The soil up ahead is wet so, trying to move through it is impossible for me. Gonna have to go through there by yourself.
 Oh, well hopefully I can manage. What are you gonna do?

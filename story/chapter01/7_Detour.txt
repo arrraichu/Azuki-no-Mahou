@@ -1,0 +1,18 @@
+Cadi: Of all the stupid things!
+<question>
+What happened?
+Cadi: Rocks in the way. Dunno if I can move em.
+Can we go around them?
+Cadi: I can dig around them, but no way I can make a hole big enough for you.
+<exclamation>
+Am I really that big?
+Cadi: Um...yea I think so.
+<ellipses>
+...
+Cadi: Hey, why not try that hole over there.
+But...ants use that.
+Cadi: And?
+That...seems like a bad idea.
+Cadi: You got a better idea?
+<ellipses>
+...So, I just climb down it?
