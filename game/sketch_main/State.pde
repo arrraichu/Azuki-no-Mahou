@@ -16,7 +16,7 @@ static class State {
       {62, 44}, {56, 72}, {31, 50}
     },
     { // Chapter 2
-      {78, 48}, {51, 57}, {37, 51}, {18, 48}, {6, 76}
+      {71, 45}, {51, 57}, {37, 41}, {24, 43}, {6, 76}
     }
   };
   static String SPEECH_PATHS[][] = {
@@ -41,7 +41,7 @@ static class State {
     { // Chapter 0
       "assets/sprites/profiles/cicada_sq.png"
     },
-    { // Chapter 1
+    { // Chapter 1 
       "assets/sprites/profiles/cicada_sq.png",
       "",
       "assets/sprites/profiles/cicada_sq.png"

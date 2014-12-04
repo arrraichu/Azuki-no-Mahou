@@ -11,5 +11,5 @@ Cadi: Arms? What are those?
 <ellipses>
 ....
 So, we keep going this way, right?
-[Objective: Follow the path and head towards the worm.]
+[Objective: Keep heading towards the worm.]
 <off>

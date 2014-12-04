@@ -23,8 +23,8 @@ class Map {
     "assets/sprites/talkA02.png"
   };
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
-  final int NUM_EXTRAS = 20;               // number of npc charcters and the like
-  final int NUM_TILES = 37;                // number of tiles
+  final int NUM_EXTRAS = 13;               // number of npc charcters and the like
+  final int NUM_TILES = 73;                // number of tiles
   final int TILES_RANGE = 80;
   final char STARTING_CHAR = '"';
   final String TILE_PATHS[] = { // asset paths for npcs
@@ -37,7 +37,7 @@ class Map {
     "assets/tiles/dirt_06.png",
     "assets/tiles/dirt_07.png",
     "assets/tiles/dirt_08.png",
-    "assets/tiles/dirt_09.png",
+    "assets/tiles/dirt_09.png", // 10
     "assets/tiles/grassB_01.png",
     "assets/tiles/signpost.png",
     "assets/tiles/wetgrass.png",
@@ -47,7 +47,7 @@ class Map {
     "assets/tiles/cornertree_R02.png",
     "assets/tiles/treetop.png",
     "assets/tiles/treebottom_01.png",
-    "assets/tiles/treebottom_02.png",
+    "assets/tiles/treebottom_02.png", // 20
     "assets/tiles/trees_TL.png",
     "assets/tiles/trees_TR.png",
     "assets/tiles/hindtree_01.png",
@@ -57,7 +57,7 @@ class Map {
     "assets/tiles/grass_tile_7.png",
     "assets/tiles/wetdirt_01.png",
     "assets/tiles/wetdirt_02.png",
-    "assets/tiles/wetdirt_03.png",
+    "assets/tiles/wetdirt_03.png", // 30
     "assets/tiles/wetdirt_04.png",
     "assets/tiles/wetdirt_05.png",
     "assets/tiles/wetdirt_06.png",
@@ -67,7 +67,7 @@ class Map {
     "assets/tiles/wetbush.png",
     "assets/tiles/wetstep.png",
     "assets/tiles/anthole_01.png",
-    "assets/tiles/anthole_02.png",
+    "assets/tiles/anthole_02.png", // 40
     "assets/tiles/caveelevated_BL.png",
     "assets/tiles/caveelevated_BR.png",
     "assets/tiles/caveelevated_L1.png",
@@ -77,7 +77,7 @@ class Map {
     "assets/tiles/caveelevated_T.png",
     "assets/tiles/caveelevated_TL.png",
     "assets/tiles/caveelevated_TR.png",
-    "assets/tiles/caveelevated_WallBL.png",
+    "assets/tiles/caveelevated_WallBL.png", // 50
     "assets/tiles/caveelevated_WallBM.png",
     "assets/tiles/caveelevated_WallBR.png",
     "assets/tiles/caveelevated_path.png",
@@ -87,7 +87,7 @@ class Map {
     "assets/tiles/wetpuddle_hozi_04.png",
     "assets/tiles/wetpuddle_hozi_05.png",
     "assets/tiles/wetshallow_01.png",
-    "assets/tiles/wetshallow_02.png",
+    "assets/tiles/wetshallow_02.png", // 60
     "assets/tiles/wetshallow_03.png",
     "assets/tiles/wetshallow_04.png",
     "assets/tiles/wetshallow_05.png",
@@ -97,7 +97,7 @@ class Map {
     "assets/tiles/wetshallow_09.png",
     "assets/tiles/cavesteps.png",
     "assets/tiles/cavesteps_loop.png",
-    "assets/tiles/cavefloor_hole.png",
+    "assets/tiles/cavefloor_hole.png", // 70
     "assets/tiles/caverock.png",
     "assets/tiles/cavedirt.png",
     "assets/tiles/ladder.png",
