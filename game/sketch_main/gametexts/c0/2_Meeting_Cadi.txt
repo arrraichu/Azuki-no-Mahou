@@ -12,7 +12,6 @@ Wait...
 Where are my arms?
 <exclamation>
 Where are my legs?
-No...What the hell? This...
 <exclamation>
 What the hell happened to me!?
 Cicada: Are you listening mister? You. Are. A. Bean.
@@ -20,22 +19,19 @@ Bean!? What the hell do you mean a bean!
 Cicada: Well, you look like a bean, and you smell like one. So, it would be a safe guess that you are one.
 <ellipses>
 This is a nightmare.
-Cicada: It could be worse. You could be...
-<monster sounds>
-...
-Cicada: ...Lunch...
+Cicada: It could be worse. You could be...lunch.
 <exclamation>
 What was that?
-Cicada: That, would be some ants. And they sound hungry.
+Cicada: That, would be ants.
 Are they friendly?
 Cicada: If by friendly, you mean blood thirsty, then yea.
 Well, what do they eat?
 Cadi: Beans...
-Well why are we just standing here? 
-Cicada: Because ants are faster than us and can dig under ground. Getting away is not really possible.
+Screw that, gonna get the hell out of here.
+Cicada: Wasting your time. Ants are way faster then you, and they dig. I give you about sixty seconds before you wind up in their mouth.
 <exclamation>
 Well, what can we do then?
-Cicada: Fight them!
-Fight them? How!? I don't even have arms!
-Cicada: I dunno, just slame your body into them or something.
+Cicada: Fight them?
+Fight them? How?
+Cicada: I dunno, just slame your body into them or something. Figure it out.
 <fight>
