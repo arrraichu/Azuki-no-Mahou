@@ -135,7 +135,10 @@ void handleKeys() {
      }
     
     if (game.mode == GameMode.EXPLORE) {
-      if (key == ' ') game.playerTalk();
+      if (key == ' ') {
+//        println("x == " + game.current_map.tileOn(true, 0) + "\ty = " + game.current_map.tileOn(false, 0));
+        game.playerTalk();
+      }
       
       else if (USE_CODED_CONTROLS) {
         if (key == CODED) {
@@ -148,7 +151,7 @@ void handleKeys() {
           } else if (keyCode == BUTTON_RIGHT) {
             game.sendSignalMove(1);
           }
-        }
+        }   
       }
       
       else {

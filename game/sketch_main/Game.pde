@@ -134,6 +134,15 @@ class Game {
     
     p.move(move_x, move_y);
     current_map.move(move_x, move_y);
+    
+    if (current_chapter == 1 && current_map.tileOn(true, 0) == 34 && current_map.tileOn(false, 0) == 134) { // transport to separate spot 1
+      current_map.starting_x += 400; 
+      current_map.starting_y -= 2550;
+    }
+    if (current_chapter == 1 && current_map.tileOn(true, 0) == 1 && current_map.tileOn(false, 0) == 25) { // transport to separate spot 2
+      current_map.starting_x += 1650; 
+      current_map.starting_y += 4950;
+    }
   }
   
   

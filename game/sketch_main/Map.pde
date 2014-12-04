@@ -148,6 +148,7 @@ class Map {
       }
       
       for (int j = 0; j < columns; ++j) {
+//        println("i = " + i + "\tj = " + j);
         map[i][j] = line.charAt(j);
         
         char cur = line.charAt(j);
@@ -362,6 +363,7 @@ class Map {
     if (index <= 0) return false;
     if (index >= 13 && index <= 26) return false;
     if (index > NUM_TILES) return false;
+    if (index == 36) return false;
     return true;
   }
   
