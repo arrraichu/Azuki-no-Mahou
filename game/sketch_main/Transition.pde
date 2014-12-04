@@ -11,6 +11,7 @@ public class Transition {
   int fade_counter;
   int current_chapter = -1;
   
+  
   /* CONSTANTS */
   final String CHAPTER = "Chapter ";
   final String CHAPTER_TITLES[] = {
@@ -56,15 +57,9 @@ public class Transition {
           float pctg = 255f * ((float) (FADE_LENGTH - fade_counter)/FADE_LENGTH);
           tint(255, pctg);
           image(bg, 0, 0, width, height);
-//          fill(255, pctg);
-//          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
-//          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {
           tint(255, 255);
           image(bg, 0, 0, width, height);
-//          fill(255, 255);
-//          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
-//          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
           fade_counter = FADE_LENGTH;
           fadeIn = false;
         }
@@ -73,9 +68,6 @@ public class Transition {
           float pctg = 255f * ((float) fade_counter/FADE_LENGTH);
           tint(255, pctg);
           image(bg, 0, 0, width, height);
-//          fill(255, pctg);
-//          text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
-//          text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
         } else {
           noTint();
           done = true;
@@ -83,9 +75,6 @@ public class Transition {
       }
       textSize(22);
     } else {
-//      fill(255);
-//      text(chapterText, TITLE_X-(textWidth(chapterText)/2), TITLE_Y - NEWLINE_DISPARITY);
-//      text(CHAPTER_TITLES[parent.current_chapter], TITLE_X-(textWidth(CHAPTER_TITLES[parent.current_chapter])/2), TITLE_Y + NEWLINE_DISPARITY);
       noTint();
       textSize(22);
     }
