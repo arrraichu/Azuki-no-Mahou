@@ -11,7 +11,11 @@ static class ChapterNpcs {
     }, { // Chapter 1
       "assets/sprites/enemies/cicada.png",
       "",
-      "assets/sprites/enemies/seedcorn.png"
+      "assets/sprites/enemies/seedcorn.png",
+      "",
+      "",
+      "",
+      "assets/tiles/brokensignpost.png"
     }, { // Chapter 2
       "assets/sprites/enemies/cicada.png",
       "",
@@ -28,7 +32,11 @@ static class ChapterNpcs {
     }, { // Chapter 1
       10,
       0, // empty
-      5
+      5,
+      0,
+      0,
+      0,
+      10
     }, { // Chapter 2
       5,
       0,

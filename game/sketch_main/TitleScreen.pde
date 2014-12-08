@@ -11,19 +11,25 @@ class TitleScreen {
   boolean blink_on;
   
   boolean ready;
+  boolean acceptkey;
   boolean controlsmode = false;
   
   PImage bg;
   PImage logo;
   PImage controls;
+  PImage a_button[];
   
   int logo_x = (int) (width * 0.45);
   int logo_y = (int) (height * 0);
   int logo_width = (int) (width/2);
   int logo_height = (int) (height/2);
   
-  final String pressText = "Press SPACEBAR to Start.";
+  final String pressText = "Press A key to Start.";
   final String ASSET_CONTROLSPATH = "assets/backgrounds/controls.png";
+  final String PRESS_A_ASSET[] = {
+    "assets/sprites/text_completion1.png",
+    "assets/sprites/text_completion2.png"
+  };
   
   boolean fadeDone = false;
   boolean fadeIn = true;
@@ -40,13 +46,30 @@ class TitleScreen {
     bg = loadImage(bgpath);
     logo = loadImage(logopath);
     controls = loadImage(ASSET_CONTROLSPATH);
+    a_button = new PImage[2];
+    a_button[0] = loadImage(PRESS_A_ASSET[0]);
+    a_button[1] = loadImage(PRESS_A_ASSET[1]);
     
     ready = false;
+    acceptkey = false;
     
     fade_counter = FADE_LENGTH;
   } 
   
   void run() {
+    if (ready) {
+      if (!controlsmode) {
+        controlsmode = true;
+        fade_counter = FADE_LENGTH;
+      }
+      else {
+        starting_state = false;
+        resetBgm();
+      }
+      ready = false;
+      acceptkey = false;
+    }
+    
     if (!controlsmode) {
       image(bg, 0, 0, width, height);
       if (pf_time > 0) {
@@ -74,7 +97,7 @@ class TitleScreen {
         text(pressText, width * 0.52, height * 0.67);
         
         textSize(22);
-        ready = true;
+        acceptkey = true;
   
         --iw_time;
       }
@@ -90,7 +113,7 @@ class TitleScreen {
         }
         textSize(22);
         noTint();
-        ready = true;
+        acceptkey = true;
       }
     } else {
       if (!fadeDone) {
@@ -106,19 +129,15 @@ class TitleScreen {
             fadeIn = false;
           }
         } else {
-          if (--fade_counter > 0) {
-            float pctg = 255f * ((float) fade_counter/FADE_LENGTH);
-            tint(255, pctg);
-            image(controls, 0, 0, width, height);
-          } else {
-            noTint();
-            fadeDone = true;
+          if (--blink_interval <= 0) {
+            blink_interval = BLINK_LENGTH;
+            blink_on = !blink_on;
           }
+          int blink_index = (blink_on) ? 0 : 1;
+          image(a_button[blink_index], width*0.95, height*0.92, 30, 30);
+          acceptkey = true;
         }
         textSize(22);
-      } else {
-        starting_state = false;
-        resetBgm();
       }
     }
   }

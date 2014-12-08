@@ -27,6 +27,7 @@ boolean gameover_state = false;              // game over state
 boolean lastkey_pressed = false;             // whether a button was pressed at the previous loop iteration
 char lastkey = '`';                          // the last key that was pressed
 boolean needRewind = false;
+int stall = 0;
 
 /* CONSTANTS */
 final static int WIDTH = 1024;               // game screen width & height
@@ -42,9 +43,11 @@ final char U_BUTTON_DOWN = 's';
 final char U_BUTTON_LEFT = 'a';
 final char U_BUTTON_RIGHT = 'd';
 final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
-final char BUTTON_A = ' ';                   // affirmative button
-final char BUTTON_B = 'z';                   // cancel button
+final char BUTTON_A = 'a';                   // affirmative button
+final char BUTTON_B = 'd';                   // cancel button
 static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequent chapters
+final boolean MUTE = false;                  // mute the sound
+final int STALL_INTERVAL = 10;
 
 
 
@@ -81,7 +84,7 @@ void draw() {
   handleKeys();
   
   if (starting_state) {
-    if (bgm == null || !bgm.isPlaying()) {
+    if (!MUTE && (bgm == null || !bgm.isPlaying())) {
       bgm = minim.loadFile("assets/sounds/titlemusic.mp3");
       bgm.play();
     }
@@ -100,6 +103,8 @@ void draw() {
   
   game.run();
   
+  if (stall > 0) --stall;
+  
 }
 
 
@@ -112,16 +117,13 @@ void handleKeys() {
     
     if (game == null) return;
     
-    if (starting_state && title.ready && key == ' ') {
-      title.controlsmode = true;
-      title.ready = false;
-//      starting_state = false;
-//      bgm.close();
-//      bgm = null;
+    if (starting_state && title.acceptkey && key == BUTTON_A) {
+      title.ready = true;
+      title.acceptkey = false;
       return;
     }
     
-    if (gameover_state && key == ' ') {
+    if (gameover_state && key == BUTTON_A) {
       setup();
     }
     
@@ -135,11 +137,11 @@ void handleKeys() {
      }
     
     if (game.mode == GameMode.EXPLORE) {
-      if (key == ' ') {
-//        println("x == " + game.current_map.tileOn(true, 0) + "\ty = " + game.current_map.tileOn(false, 0));
+      if (key == BUTTON_A && stall <= 0) {
         game.playerTalk();
       }
       
+      // movements
       else if (USE_CODED_CONTROLS) {
         if (key == CODED) {
           if (keyCode == BUTTON_UP) {
@@ -168,7 +170,7 @@ void handleKeys() {
     }
     
     else if (game.mode == GameMode.STORY) {
-      if (key == ' ') {
+      if (key == BUTTON_A) {
         if (game.reader == null) return;
         if (DEBUG) game.reader.sendNextLine();
         if (!lastkey_pressed) game.reader.sendNextLine();
@@ -218,6 +220,8 @@ void handleKeys() {
 }
 
 void resetBgm() {
+  if (MUTE) return;
+  
   minim.stop();
   if (game.current_chapter < 0 || game.current_chapter > CHAPTERS_IMPLEMENTED) return;
   
@@ -239,6 +243,7 @@ void resetBgm() {
 }
 
 void playSound(int i) {
+  if (MUTE) return;
    if (i < 0 || i >= NUM_MISCSOUNDS) return;
    
    if (i == 0) {

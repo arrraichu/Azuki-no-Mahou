@@ -24,7 +24,7 @@ class Map {
   };
   final int TALK_FLICKR = 40;              // the time length of the talk indication sprites
   final int NUM_EXTRAS = 13;               // number of npc charcters and the like
-  final int NUM_TILES = 73;                // number of tiles
+  final int NUM_TILES = 72;                // number of tiles
   final int TILES_RANGE = 80;
   final char STARTING_CHAR = '"';
   final String TILE_PATHS[] = { // asset paths for npcs
@@ -100,8 +100,7 @@ class Map {
     "assets/tiles/cavefloor_hole.png", // 70
     "assets/tiles/caverock.png",
     "assets/tiles/cavedirt.png",
-    "assets/tiles/ladder.png",
-    "assets/tiles/brokensignpost.png"
+    "assets/tiles/ladder.png"
   };
   final String MAP_FILES[] = {             // paths for the map files
     "assets/maps/0.txt",
@@ -148,7 +147,6 @@ class Map {
       }
       
       for (int j = 0; j < columns; ++j) {
-//        println("i = " + i + "\tj = " + j);
         map[i][j] = line.charAt(j);
         
         char cur = line.charAt(j);
@@ -183,6 +181,7 @@ class Map {
   */
   void displayMap() {
     int talkx = -1, talky = -1;
+    int permx = -1, permy = -1;
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < columns; ++j) {
         int x = center_x + j*50 - starting_x;
@@ -202,6 +201,16 @@ class Map {
           if (state >= 0 && state < State.NUM_STATES[parent.current_chapter] && State.isCoor(parent.current_chapter, state, i, j)) {
             talkx = x; talky = y;
           }
+          
+          // check if an always-on state
+          if (State.ALWAYS_ONS[parent.current_chapter] > 0) {
+            for (int a = 0; a < State.ALWAYS_ONS[parent.current_chapter]; ++a) {
+              if (State.ALWAYS_ON[parent.current_chapter][a][0] == i && State.ALWAYS_ON[parent.current_chapter][a][1] == j) {
+                permx = x; permy = y;
+                break;
+              }
+            }
+          }
           continue;
         }
         if (c_index > NUM_TILES) continue;
@@ -209,8 +218,10 @@ class Map {
       }
     }
     
-    if (parent.mode == GameMode.EXPLORE && talkx >= 0 && talky >= 0) 
-      image(talk_notices[talk_index], talkx+40, talky-30, 40, 40);
+    if (parent.mode == GameMode.EXPLORE) {
+      if (talkx >= 0 && talky >= 0) image(talk_notices[talk_index], talkx+40, talky-30, 40, 40);
+      if (permx >= 0 && permy >= 0) image(talk_notices[talk_index], permx+40, permy-30, 40, 40);
+    }
     
     if (parent.mode == GameMode.EXPLORE) flickerTalk();
   }
@@ -323,6 +334,53 @@ class Map {
     int fy = tileOn(false, pointfy);
     
     return State.isCoor(parent.current_chapter, state, fy, fx);
+  }
+  
+  int isStatePerm(float speed, int direction) {
+    if (direction < 0 || direction > 3) return -1;
+    float point1x = 0, point1y = 0, point2x = 0, point2y = 0;
+   
+    if (direction == 2) { // up
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 - speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 - speed;
+    } else if (direction == 3) { // down
+      point1x = WIDTH/2;
+      point1y = HEIGHT/2 + 50 + speed;
+      point2x = WIDTH/2 + 50;
+      point2y = HEIGHT/2 + 50 + speed;
+    } else if (direction == 0) { // left
+      point1x = WIDTH/2 - speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 - speed;
+      point2y = HEIGHT/2 + 50;
+    } else if (direction == 1) { // right
+      point1x = WIDTH/2 + 50 + speed;
+      point1y = HEIGHT/2;
+      point2x = WIDTH/2 + 50 + speed;
+      point2y = HEIGHT/2 + 50;
+    }
+    
+    int coor1 = coordinateOn(point1x, point1y) - STARTING_CHAR - TILES_RANGE;
+    int coor2 = coordinateOn(point2x, point2y) - STARTING_CHAR - TILES_RANGE;
+    
+    float pointfx = 0, pointfy = 0;
+    
+    if (coor1 < 0 && coor2 < 0) return -1;
+    if (coor1 >= 0 && coor2 >= 0) {
+      pointfx = (point1x + point2x) / 2;
+      pointfy = (point1y + point2y) / 2;
+    }
+    else {
+      pointfx = (coor1 >= 0) ? point1x : point2x;
+      pointfy = (coor1 >= 0) ? point1y : point2y;
+    }
+    
+    int fx = tileOn(true, pointfx);
+    int fy = tileOn(false, pointfy);
+    
+    return State.isPerm(parent.current_chapter, fy, fx);
   }
   
   void move(float x, float y) {

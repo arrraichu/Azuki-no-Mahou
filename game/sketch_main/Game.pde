@@ -162,6 +162,16 @@ class Game {
       reader.sendNextLine();
       ++current_map.state;
     }
+    
+    else {
+      int perm_index = current_map.isStatePerm(GAME_SPEED, p.direction);
+      if (perm_index >= 0) {
+        reader = new TextReader(this, State.ALWAYS_ON_FILES[current_chapter][perm_index], tr);
+        tr.profileRight = null;
+        mode = GameMode.STORY;
+        reader.sendNextLine();
+      }
+    }
   }
   
   void finishBattle() {
@@ -208,6 +218,7 @@ class Game {
   void extraOff() {
     mode = GameMode.EXPLORE;
     battle_index = -1;
+    stall = STALL_INTERVAL;
   }
   
   void extraFight() {

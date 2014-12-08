@@ -76,13 +76,13 @@ g - tile # 70: cave floor hole (ASSET DONE) (CODED)
 h - tile # 71: cave rock (ASSET DONE) (CODED)
 i - tile # 72: cave dirt (ASSET DONE) (CODED)
 j - tile # 73: ladder (ASSET DONE) (CODED)
-k - tile # 74: broken sign post (ASSET DONE) (CODED)
+k - tile # 74: 
 l - tile # 75: 
 m - tile # 76: 
 n - tile # 77: 
 o - tile # 78: 
 p - tile # 79: 
-q - tile # 80: 
+q - tile # 80: IGNORING TILE
 
 Use the following characters for characters:
 
@@ -92,7 +92,7 @@ t - character # 03 : seedcorn (ASSET DONE) (CODED)
 u - character # 04 : maggots (ASSET DONE) (CODED)
 v - character # 05 : worm (ASSET DONE) (CODED)
 w - character # 06 : rabbit (ASSET DONE) (CODED)
-x - character # 07 : 
+x - character # 07 : broken sign post (ASSET DONE) (CODED)
 y - character # 08 : 
 z - character # 09 : 
 { - character # 10 : 
