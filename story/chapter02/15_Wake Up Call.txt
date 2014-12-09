@@ -26,12 +26,10 @@ Old Worm: Well, give it a shot and see.
 Cadi: ...
 Old Worm: ...
 Nothing.
-Old Worm: Really? That usually works. Well, I suppose you could try touching the tree. 
-<question>
-You mean that big looking one behind you?
-Old Worm: Big? Whoa, when did that thing get so big?<ellipses>
+Old Worm: Really? That usually works. Well, I suppose you could try touching the tree walls. Whoa, when did that thing get so big in here?
 ...
-Cadi: Told you.
-Whatever...
+Cadi: See?
+<ellipses>
+I hate you both so much.
 
 <chapterend>

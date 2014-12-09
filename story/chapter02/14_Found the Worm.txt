@@ -1,11 +1,9 @@
 <exclamation>
 Cadi: Whoa...
-What? He is just a worm, right?
-No, not him. The tree behind him.
-Cadi: Oh, you mean the tree? What about it?
-Nothing really. Just seems...bigger.
-Cadi: Just a tree man. You focus on the weirdest things.
+What? I mean I know going inside the tree was unexpected and all but..
+Cadi: No, not that. When did it get so big in here?
 <ellipses>
+You focus on the weirdest things.
 So anyway...this him?
 Cadi: Yea. but we got here too late...
 <exclamation>
