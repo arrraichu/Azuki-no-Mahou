@@ -10,6 +10,7 @@ class Map {
   public char map[][];                     // the map itself
   PImage tiles[];                          // the tile sprites
   PImage talk_notices[];                   // sprites the signal talking to npcs, etc.
+  PImage worldtree;
   
   /* CONTROL VARIABLES */
   int talk_counter;                        // time counter to flicker talk indication animation
@@ -173,6 +174,8 @@ class Map {
     talk_notices[1] = loadImage(TALK_PATH[1]);
     talk_index = 0;
     talk_counter = TALK_FLICKR;
+    
+    worldtree = loadImage(ChapterNpcs.WORLDTREE_ASSET);
   }
   
   
@@ -182,6 +185,7 @@ class Map {
   void displayMap() {
     int talkx = -1, talky = -1;
     int permx = -1, permy = -1;
+    int treex = -1000, treey = -1000;
     for (int i = 0; i < rows; ++i) {
       for (int j = 0; j < columns; ++j) {
         int x = center_x + j*50 - starting_x;
@@ -213,9 +217,21 @@ class Map {
           }
           continue;
         }
+        if (c >= 'l' && c <= 'q') {
+          if (c == 'l' || c == 'q') continue;
+          if (c == 'm') { treex = x; treey = y; continue; }
+          if (c == 'n') { treex = x - (8*50); treey = y; continue; }
+          if (c == 'o') { treex = x; treey = y - (6*50); continue; }
+          if (c == 'p') { treex = x - (8*50); treey = y - (6*50); continue; }
+        }
         if (c_index > NUM_TILES) continue;
         image(tiles[c_index], x, y, 50, 50);
       }
+    }
+    
+    if (treex > -450 && treey > -350) {
+      println("treex = " + treex + "\ttreey = " + treey);
+      image(worldtree, treex, treey, 450, 350);
     }
     
     if (parent.mode == GameMode.EXPLORE) {
@@ -420,8 +436,9 @@ class Map {
   private boolean walkAllowed(int index) {
     if (index <= 0) return false;
     if (index >= 13 && index <= 26) return false;
+    if (index == 74) return true; // walkable tiles on the world tree
     if (index > NUM_TILES) return false;
-    if (index == 36) return false;
+    if (index == 36) return false; // wetbush
     return true;
   }
   

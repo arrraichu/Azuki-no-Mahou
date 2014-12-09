@@ -52,4 +52,6 @@ static class ChapterNpcs {
     "assets/sprites/profiles/cicada_sq.png", // Chapter 1
     "" // Chapter 2
   };
+  
+  static String WORLDTREE_ASSET = "assets/tiles/worldtree.png";
 }

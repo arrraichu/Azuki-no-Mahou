@@ -77,12 +77,12 @@ h - tile # 71: cave rock (ASSET DONE) (CODED)
 i - tile # 72: cave dirt (ASSET DONE) (CODED)
 j - tile # 73: ladder (ASSET DONE) (CODED)
 k - tile # 74: 
-l - tile # 75: 
-m - tile # 76: 
-n - tile # 77: 
-o - tile # 78: 
-p - tile # 79: 
-q - tile # 80: IGNORING TILE
+l - tile # 75: walkable IGNORE TILE (CODED)
+m - tile # 76: world tree top left (CODED)
+n - tile # 77: world tree top right (CODED)
+o - tile # 78: world tree bottom left (CODED)
+p - tile # 79: world tree bottom right (CODED)
+q - tile # 80: IGNORED TILE (CODED)
 
 Use the following characters for characters:
 

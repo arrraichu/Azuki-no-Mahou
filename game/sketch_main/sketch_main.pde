@@ -46,7 +46,7 @@ final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
 final char BUTTON_A = 'a';                   // affirmative button
 final char BUTTON_B = 'd';                   // cancel button
 static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequent chapters
-final boolean MUTE = false;                  // mute the sound
+final boolean MUTE = true;                  // mute the sound
 final int STALL_INTERVAL = 10;
 
 
