@@ -1,3 +1,3 @@
-SIGN: The clock ticks three.
-SIGN: In three hours, you shall head towards six.
+SIGN: Tick, tick the clock hands go.
+SIGN: When they strike six, you shall know where to go.
 <off>
