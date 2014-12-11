@@ -30,6 +30,10 @@ Old Worm: Really? That usually works. Well, I suppose you could try touching the
 ...
 Cadi: See?
 <ellipses>
-I hate you both so much.
-
+Well, I guess this is it.
+Cadi: You guess what is it?
+Old Worm: Cadi is correct. You should really be more specific.
+...I mean bye...
+Cadi: Oh...see you later then.
+Old Worm: Nice to meet you young bean.
 <chapterend>
