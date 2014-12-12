@@ -1,2 +1,3 @@
-SIGN: One is safe to go left for no ants shall await your death.
+SIGN: To the left our queen and we shall defend her with every breath.
+SIGN: Enter without food, and await your death.
 <off>

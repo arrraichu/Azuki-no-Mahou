@@ -1,9 +1,7 @@
-[Use the SPACEBAR to progress through text.]
 Where...where am I?
 How...did I get here?
 <question>
 Where am I?
 Maybe I should look around.
-[Use the DIRECTIONAL ARROW controls to move your character.]
 [New Objective: Walk around the area and see where you are.]
 <off>

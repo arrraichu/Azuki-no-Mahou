@@ -1,2 +1,3 @@
-SIGN: Sleeping Chambers -->
+SIGN: You managed to make your way deep into the maze.
+SIGN: Take a rest to the right, if you are an ant anyway.
 <off>
