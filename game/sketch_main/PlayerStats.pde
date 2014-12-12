@@ -41,7 +41,7 @@ class PlayerStats {
     
     r = new Random();
     if (r.nextFloat() < (float) impact / 255f) {
-      atk *= -2;
+      atk *= 2;
       println("critical hit");
     }
     return atk;
@@ -56,24 +56,28 @@ class PlayerStats {
     float def = (float) defense;
     float spd = (float) speed;
     
-    r = new Random();
-    float chance = r.nextFloat();
-    if (spd >= (float) atk) {
-      if (chance < 0.2f) return 0;
+    if (atk > 0) {
+      r = new Random();
+      float chance = r.nextFloat();
+      if (spd >= (float) atk) {
+        if (chance < 0.2f) return 0;
+      }
+      if (spd >= (float) atk * 2f) {
+        if (chance < 0.5f) return 0;
+      }
+      if (spd >= (float) atk * 5f) {
+        if (chance < 0.8f) return 0;
+      }
+      
+      if (def >= (float) atk * 3f) atk /= 2;
+      else if (def >= (float) atk * 2f) atk = (int)((float) atk * 0.67f);
+      else if (def >= (float) atk * 0.75f) atk = (int)((float) atk * 0.9f);
+      else if (def >= (float) atk) atk = (int)((float) atk * 0.8f);
     }
-    if (spd >= (float) atk * 2f) {
-      if (chance < 0.5f) return 0;
-    }
-    if (spd >= (float) atk * 5f) {
-      if (chance < 0.8f) return 0;
-    }
-    
-    if (def >= (float) atk * 3f) atk /= 2;
-    else if (def >= (float) atk * 2f) atk = (int)((float) atk * 0.67f);
-    else if (def >= (float) atk * 0.75f) atk = (int)((float) atk * 0.9f);
-    else if (def >= (float) atk) atk = (int)((float) atk * 0.8f);
     
     rem_health -= atk;
+    if (rem_health > health) rem_health = health;
+    
     return atk;
   }
 }

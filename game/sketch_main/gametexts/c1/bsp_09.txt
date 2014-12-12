@@ -1,4 +1,4 @@
 SIGN: Please...
-SIGN: Do not mess up.
-SIGN: What happens as you drain your cup.
+SIGN: Please do not mess up.
+SIGN: What happens as you drain your cup?
 <off>

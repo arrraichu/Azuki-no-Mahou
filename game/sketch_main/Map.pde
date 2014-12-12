@@ -230,7 +230,6 @@ class Map {
     }
     
     if (treex > -450 && treey > -350) {
-      println("treex = " + treex + "\ttreey = " + treey);
       image(worldtree, treex, treey, 450, 350);
     }
     
@@ -436,6 +435,8 @@ class Map {
   private boolean walkAllowed(int index) {
     if (index <= 0) return false;
     if (index >= 13 && index <= 26) return false;
+    if (index >= 40 && index <= 51) return false;
+    if (index == 70) return false;
     if (index == 74) return true; // walkable tiles on the world tree
     if (index > NUM_TILES) return false;
     if (index == 36) return false; // wetbush

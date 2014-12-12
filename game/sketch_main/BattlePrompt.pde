@@ -128,7 +128,10 @@ class BattlePrompt {
       else if (hp_pctg <= 68f * 0.5f) fill(255, 170, 0);
       else fill(100, 100, 255);
       rect(player_pos[0]+62, player_pos[1]+9, hp_pctg, 3);
-      if (parent.p.stats.rem_health < player_hpbuffer) --player_hpbuffer;
+      if (parent.p.stats.rem_health != player_hpbuffer) {
+        if (parent.p.stats.rem_health > player_hpbuffer) ++player_hpbuffer;
+        else --player_hpbuffer;
+      }
       
       for (int i = 0; i < ChapterEnemies.NUM_ENEMIES[parent.current_chapter]; ++i) {
         if (enemies[i] == null) continue;
@@ -184,7 +187,7 @@ class BattlePrompt {
       if (parent.p.stats.skill != null) {
         if (selection == 1) {
           fill(0);
-          setText("Use a specialized.");
+          setText("Use a specialized skill.");
           image(arrow, text_startx, text_starty + 3*nextline_disp - SELECTOR_WIDTH, SELECTOR_WIDTH, SELECTOR_WIDTH);
         }
         else fill(150);
@@ -246,18 +249,26 @@ class BattlePrompt {
           isAnimateFinished = false;
         }
         
-        if (!isAnimateFinished) {
+        int atk_dmg = (using_skill < 0) ? parent.p.stats.attack() : parent.p.stats.skill.activateAbility(using_skill);
+        
+        if (!isAnimateFinished && atk_dmg > 0) {
           animateAttack(true);
         }
         
         else {
-          int atk_dmg = (using_skill < 0) ? parent.p.stats.attack() : parent.p.stats.skill.activateAbility(using_skill);
-          if (atk_dmg < 0) atk_dmg *= -1;
-          enemies[target].takeDamage(atk_dmg);
-          String text = enemies[target].name + " has taken a hit.";
+          String text;
+          if (atk_dmg > 0) {
+            enemies[target].takeDamage(atk_dmg);
+            text = enemies[target].name + " has taken a hit.";
+          } else if (atk_dmg == 0) {
+            text = "You decide to focus for this turn.";
+          } else {
+            parent.p.stats.takeDamage(atk_dmg);
+            text = "You have recovered a bit of health back.";
+          }
   
           /* handling knockouts */
-          if (enemies[target].rem_health < 0) {
+          if (target >= 0 && enemies[target].rem_health < 0) {
             text += " " + enemies[target].name + " has been knocked out!";
             enemies[target] = null;
             --enemies_left;
@@ -436,8 +447,8 @@ class BattlePrompt {
     }
     
     if (state == 7) {
-      if (ctrl == 4) {
-        state = 2;
+      if (ctrl == 4) { // accept
+        state = (parent.p.stats.skill.activateAbility(using_skill) > 0) ? 2 : 3;
         using_skill = selection;
         playSound(0);
         return;
@@ -454,7 +465,7 @@ class BattlePrompt {
         return;
       }
       
-      if (ctrl == 5) {
+      if (ctrl == 5) { // back
         selection = 0;
         enemy_ptr = 0;
         state = 1;
@@ -476,7 +487,7 @@ class BattlePrompt {
     
     if (animationState >= 2) {
       activate_hitani = true;
-      }
+    }
       
     if (activate_hitani) {
       for (int i = NUM_BATTLEANIS-1; i >= 0; --i) {

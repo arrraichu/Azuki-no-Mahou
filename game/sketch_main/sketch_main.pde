@@ -46,7 +46,7 @@ final boolean USE_CODED_CONTROLS = true;     // to use coded controls or not
 final char BUTTON_A = 'a';                   // affirmative button
 final char BUTTON_B = 'd';                   // cancel button
 static final int CHAPTERS_IMPLEMENTED = 2;   // controls whether to play subsequent chapters
-final boolean MUTE = true;                  // mute the sound
+final boolean MUTE = false;                  // mute the sound
 final int STALL_INTERVAL = 10;
 
 
@@ -137,6 +137,11 @@ void handleKeys() {
      }
     
     if (game.mode == GameMode.EXPLORE) {
+      if (key == '`') {
+        println("x = " + game.current_map.tileOn(true, 0f) + "\ty = " + game.current_map.tileOn(false, 0f)); 
+        println(game.current_map.state);
+      }
+      
       if (key == BUTTON_A && stall <= 0) {
         game.playerTalk();
       }
@@ -234,7 +239,11 @@ void resetBgm() {
     if (game.current_chapter == 2) {
       bgm = minim.loadFile("assets/sounds/Mystery_Forest.mp3");
     } else if (game.current_chapter == 1) {
-      bgm = minim.loadFile("assets/sounds/overworld4.0.mp3");
+      if (game.soundExtra) {
+        bgm = minim.loadFile("assets/sounds/Underground_Tunnel.mp3");
+      } else {
+        bgm = minim.loadFile("assets/sounds/overworld4.0.mp3");
+      }
     } else if (game.current_chapter == 0) {
       bgm = minim.loadFile("assets/sounds/overworld.mp3");
     } else bgm = minim.loadFile("assets/sounds/overworld.mp3");
@@ -244,7 +253,7 @@ void resetBgm() {
 
 void playSound(int i) {
   if (MUTE) return;
-   if (i < 0 || i >= NUM_MISCSOUNDS) return;
+//   if (i < 0 || i >= NUM_MISCSOUNDS) return;
    
    if (i == 0) {
      if (needRewind) {
@@ -255,6 +264,21 @@ void playSound(int i) {
      othersound = minim.loadFile("assets/sounds/battle_command_2.mp3");
      othersound.play();
      needRewind = true;
+   }
+   
+   else if (i < 3) {
+     minim.stop();
+     if (bgm != null) { bgm.close(); bgm = null; }
+     
+     if (i == 1) {
+       bgm = minim.loadFile("assets/sounds/Underground_Tunnel.mp3");
+     }
+     
+     else if (i == 2) {
+       bgm = minim.loadFile("assets/sounds/overworld4.0.mp3");
+     }
+     
+     bgm.play();
    }
 }
 

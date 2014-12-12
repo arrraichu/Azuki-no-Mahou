@@ -23,6 +23,8 @@ class Game {
   boolean chapter_ending = false;    // post-chapter fade
   int battle_index = -1;             // which character the battle came from
   public int current_chapter = 0;    // current chapter number
+  boolean nonintrusive = false;
+  boolean soundExtra = false;
   
   /* CONSTANTS */
   final float GAME_SPEED = 0.1f;                         // overall game speed
@@ -135,13 +137,33 @@ class Game {
     p.move(move_x, move_y);
     current_map.move(move_x, move_y);
     
-    if (current_chapter == 1 && current_map.tileOn(true, 0) == 34 && current_map.tileOn(false, 0) == 134) { // transport to separate spot 1
+    if (current_chapter == 1 && current_map.state == 2 && current_map.tileOn(true, 0) == 34 && current_map.tileOn(false, 0) == 134) { // transport to separate spot 1
+      nonintrusive = true;
+      extraFade = EXTRA_FADE_LENGTH;
+      playSound(1);
+      
       current_map.starting_x += 400; 
       current_map.starting_y -= 2550;
+      
+      soundExtra = true;
     }
-    if (current_chapter == 1 && current_map.tileOn(true, 0) == 1 && current_map.tileOn(false, 0) == 25) { // transport to separate spot 2
+    if (current_chapter == 1 && current_map.state == 2 && current_map.tileOn(true, 0) == 1 && current_map.tileOn(false, 0) == 25) { // transport to separate spot 2
+      nonintrusive = true;
+      extraFade = EXTRA_FADE_LENGTH;
+      playSound(2);
+    
       current_map.starting_x += 1650; 
       current_map.starting_y += 4950;
+      
+      soundExtra = false;
+    }
+    if (current_chapter == 2 && current_map.state == 4 && current_map.tileOn(true, 0) == 81 && current_map.tileOn(false, 0) == 20) { // transport to end
+      nonintrusive = true;
+      extraFade = EXTRA_FADE_LENGTH;
+    
+      current_map.starting_x += (168 - 93) * 50;
+      current_map.starting_y += 350;
+      
     }
   }
   
@@ -202,7 +224,8 @@ class Game {
       fill(20, fade);
       rect(0, 0, WIDTH, HEIGHT);
       if (--extraFade <= 0) {
-        reader.sendNextLine();
+        if (nonintrusive) nonintrusive = false;
+        else reader.sendNextLine();
         if (chapter_ending) {
           chapter_ending = false;
           ++current_chapter;

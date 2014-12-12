@@ -1,28 +1,39 @@
-<surprise>
+<exclamation>
 That...was one...angry...rabbit...
 Cadi: Man, I wish other people were here. Coulda sold tickets for this stuff.
 I still...can't believe that...worm didn't wake up.
 Cadi: Told you he was a heavy sleeper.
-Yea, but this is ridiclous.
-Cadi: Well, at least we don't have to worry about waking him up then.
-Old Worm: HUH!? WHO GOES THERE!?
-<surprise>
-Guess, that did it.
-Cadi: Hey old man!
-Old Worm: Huh? Oh, Cadi. What brings you over here.
-Cadi: Found a bean. 
-Old worm: Oh...a bean? How ni-did you say bean?
-Hi...
-Old worm: Well, look at you. Been, a while since a beans been anywhere near here.
-So, I hear.
-Old worm: So, I guess you have some questions?
-A lot actually.
-Old worm: Well, let me just close my eyes for a second, to remember everything.
-...
-...
-...
-Did he go back to sleep?
-Cadi: Yep.
+Yea, but this is ridiculous. OI!
+Old Worm: zzz
+OI! OLD WORM! WAKE UP!
+Old Worm: zzz
+OI! WAKE UP! WAKE UP DAMMIT!
+Old Worm: zzzz
 <ellipses>
-Of course he did...
+Well, guess we gotta wait for a while.
+Old Worm: Wha-huh!? Just take the rocks, I do not wanna fight.
+Cadi: Uh...old man?
+Old Worm: Oh, Cadi. Nice to see ya. Did you need something?
+Cadi: Kinda. This guy says he needs your help. Something about not being a bean.
+Old Worm: Oh, well did he click his shoes three times and go home?
+No, because that sounds stupid.
+Old Worm: But, have you tried it?
+<ellipses>
+...No...
+Old Worm: Well, give it a shot and see.
+<ellipses>
+...
+Cadi: ...
+Old Worm: ...
+Nothing.
+Old Worm: Really? That usually works. Well, I suppose you could try touching the tree walls. Whoa, when did that thing get so big in here?
+...
+Cadi: See?
+<ellipses>
+Well, I guess this is it.
+Cadi: You guess what is it?
+Old Worm: Cadi is correct. You should really be more specific.
+...I mean bye...
+Cadi: Oh...see you later then.
+Old Worm: Nice to meet you young bean.
 <chapterend>
